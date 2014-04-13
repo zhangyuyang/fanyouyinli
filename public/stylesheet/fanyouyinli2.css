@@ -1,0 +1,1141 @@
+/*.aaa {
+		border-bottom: 1px solid red;
+		box-shadow: 0px 3px 6px red;
+	}
+*/
+html{
+	height:100%;
+	overflow:auto;
+	}
+
+body {
+	position: relative;
+	height: auto !important;
+	min-height:100%;
+	height:100%;
+	margin:0;
+	padding:0;
+	/*background-image: url(../images/fanyouyinli.png);*/
+	background-repeat: no-repeat;
+	background-position: center 0px;	
+}
+
+
+.xuxian {
+	min-width: 1200px;
+	width: 100%;
+	height: 73px;
+	margin-top: 6px;
+	background-image: url(../images/xuxian.png);
+	background-repeat: repeat-x;		
+	background-position: 0px -7px;
+}
+
+.fan_center {
+	position: absolute;
+	display: inline-block;
+    width: 960px;
+    height: 100%;
+	left:50%;
+	margin-left: -500px;
+}
+
+.fan {
+	background-image: url(../images/new_03.png);
+	background-repeat:no-repeat;
+	height: 80px;
+	width: 270px;
+}
+.one {
+	float: left;
+	margin-left: 25px;
+	margin-top: -69px;
+	/*border: 1px solid black;*/
+	height: 32px;
+	width: 119px;
+
+	background-image: url(../images/new_07.png);
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+}
+.one:hover {
+
+	background-position: 0px -35px;
+}
+
+.center {
+
+	min-width: 1200px;
+	min-height: 630px;
+	/*border: black 2px solid;*/
+
+}
+
+.main_border {
+	position: absolute;
+	height: 475px;
+	width: 957px;
+	left:50%;
+	margin-left: -496px;
+	margin-top: 35px;
+	border: 1px solid #efefef;
+	background-image: url(../images/zhutu1.png);
+	background-repeat: no-repeat;
+	/*background-position: -80px 10px;*/
+}
+
+.a_button {
+	position: absolute;
+	left: 755px;
+	top: 400px;
+	height: 25px;
+	width: 160px;
+	/*border: 1px solid red;*/
+}
+
+.e_mail {
+	position: absolute;
+	left: 170px;
+	top: 119px;
+	height: 28px;
+	width: 318px;
+	font-size: 20px;
+	border: 1px solid white;
+}
+.name {
+	position: absolute;
+	left: 170px;
+	top: 172px;
+	height: 28px;
+	width: 318px;
+	font-size: 20px;
+	border: 1px solid white;
+}
+.city {
+	position: absolute;
+	left: 170px;
+	top: 224px;
+	height: 28px;
+	width: 130px;
+	font-size: 20px;
+	border: 1px solid white;
+}
+
+.about_me {
+	position: absolute;
+	left: 170px;
+	top: 278px;
+	height: 80px;
+	width: 316px;
+	font-size: 20px;
+	border: 1px solid white;
+	overflow: hidden;
+}
+
+.email_tip {
+	position: absolute;
+	left: 510px;
+	top: 126px;
+	height: 28px;
+	width: 318px;
+	font-size: 16px;
+	color: #f78f70;
+	/*border: 1px solid white;*/
+}
+.name_tip {
+	position: absolute;
+	left: 510px;
+	top: 179px;
+	height: 28px;
+	width: 318px;
+	font-size: 16px;
+	color: #f78f70;
+	/*border: 1px solid white;*/
+}
+.city_tip {
+	position: absolute;
+	left: 320px;
+	top: 231px;
+	height: 28px;
+	width: 230px;
+	font-size: 16px;
+	color: #f78f70;
+	/*border: 1px solid white;*/
+}
+.xing1{
+	position: absolute;
+	left: 500px;
+	top: 130px;
+	color: #f78f70;
+}
+.xing2{
+	position: absolute;
+	left: 500px;
+	top: 183px;
+	color: #f78f70;
+}
+.xing3{
+	position: absolute;
+	left: 310px;
+	top: 235px;
+	color: #f78f70;
+}
+.messge_sub {
+	position: absolute;
+	left: 169px;
+	top: 390px;
+	height: 30px;
+	width: 135px;
+	/*border: 1px solid red;*/
+}
+
+.turn_photo_left {
+	position: absolute;
+	height: 60px;
+	width: 35px;
+	left: 50%;
+	margin-left: -580px;
+	margin-top: 245px;
+	/*border: 1px solid red;*/
+	background-image: url(../images/fanyouyinli2_03.gif);
+	background-position: 1090px 270px;
+}
+
+.turn_photo_right {
+	position: absolute;
+	height: 60px;
+	width: 35px;
+	left: 50%;
+	margin-left: 495px;
+	margin-top: 245px;
+	/*border: 1px solid red;*/
+	background-image: url(../images/fanyouyinli2_03.gif);
+	background-position: 1130px 270px;	
+}
+
+.footer {
+	position: fixed;
+	clear:both;
+	min-width: 1200px;
+	height:70px;
+	width: 100%;
+	border-top:1px solid #e2e2e2;	
+	/*margin-top:80px;*/
+	bottom:0px;
+}
+
+.f1 {
+	height:70px;
+	width: 100%;
+	margin-top: 0px;
+	border-top: 2px solid #f2f2f2;
+	background-color: #fafafa;
+}
+
+.f2 {
+	height: 40px;
+	width: 1000px;
+	margin: auto;
+	/*background-color: black; */
+
+}
+
+.f3 {
+	float: left;
+	height: 19px;
+	width: 130px;
+	/*background-color: pink; */
+	font: 11px arial;
+	color: #b5b5b5;
+	margin-left: 10px;
+	margin-top: 27px;
+
+}
+
+.f4 {
+	float: right;
+	height: 19px;
+	width: 330px;
+	/*background-color: pink; */
+	font: 12px arial;
+	color: #b5b5b5;
+	margin-right: -42px;
+	margin-top: 27px;
+}
+.tip_err {
+	margin-left: 4px;
+	border:1px red solid;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	width: 957px;
+	color: #b94a48;
+	background-color: #f2dede;
+	border-color: #eed3d7;
+}
+.tip_success {
+	margin-left: 4px;
+	border:1px red solid;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	width: 957px;
+	color: #468847;
+	background-color: #dff0d8;
+	border-color: #d6e9c6;
+}
+.all_center {
+	position: relative;
+	border:1px red solid;
+	width: 1000px;
+	left: 50%;
+	margin-left: -495px;
+	/*position: relative;*/
+	/*min-width: 1200px;*/
+	/*min-height: 630px;*/
+}
+.login_main {
+	position: absolute;
+	height: 475px;
+	width: 957px;
+	left:50%;
+	margin-left: -496px;
+	margin-top: 35px;
+	border: 1px solid #efefef;
+	background-image: url(../images/denglu.png);
+	background-repeat: no-repeat;
+}
+.login_text1 {
+	font-family: sans-serif;
+	font-size: 24px;
+	font-weight:bold;
+	color: #b5b5b5;
+	margin-left: 315px;
+	margin-top: 180px;
+}
+.login_text2 {
+	float: left;
+	margin-left: 240px;
+	margin-top: 25px;
+}
+.login_text3 {
+	margin-left: 240px;
+	margin-top: 80px;
+}
+.login_email {
+	position: absolute;
+	top: 222px;
+	left: 313px;
+	width: 318px;
+	height: 29px;
+	font-size: 18px;
+}
+.login_password {
+	position: absolute;
+	top: 275px;
+	left: 313px;
+	width: 318px;
+	height: 29px;
+	font-size: 18px;
+}
+.login_button {
+	position: absolute;
+	width: 130px;
+	height: 30px;
+	left: 500px;
+	top: 330px;
+	/*border: 1px red solid;*/
+}
+.reg_main {
+	position: absolute;
+	height: 475px;
+	width: 957px;
+	left:50%;
+	margin-left: -496px;
+	margin-top: 35px;
+	border: 1px solid #efefef;
+	/*background-image: url(../images/zhuce.png);*/
+	background-repeat: no-repeat;
+}
+.reg_text1 {
+	font-size: 26px;
+	font-weight: bold;
+	font-family: "黑体";
+	letter-spacing: -2px;
+	color: #5bc7d6;
+	margin-top: 38px;
+	margin-left: 168px;
+}
+.reg_text2 {
+	font-size: 18px;
+	font-family: Helvetica;
+	font-weight: bold;
+	color: #b5b5b5;
+	margin-top: 2px;
+	margin-left: 170px;
+}
+.reg_text3 {
+	float: left;
+	margin-top: 36px;
+	margin-left: 105px;
+}
+.reg_mail {
+	float: left;
+	margin-left: 36px;
+	margin-top: 28px;
+	height: 29px;
+	width: 320px;
+	font-size: 20px;
+}
+.reg_text4 {
+	float: left;
+	margin-top: 90px;
+	margin-left: -418px;
+}
+.reg_password {
+	float: left;
+	margin-top: 81px;
+	margin-left: -326px;
+	height: 29px;
+	width: 319px;
+	font-size: 20px;
+}
+.reg_text5 {
+	float: left;
+	margin-top: 144px;
+	margin-left: -418px;
+}
+.reg_name {
+	float: left;
+	margin-top: 134px;
+	margin-left: -326px;
+	height: 29px;
+	width: 319px;
+	font-size: 20px;
+}
+.reg_text6 {
+	float: left;
+	margin-top: 198px;
+	margin-left: -390px;
+}
+.reg_radio {
+	float: left;
+	font-size: 16px;
+	margin-top: 195px;
+	margin-left: -325px;
+}
+.reg_text7 {
+	float: left;
+	margin-top: 251px;
+	margin-left: -418px;
+}
+.reg_city {
+	float: left;
+	margin-top: 239px;
+	margin-left: -326px;
+	height: 29px;
+	width: 129px;
+	font-size: 20px;
+}
+.reg_button {
+	position: absolute;
+	width: 135px;
+	height: 30px;
+/*	width: 1000px;
+	height: 1000px;*/
+	left: 170px;
+	top: 390px;
+	/*border: 1px red solid;*/
+	background-image: url(../images/zhuce.png);
+	background-position: -170px 86px;
+}
+.reg_success_border {
+	position: absolute;
+	height: 475px;
+	width: 957px;
+	left:50%;
+	margin-left: -496px;
+	margin-top: 35px;
+	border: 1px solid #efefef;
+	background-image: url(../images/zhuce_success.png);
+	background-repeat: no-repeat;
+	/*background-position: -80px 10px;*/
+}
+.reg_success_button {
+	position: absolute;
+	width: 135px;
+	height: 30px;
+	left: 403px;
+	top: 345px;
+	/*border: 1px red solid;*/
+}
+
+.find_password_border {
+	position: absolute;
+	height: 475px;
+	width: 957px;
+	left:50%;
+	margin-left: -496px;
+	margin-top: 35px;
+	border: 1px solid #efefef;
+	background-image: url(../images/find_password.png);
+	background-repeat: no-repeat;
+	/*background-position: -80px 10px;*/
+}
+
+.find_password_button {
+	position: absolute;
+	width: 135px;
+	height: 35px;
+	left: 313px;
+	top: 250px;
+	/*border: 1px red solid;*/
+}
+.find_password_text1 {
+	font-size: 22px;
+	font-family: Helvetica;
+	letter-spacing: -1px;
+	font-weight: bold;
+	color: #b5b5b5;
+	margin-top: 140px;
+	margin-left: 315px;
+}
+.find_password_text2 {
+	font-size: 14px;
+	font-family: Helvetica;
+	color: #b5b5b5;
+	margin-top: 43px;
+	margin-left: 265px;
+}
+.find_password_email {
+	float: left;
+	margin-top: -26px;
+	margin-left: 313px;
+	height: 29px;
+	width: 319px;
+	font-size: 20px;
+}
+.text_all {
+	color: #666666;
+	font-size: 14px;
+}
+.neice_success_border {
+	position: absolute;
+	height: 475px;
+	width: 957px;
+	left:50%;
+	margin-left: -496px;
+	margin-top: 35px;
+	border: 1px solid #efefef;
+	background-image: url(../images/neice_success.png);
+	background-repeat: no-repeat;
+	/*background-position: -80px 10px;*/
+}
+.neice_success_button {
+	position: absolute;
+	width: 135px;
+	height: 30px;
+	left: 419px;
+	top: 359px;
+	/*border: 1px red solid;*/
+}
+.reg_radio label {
+	margin-right: 20px; 
+}
+.tips{
+	position: absolute;
+	font-size: 16px;
+	color: #f78f70;
+}
+.navigation {
+	border-bottom: 1px #dddddd solid;
+	height: 49px;
+	margin-left: 2px;
+	margin-top: 3px;
+}
+.navigation label {
+	display: inline-block;
+	width: 67px;
+	height: 31px;
+	/*border: 1px red solid;*/
+	margin-top: 8px;
+	background-image: url(../images/navigation.png);
+	background-repeat: no-repeat;
+}
+.lab1 {
+	margin-left: 2px;
+	background-position: -95px 0px;  
+}
+.lab1:hover{
+	background-position: 0px 0px;  
+}
+
+.lab2 {
+	margin-left: 21px;
+	background-position: -95px -38px;
+}
+.lab2:hover {
+	background-position: 0px -38px;
+}
+.lab3 {
+	background-position: -95px -74px;
+	margin-left: 13px;
+}
+.lab3:hover {
+	background-position: 0px -74px;
+}
+.lab4 {
+	background-position: -95px -112px;
+	margin-left: 12px;
+}
+.lab4:hover {
+	background-position: 0px -112px;
+}
+.user_info {
+	position: absolute;
+	display: inline-block;
+	right:50%;
+	margin-right: -448px;
+	top: 35px;
+	font-size: 13px;
+}
+.user_city_info {
+	position: absolute;
+	left: 50%;
+	margin-left: -253px;
+	top: 30px;
+	color: #5bc7d6;
+	font-size: 18px;
+	font-weight: bold;
+}
+.my_attraction_left {
+	display: inline-block;
+	/*border:1px red solid;*/
+	margin-top: 26px;
+	width: 230px;
+}
+.my_attraction_left p{
+	
+	margin-left: 90px;
+	font-size: 14px;
+	color: #797979;
+}
+.my_attraction_name {
+	margin-top: -57px;
+	font-weight:bold;
+}
+.my_attraction_left img {
+	margin-left: 20px;
+}
+.activity {
+	margin-top: 12px;
+	margin-left: 11px;
+	border-top: 1px #dedede dashed;
+	border-bottom: 1px #dedede dashed;
+	height: 80px;
+	width: 216px;
+}
+.activity label {
+	display: inline-block;
+	margin-top: 7px;
+	height: 69px;
+	border-right: 1px #dedede dashed;
+}
+.activity h6 {
+	font-size: 14px;
+	color: #797979;
+	text-align: center;
+	margin-top: 14px;
+}
+.my_attraction {
+	position: relative;
+	height: 1100px;
+	left: 50%;
+	width: 970px;
+	margin-left: -495px;
+	margin-top: 4px;
+	margin-bottom: 100px;
+	/*border:1px red solid;*/
+	/*background-image: url(../images/my_attraction.png);*/
+	background-repeat: no-repeat;
+	background-position: 4px -22px;
+}
+
+.my_attraction_info {
+	font-family: SimSun;
+	margin-left: 3px !important;
+	display: inline;
+}
+.chakong {
+	height: 24px;
+}
+.state {
+	height: 300px;
+	width: 85%;
+	margin-left: 1px;
+	margin-top: 1px;
+	/*border:1px red solid;*/
+}
+.activity h2 {
+	font-family: MicrosoftYaHei;
+	font-weight:bold;
+	font-size: 24px;
+	text-align: center;
+	color: #5bc7d6;
+	margin-top: 8px;
+	margin-left: -3px;
+}
+.state h5 {
+	font-size: 13px;
+	margin-top: 41px;
+	margin-left: 17px;
+}
+.state h6 {
+	font-size: 12px;
+	margin-top: 13px;
+	margin-left: 35px;
+	/*line-height: 30px;*/
+}
+.state_title {
+	font-size: 18px;
+	font-family: SimHei;
+	color: #f1390b;
+}
+.curriculum_vitae {
+	display: block;
+	/*border:1px red solid;*/
+	height: 260px;
+	margin-top: 140px;
+	margin-left: 19px;
+}
+.curriculum_vitae h5 {
+	margin-left: 0px;
+	margin-top: 31px;
+}
+.curriculum_vitae h5 {
+	margin-left: 0px;
+	margin-top: 31px;
+} 
+.state_title_info1 {
+	display: block;
+	/*border:1px red solid;*/
+	margin-top: 20px;
+	margin-left: 16px;
+}
+.state_title_info1 h6 {
+	margin-top: 6px;
+	margin-left: 0px;
+}
+.my_attraction_link {
+	display: block;
+	/*border:1px red solid;*/
+	height: 180px;
+	margin-top: 22px;
+	margin-left: 19px;
+}
+a:link {
+	color: #336699; 
+	text-decoration:none;
+}
+a:hover {
+	text-decoration:underline;
+}
+.my_attraction_link a {
+
+	margin-left: 9px;
+	font-size: 14px;
+}
+.my_attraction_ico {
+	margin-left: 19px;
+	margin-top: 5px;
+	margin-bottom: -2px;
+	display: inline-block;
+	height: 16px;
+	width: 16px;
+	background-image: url(../images/sina.ico);
+	background-size: 16px 16px;
+}
+
+.my_attraction_right {
+	float: right;
+	/*border:1px blue solid;*/
+	width: 710px;  
+	/*height: 100px;*/
+	margin-top: 23px;
+	/*margin-right: 50%;*/
+	/*margin-left: -4px;*/
+}
+.my_attraction_iwant {
+	display: inline;
+	margin-left: 11px;
+
+}
+.my_attraction_h5 {
+	font-size: 14px;
+	display: block;
+	margin-left: 13px;
+	margin-top: 3px;
+}
+.my_attraction_block1 {
+	display: block;
+	height: 65px;
+	width: 55px;
+	/*border:1px pink solid;*/
+}
+.my_attraction_block2 {
+	display: block;
+	height: 65px;
+	width: 60%;
+	margin-top: -68px;
+	margin-left: 58px;
+	/*border:1px pink solid;*/
+}
+.data_editing {
+	float: right;
+	height: 45px;
+	width: 80px;
+	background-image: url(../images/my_attraction.png);
+	background-position: -878px -40px;
+}
+.my_attraction_block3 {
+	margin-top: 5px;
+	display: block;
+	height: 386px;
+	width: 100%;
+	/*border:1px red solid;*/
+	/*margin-top: -64px;*/
+	/*margin-left: 58px;*/
+}
+.attraction_main_photo {
+	height: 100%;
+	width: 100%;
+	background-image: url(../images/my_attraction.png);
+	background-position: -242px -115px;
+}
+.my_attraction_block4 {
+	display: inline-block;
+	margin-left: 10px;
+	margin-top: 35px;
+	height: 450px;
+	width: 450px;
+	/*border:1px red solid;*/
+}
+.friend_appraise {
+	/*border:1px black solid;*/
+	width: 100%;
+	height: 111px;
+}
+.my_attraction_block5 {
+	float: right;
+	display: inline-block;
+	margin-top: 35px;
+	height: 450px;
+	width: 227px;
+	/*border:1px blue solid;*/
+}
+.my_attraction_userphoto {
+	display: inline-block;
+	margin-left: 1px;
+	/*margin-top: 30px;*/
+	height: 58px;
+	width: 58px;
+	border:1px #bbbbbb solid;
+}
+.appraises {
+	position: relative;
+	margin-top: 1px;
+
+	float: right;
+	display: inline-block;
+	/*border: 1px pink solid;*/
+	height: 68px;
+	width: 360px;
+}
+.quotes_start {
+	position: absolute;
+	top: -2px;
+	left: -2px;
+	height: 10px;
+	width: 14px;
+	/*border: 1px black solid;*/
+	background-image: url(../images/my_attraction.png);
+	background-position: -340px -584px;
+}
+.quotes_end {
+	position: absolute;
+	top: 52px;
+	left: 328px;
+	height: 10px;
+	width: 14px;
+	/*border: 1px black solid;*/
+	background-image: url(../images/my_attraction.png);
+	background-position: -670px -749px;
+}
+.appraises_info {
+	position: absolute;
+	top: 10px;
+	left: 25px;
+	width: 80%;
+	font-size: 13px;
+	font-family: SimSun;
+	color: #5c5c5c;
+	/*border:1px red solid;*/
+}
+.state_title_medal {
+	font-size: 18px;
+	font-family: SimHei;
+	color: #f1390b;
+	margin-left:10px;
+	margin-bottom: 26px;
+}
+.medal_row {
+	display: block;
+	height: 68px;
+	margin-left: 7px;
+	/*border:1px red solid;*/
+}
+.my_attraction_medal {
+	float: right;
+	display: inline-block;
+	margin-right: 6px;
+	height: 100%;
+	width: 66px;
+	border-left:1px #bbbbbb dashed;
+	background-image: url(../images/my_attraction.png);
+	background-position: 70px -579px;
+	/*border:1px red solid;*/
+}
+.idinner_center {
+	/*border:1px black solid;*/
+	width: 99%;
+	height: 94%;
+	margin-left: 3px;
+	/*background-image: url(../images/xianxiajucan_01.png);*/
+	background-repeat: no-repeat;
+	/*background-position: 70px -579px;*/
+}
+.idinner_right {
+	float: right;
+	/*border:1px pink solid;*/
+	height: 100%;
+	width: 25%;
+}
+.idinner_left {
+	/*display: inline-block;*/
+	/*border:1px pink solid;*/
+	height: 100%;
+	width: 70.5%;
+}
+.idinner_navigation {
+	display: block;
+	border-bottom:1px #dedede dashed;
+	height: 34px;
+	width: 99%; 
+	
+}
+.dinner_now {
+	position: relative;
+	width: 100%;
+	height: 156px;
+	margin-top: 20px;
+	border-bottom:1px #dedede dashed;
+}
+.dinner_photo {
+	display: inline-block;
+	width: 203px;
+	height: 132px;
+	/*border: 1px black solid;*/
+	margin-left: -1px;
+	background-image: url(../images/xianxiajucan_07.png);
+}
+.dinner_photo_info {
+	position: absolute;
+	display: inline-block;
+	width: 240px;
+	height: 132px;
+	/*border: 1px black solid;*/
+	margin-left: 12px;
+}
+.dinner_date {
+	position: absolute;
+	top: -2px;
+	left: 560px;
+	height: 50px;
+	width: 110px;
+	/*border: 1px blue solid;*/
+}
+.dinner_jion_btn {
+	position: absolute;
+	top: 75px;
+	left: 612px;
+	height: 57px;
+	width: 58px;
+	/*border: 1px blue solid;*/
+	background-image: url(../images/xianxiajucan_10.png);
+}
+.treat {
+	position: absolute;
+	top: 118px;
+	left: 540px;
+	height: 13px;
+	width: 60px;
+	/*border: 1px blue solid;*/
+}
+.treat p {
+	font-size: 14px;
+	color: #5c5c5c;
+	text-align: right;
+
+}
+.label_text {
+	font-family: SimSun;
+	font-size: 14px;
+	color: #ff8262;
+	margin-top: 45px;
+	margin-left: 4px;
+	font-weight: 200;
+}
+.idinner_today {
+	float: right;
+	height: 36px;
+	width: 235px;
+	border: 1px #bbbbbb solid;
+}
+.idinner_today h5 {
+	font-size: 14px;
+	color: #5c5c5c;
+	font-weight: 200;
+	margin-top: 10px;
+	margin-left: 48px;
+}
+.photo_mini1 {
+	float: right;
+	width: 230px;
+	height: 95px;
+	/*border: 1px blue solid;*/
+	margin-top: 11px;	
+	margin-bottom: -9px;
+}
+.idinner_lie {
+	position: relative;
+	display: inline-block;
+	/*border: 1px pink solid;*/
+	height: 100%;
+	width: 71px;
+	margin-right: -1px;
+	/*margin-left: 11px;*/
+}
+.photo_mini1 a {
+	position: absolute;
+	display: block;
+	top: 6px;
+	left: 11px;
+	height: 48px;
+	width: 46px;
+	/*border: 1px green solid;*/
+	background-image: url(../images/xianxiajucan_13.png);	
+}
+.idinner_user_info {
+	position: absolute;
+	display: block;
+	text-align: center;
+	font-size: 12px;
+	top: 60px;
+	left: -1px;
+	/*border: 1px #123983 solid;*/
+	width: 100%;
+}
+.go_dinner {
+	float: right;
+	height: 31px;
+	width: 168px;
+	margin-right: 1px !important;
+	margin-top: 1px !important;	
+	background-image: url(../images/xianxiajucan_03.png);	
+}
+.idinner_navigation a {
+	display: inline-block;
+	margin-top: 12px;
+	margin-left: 22px;
+	margin-right: -5px;
+	color: #5c5c5c;
+	font-size: 13px;
+	text-decoration:none
+}
+.dinner_photo_info h2 {
+	position: absolute;
+	display: inline-block;
+	height: 20px;
+	width: 240px;
+	/*border: 1px black solid;*/
+	font-size: 18px;
+	color: #808080;
+}
+.dinner_photo_info h6 {
+	position: absolute;
+	display: inline-block;
+	top: 24px;
+	height: 16px;
+	width: 240px;
+	font-size: 12px;
+	color: #808080;
+}
+.small_lab {
+	position: absolute;
+	top: 42px;
+	height: 30px;
+	width: 240px;
+	/*border: 1px red solid;*/
+}
+.small_lab label {
+	display: inline-block;
+	margin-top: 4px;
+	height: 26px;
+	width: 74px;
+	font-size: 13px;
+	color: #5c5c5c;
+	background-color: #f8f8f8;
+	/*border:1px pink solid;*/
+}
+.small_lab label p{
+	margin-top: 8px;
+	height: 10px;
+	width: 100%;
+	font-size: 13px;
+	color: #5c5c5c;
+	text-align: center;
+	background-color: #f8f8f8;
+	/*border:1px green solid;*/
+}
+.friends_photo {
+	margin-top: 80px;
+	display: inline-block;
+	/*bottom: 23px;*/
+	height: 48px;
+	width: 46px;
+	margin-right: 5px;
+	margin-top: 84px;
+	/*border: 1px green solid;*/
+	background-image: url(../images/xianxiajucan_13.png);	
+}
+
+.dinner_date p {
+	margin-top: 2px;
+	left: 578px;
+	height: 50px;
+	width: 100%;
+	/*border: 1px blue solid;*/
+	font-size: 12px;
+	text-align: right;
+	color: black;	
+}
+.dinner_date h1 {
+	/*top: -2px;*/
+	/*left: 578px;*/
+	/*height: 50px;*/
+	/*width: 90px;*/
+	/*border: 1px blue solid;*/
+	font-size: 36px;
+	text-align: right;
+	color: #ff8262;
+}
