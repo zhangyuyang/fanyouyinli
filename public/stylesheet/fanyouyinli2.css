@@ -1151,30 +1151,24 @@ a:hover {
 	color: #9f9f9f;
 	
 }
-.iat_lab1:hover{
+/*.iat_lab1:hover{
 	color: white;
 	background-color: #5bc7d6;
-}
+}*/
 
 .iat_lab2 {
 	margin-left: 12px;
 	background-color: white;
 	color: #9f9f9f;
 }
-.iat_lab2:hover {
-	color: white;
-	background-color: #5bc7d6;
-}
+
 .iat_lab3 {
-	border:1px red solid;
+	/*border:1px red solid;*/
 	margin-left: 15px;
 	background-color: white;
 	color: #9f9f9f;
 }
-.iat_lab3:hover {
-	color: white;
-	background-color: #5bc7d6;
-}
+
 .iat_lab4 {
 	position: absolute;
 	width: 330px !important;

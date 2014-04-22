@@ -186,5 +186,50 @@ $(document).ready( function () {
 		$("#my_attractive").css("background-position","0px -112px");
 		window.location.href="/ifanyor"; 
 	});
-
+	$("#iat_hot").click(function() {
+		$("#iat_hot").css("background-color","#5bc7d6");
+		$("#iat_hot").css("color","white");
+		$("#iat_new").css("background-color","white");
+		$("#iat_new").css("color","#9f9f9f");
+		$("#iat_add").css("background-color","white");
+		$("#iat_add").css("color","#9f9f9f");
+	});
+	$("#iat_new").click(function() {
+		$("#iat_new").css("background-color","#5bc7d6");
+		$("#iat_new").css("color","white");
+		$("#iat_hot").css("background-color","white");
+		$("#iat_hot").css("color","#9f9f9f");
+		$("#iat_add").css("background-color","white");
+		$("#iat_add").css("color","#9f9f9f");
+	});
+	$("#iat_add").click(function() {
+		$("#iat_add").css("background-color","#5bc7d6");
+		$("#iat_add").css("color","white");
+		$("#iat_hot").css("background-color","white");
+		$("#iat_hot").css("color","#9f9f9f");
+		$("#iat_new").css("background-color","white");
+		$("#iat_new").css("color","#9f9f9f");
+	});
+	$("#iat_hot").hover(function() {
+		$("#iat_hot").css("background-color","#5bc7d6");
+		$("#iat_hot").css("color","white");
+		} ,function() {
+		$("#iat_hot").css("background-color","white");
+		$("#iat_hot").css("color","#9f9f9f");
+		});
+	$("#iat_new").hover(function() {
+		$("#iat_new").css("background-color","#5bc7d6");
+		$("#iat_new").css("color","white");
+		} ,function() {
+		$("#iat_new").css("background-color","white");
+		$("#iat_new").css("color","#9f9f9f");
+		});
+	$("#iat_add").hover(function() {
+		$("#iat_add").css("background-color","#5bc7d6");
+		$("#iat_add").css("color","white");
+		} ,function() {
+		$("#iat_add").css("background-color","white");
+		$("#iat_add").css("color","#9f9f9f");
+		});
+	
 });
