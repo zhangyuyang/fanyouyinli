@@ -49,7 +49,7 @@ body {
 .one {
 	float: left;
 	margin-left: 25px;
-	margin-top: -69px;
+	margin-top: -39px;
 	/*border: 1px solid black;*/
 	height: 32px;
 	width: 119px;
@@ -286,7 +286,7 @@ body {
 }
 .all_center {
 	position: relative;
-	border:1px red solid;
+	/*border:1px red solid;*/
 	width: 1000px;
 	left: 50%;
 	margin-left: -495px;
@@ -1129,13 +1129,81 @@ a:hover {
 	text-align: right;
 	color: black;	
 }
-.dinner_date h1 {
-	/*top: -2px;*/
-	/*left: 578px;*/
-	/*height: 50px;*/
-	/*width: 90px;*/
-	/*border: 1px blue solid;*/
+.dinner_date h1 {	
 	font-size: 36px;
 	text-align: right;
 	color: #ff8262;
+}
+.iat_navigation label {
+	display: inline-block;
+	width: 67px;
+	height: 31px;
+	/*border: 1px red solid;*/
+	margin-top: 8px;
+	/*background-image: url(../images/yinliquan.png);*/
+	background-repeat: no-repeat;
+	font-family: serif;
+}
+.iat_lab1 {
+	margin-left: 8px;
+	background-position: -50px -35px;
+	background-color: white;
+	color: #9f9f9f;
+	
+}
+.iat_lab1:hover{
+	color: white;
+	background-color: #5bc7d6;
+}
+
+.iat_lab2 {
+	margin-left: 12px;
+	background-color: white;
+	color: #9f9f9f;
+}
+.iat_lab2:hover {
+	color: white;
+	background-color: #5bc7d6;
+}
+.iat_lab3 {
+	border:1px red solid;
+	margin-left: 15px;
+	background-color: white;
+	color: #9f9f9f;
+}
+.iat_lab3:hover {
+	color: white;
+	background-color: #5bc7d6;
+}
+.iat_lab4 {
+	position: absolute;
+	width: 330px !important;
+	height: 40px !important;
+	/*border:1px red solid;*/
+	background-image: url(../images/yinliquan.png);
+	background-position: -290px 0px;
+	margin-left: 20px;
+	margin-top: 6px !important;
+}
+.iat_lab4 input {
+	margin-top: 7px;
+	margin-left: 14px;
+	height: 25px;
+	width: 248px;
+	border: 0px;
+	outline:none;
+	font-size: 14px;
+}
+.iat_lab4 a {
+	position: absolute;
+	display: inline-block;
+	height: 28px;
+	width: 58px;
+	top: 5px;
+	left: 264px;
+	/*border: 1px red solid;*/
+}
+.circle_text {
+	color: #808080;
+	position: absolute;
 }
