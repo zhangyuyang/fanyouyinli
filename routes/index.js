@@ -13,7 +13,8 @@ module.exports = function(app) {
 			title: '首页',
 			user : req.session.user,
 			success : req.flash('success').toString(),
-			error : req.flash('error').toString()
+			error : req.flash('error').toString(),
+			layout : 'flase'
 		});
 	});
 
@@ -57,7 +58,8 @@ module.exports = function(app) {
 			title: '用户登入',
 			user : req.session.user,
 			success : req.flash('success').toString(),
-			error : req.flash('error').toString()
+			error : req.flash('error').toString(),
+			layout : 'flase'
 		});
 	});
 	app.post('/login', function(req, res) {
@@ -87,7 +89,8 @@ module.exports = function(app) {
 		res.render('find_password', {
 			user : req.session.user,
 			success : req.flash('success').toString(),
-			error : req.flash('error').toString()
+			error : req.flash('error').toString(),
+			layout : 'flase'
 		});
 	});
 	app.post('/find_password', function(req, res) {
@@ -120,7 +123,8 @@ module.exports = function(app) {
 		res.render('reg', {
 			user : req.session.user,
 			success : req.flash('success').toString(),
-			error : req.flash('error').toString()
+			error : req.flash('error').toString(),
+			layout : 'flase'
 		});
 	});
 	app.post('/reg', function(req, res) {
@@ -175,7 +179,8 @@ module.exports = function(app) {
 		res.render('reg_success', {
 			user : req.session.user,
 			success : req.flash('success').toString(),
-			error : req.flash('error').toString()
+			error : req.flash('error').toString(),
+			layout : 'flase'
 		});
 	});
 	app.post('/reg_success', function(req, res) {
@@ -185,7 +190,8 @@ module.exports = function(app) {
 		res.render('neice_success', {
 			user : req.session.user,
 			success : req.flash('success').toString(),
-			error : req.flash('error').toString()
+			error : req.flash('error').toString(),
+			layout : 'flase'
 		});
 	});
 	app.get('/ifanyor', function(req, res) {
@@ -193,7 +199,8 @@ module.exports = function(app) {
 			title: '我的引力',
 			user : req.session.user,
 			success : req.flash('success').toString(),
-			error : req.flash('error').toString()
+			error : req.flash('error').toString(),
+			layout : 'flase'
 		});
 	});
 	app.get('/idinner', function(req, res) {
@@ -201,7 +208,8 @@ module.exports = function(app) {
 			title: '多人聚餐',
 			user : req.session.user,
 			success : req.flash('success').toString(),
-			error : req.flash('error').toString()
+			error : req.flash('error').toString(),
+			layout : 'flase'
 		});
 	});
 	app.get('/iattractive', function(req, res) {
@@ -209,7 +217,8 @@ module.exports = function(app) {
 			title: '引力圈',
 			user : req.session.user,
 			success : req.flash('success').toString(),
-			error : req.flash('error').toString()
+			error : req.flash('error').toString(),
+			layout : 'flase'
 		});
 	});
 	app.get('/isinger', function(req, res) {
@@ -217,14 +226,16 @@ module.exports = function(app) {
 			title: '单身随缘',
 			user : req.session.user,
 			success : req.flash('success').toString(),
-			error : req.flash('error').toString()
+			error : req.flash('error').toString(),
+			layout : 'flase'
 		});
 	});
 	app.get('/iring', function(req, res) {
 		res.render('iring', {
 			user : req.session.user,
 			success : req.flash('success').toString(),
-			error : req.flash('error').toString()
+			error : req.flash('error').toString(),
+			layout : 'flase'
 		});
 	});
 

@@ -10,7 +10,8 @@
     "jade": "*",
     "mongodb": ">= 0.9.9",
     "connect-mongo": ">= 0.1.7",
-    "express-partials": "*"
+    "express-partials": "*",
+    "connect-flash": "*"
   }
 
 }

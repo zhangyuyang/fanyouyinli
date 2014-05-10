@@ -1,0 +1,20 @@
+include head
+form#form1(method='post')
+  .center
+    #turn_left.turn_photo_left
+    #mian_photo.main_border
+      a#login.one(href='/login')
+      #apply_button.a_button
+      input#e_mail.e_mail(name='e_mail', type='hidden')
+      b#xing1.xing1(hidden='') *
+      p#email_tip.email_tip
+      input#username.name(name='username', type='hidden')
+      b#xing2.xing2(hidden='') *
+      p#name_tip.name_tip
+      input#city.city(name='city', type='hidden')
+      b#xing3.xing3(hidden='') *
+      p#city_tip.city_tip
+      textarea#about_me.about_me(hidden='', name='about_me')
+      #messge_sub.messge_sub(hidden='')
+    #turn_right.turn_photo_right
+include foot

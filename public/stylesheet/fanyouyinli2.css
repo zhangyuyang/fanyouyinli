@@ -910,6 +910,7 @@ a:hover {
 	width: 99%;
 	height: 94%;
 	margin-left: 3px;
+	margin-top: 30px;
 	/*background-image: url(../images/xianxiajucan_01.png);*/
 	background-repeat: no-repeat;
 	/*background-position: 70px -579px;*/
@@ -925,6 +926,10 @@ a:hover {
 	/*border:1px pink solid;*/
 	height: 100%;
 	width: 70.5%;
+}
+.idinner_left1 {
+	width: 70.5%;
+	border-bottom:1px #dedede dashed;
 }
 .idinner_navigation {
 	display: block;
@@ -1200,4 +1205,140 @@ a:hover {
 .circle_text {
 	color: #808080;
 	position: absolute;
+}
+.iring_navigation label {
+	display: inline-block;
+	width: 67px;
+	height: 31px;
+	/*border: 1px red solid;*/
+	margin-top: 8px;
+	background-image: url(../images/yinliquan1.png);
+	background-repeat: no-repeat;
+}
+.iring_lab1 {
+	margin-left: 2px;
+	background-position: -90px -108px;
+}
+.iring_lab1:hover{
+	/*background-position: 0px 0px;  */
+}
+
+.iring_lab2 {
+	margin-left: 1px;
+	background-position: -90px -4px;
+}
+.iring_lab2:hover {
+	background-position: -4px -4px;
+}
+.iring_lab3 {
+	background-position: -91px -39px;
+	margin-left: 13px;
+}
+.iring_lab3:hover {
+	background-position: -4px -39px;
+}
+.iring_lab4 {
+	background-position: -91px -73px;
+	margin-left: 12px;
+}
+.iring_lab4:hover {
+	background-position: -4px -73px;
+}
+.iwant_div {
+	position: relative;
+	width: 100%;
+	height: 90px;
+	margin-top: -10px;
+	margin-bottom: 30px;
+	/*border: 1px red solid;*/
+}
+.iwant_photo {
+	display: inline-block;
+	width: 143px;
+	height: 77px;
+	margin-left: -1px;
+	margin-top: 10px;
+	background-image: url(../images/yinliquan2.png);
+	/*border: 1px red solid;*/
+	background-position: -3px -2px;
+}
+.iring_photo_info {
+	margin-bottom: 62px;
+	display: inline-block;
+	height: 15px;
+	width: 15px;
+	background-image: url(../images/yinliquan1.png);
+	background-position: -208px -114px;
+	/*border:1px red solid;*/
+}
+.iring_isay {
+	top: 11px;
+	left: 170px;
+	position: absolute;
+	display: inline-block;
+	width: 250px;
+	height: 20px;
+	/*border: 1px red solid;*/
+	font-size: 12px;
+}
+.iring_info_right1 {
+	display: inline-block;
+	position: absolute;
+	top: 57px;
+	left: 512px;
+	height: 15px;
+	width: 150px;
+	/*border: 1px red solid;*/
+}
+.iring_info_right2 {
+	display: inline-block;
+	position: absolute;
+	top: 75px;
+	left: 512px;
+	height: 15px;
+	width: 150px;
+	/*border: 1px red solid;*/
+}
+.iring_iname {
+	float: right;
+	margin-right: 0px;
+	font-size: 12px;
+}
+.iring_inscribe {
+	float: right;
+	margin-right: 0px;
+	font-size: 12px;
+}
+.iring_menber {
+	/*border: 1px red solid;*/
+	width: 70.5%;
+	margin-top: 56px;
+}
+.iring_menber span {
+	display: inline-block;
+	/*border: 1px green solid;*/
+	height: 80px;
+	width: 260px;
+	margin-right: 50px;
+	margin-bottom: 55px;
+}
+.menber_photo {
+	display: inline-block;
+	height: 77px;
+	width: 143px;
+	background-image: url(../images/yinliquan2.png);
+	/*background-position: -208px -114px;*/
+	border: 1px red solid;
+	margin-left: -5px;
+}
+.iring_menber span {
+	position: relative;
+}
+.menber_name {
+	position: absolute;
+	top: 2px;
+	left: 155px;
+	display: inline-block;
+	border: 1px green solid;
+	font-size: 13px;
 }

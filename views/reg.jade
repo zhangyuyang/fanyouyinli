@@ -1,0 +1,38 @@
+include head
+form#reg_form(method='post')
+  .all_center
+    .reg_main
+      .reg_text1 天下没有陌生人  ,  只有未认识的朋友
+      .reg_text2 注册饭有引力:
+      .reg_text3.text_all 邮箱
+      input#reg_mail.reg_mail(name='reg_mail')
+      #reg_email_tip.tips(style='top: 128px; left:520px;', hidden='')
+      #reg_email_tip1.tips(style='top: 132px; left:510px;', hidden='') *
+      .reg_text4.text_all 创建密码
+      input#reg_password.reg_password(name='reg_password', type='password')
+      #reg_password_tip.tips(style='top: 182px; left:520px;', hidden='')
+      #reg_password_tip1.tips(style='top: 185px; left:510px;', hidden='') *
+      .reg_text5.text_all 真实姓名
+      input#reg_name.reg_name(name='reg_name')
+      #reg_name_tip.tips(style='top: 236px; left:520px;', hidden='')
+      #reg_name_tip1.tips(style='top: 240px; left:510px;', hidden='') *
+      .reg_text6.text_all
+        | 性别
+      .reg_radio
+        label
+          input(type='radio', name='sex', value='1')
+          | 男
+        label
+          input(type='radio', name='sex', value='2')
+          | 女
+        label
+          input(type='radio', name='sex', value='3')
+          | 其他
+      #reg_sex_tip.tips(style='top: 282px; left:520px;', hidden='')
+      #reg_sex_tip1.tips(style='top: 286px; left:510px;', hidden='') *
+      .reg_text7.text_all 常住城市
+      input#reg_city.reg_city(name='reg_city')
+      #reg_city_tip.tips(style='top: 336px; left:520px;', hidden='')
+      #reg_city_tip1.tips(style='top: 340px; left:510px;', hidden='') *
+      a#reg_button.reg_button(href='#')
+include foot

@@ -31,10 +31,12 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.cookieParser());
 
-app.set('views', path.join(__dirname, 'views'));
+// app.set('views', path.join(__dirname, 'views'));
 //设置模板引擎和页面模板的位置
+
 app.set('views', __dirname + '/views');  
-app.set('view engine', 'ejs');	
+app.set('view engine', 'jade');	
+
 
 
 app.configure(function() {
@@ -44,9 +46,10 @@ app.configure(function() {
 	app.use(express.logger('dev'));
 	app.use(express.favicon());
 	app.set('port', process.env.PORT || 3000);
+	// app.use(require('connect-assets'));
 	app.set('views', path.join(__dirname, 'views'));
 	app.set('views', __dirname + '/views');
-	app.set('view engine', 'ejs');
+	app.set('view engine', 'jade');
 	app.use(express.bodyParser());
 	app.use(express.methodOverride());
 	app.use(express.cookieParser());
@@ -62,6 +65,7 @@ app.configure(function() {
 });
 
 require('./routes/index')(app);
+app.use(require('connect-assets')());
 
 http.createServer(app).listen(app.get('port'), function() {
 	console.log('Express server listening on port ' + app.get('port'));
