@@ -1,0 +1,71 @@
+include head
+!= js('city')
+!= js('select_date')
+
+
+.my_attraction
+	.navigation(style='border-bottom : 0px')
+		label#dinner_party.lab1
+		label#singer.lab2(style='background-position: 0px -38px;')
+		label#attractive.lab3
+		label#my_attractive.lab4
+	.userinfo_nav
+		.userinfo_navtxt
+			a#set_photo.set_photo(href="#") 设置头像
+			a#set_userinfo.set_userinfo(href="#" style="color:#5bc7d6") 基本信息
+			a#set_userhistory.set_userhistory(href="#") 履历
+			a#set_userlab.set_userlab(href="#") 个性标签
+			a#modiy_password.modiy_password(href="#") 修改密码
+	.userinfo_center
+		.userinfo_center_left
+			h5 真实姓名：
+			h5.user_xing *
+			h5 所在地：
+			h5.user_xing *
+			h5 性别：
+			h5.user_xing *
+			h5 婚恋状态：
+			h5 生日：
+			h5 介绍下自己：
+		.userinfo_center_right
+			input.true_name
+			span.modiy_city
+				select#province.province(size='1')
+					option(value='') 选择省
+				select#city.city1(size='1')
+					option(value='') 选择市
+			span.modiy_sex
+				input#man.man(name='sex', type='radio', value='男')
+				h5 男
+				input#woman.woman(name='sex', type='radio', value='女')
+				h5 女
+				input#other.other(name='sex', type='radio', value='其他')
+				h5 其他
+			span.modiy_marry
+				input#married.married(name='marriage', type='radio', value='已婚')
+				h5 已婚
+				input#unmarried.unmarried(name='marriage', type='radio', value='未婚')
+				h5 未婚
+			span.birthday
+				select.sel_year
+				|年
+				select.sel_month
+				|月
+				select.sel_day
+				|日
+			textarea.myself(rows='3', cols='33')
+			a#modiy_user_sub.modiy_user_sub(href="#")
+
+script
+	:coffee
+		$ ->
+			# 出生年月插件
+			$.ms_DatePicker
+				YearSelector: ".sel_year"
+				MonthSelector: ".sel_month"
+				DaySelector: ".sel_day"
+
+			return
+
+
+include foot

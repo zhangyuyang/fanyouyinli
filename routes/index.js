@@ -5,16 +5,17 @@
 var crypto = require('crypto');
 var InviteUser = require('../models/user');
 var User = require('../models/user');
+var	fs = require('fs');
 
 module.exports = function(app) {
 
 	app.get('/', function(req, res) {
 		res.render('home', {
 			title: '首页',
-			user : req.session.user,
-			success : req.flash('success').toString(),
-			error : req.flash('error').toString(),
-			layout : 'flase'
+			user: req.session.user,
+			success: req.flash('success').toString(),
+			error: req.flash('error').toString()
+			// layout: false
 		});
 	});
 
@@ -58,8 +59,7 @@ module.exports = function(app) {
 			title: '用户登入',
 			user : req.session.user,
 			success : req.flash('success').toString(),
-			error : req.flash('error').toString(),
-			layout : 'flase'
+			error : req.flash('error').toString()
 		});
 	});
 	app.post('/login', function(req, res) {
@@ -89,8 +89,7 @@ module.exports = function(app) {
 		res.render('find_password', {
 			user : req.session.user,
 			success : req.flash('success').toString(),
-			error : req.flash('error').toString(),
-			layout : 'flase'
+			error : req.flash('error').toString()
 		});
 	});
 	app.post('/find_password', function(req, res) {
@@ -123,8 +122,7 @@ module.exports = function(app) {
 		res.render('reg', {
 			user : req.session.user,
 			success : req.flash('success').toString(),
-			error : req.flash('error').toString(),
-			layout : 'flase'
+			error : req.flash('error').toString()
 		});
 	});
 	app.post('/reg', function(req, res) {
@@ -179,8 +177,7 @@ module.exports = function(app) {
 		res.render('reg_success', {
 			user : req.session.user,
 			success : req.flash('success').toString(),
-			error : req.flash('error').toString(),
-			layout : 'flase'
+			error : req.flash('error').toString()
 		});
 	});
 	app.post('/reg_success', function(req, res) {
@@ -190,8 +187,7 @@ module.exports = function(app) {
 		res.render('neice_success', {
 			user : req.session.user,
 			success : req.flash('success').toString(),
-			error : req.flash('error').toString(),
-			layout : 'flase'
+			error : req.flash('error').toString()
 		});
 	});
 	app.get('/ifanyor', function(req, res) {
@@ -199,8 +195,7 @@ module.exports = function(app) {
 			title: '我的引力',
 			user : req.session.user,
 			success : req.flash('success').toString(),
-			error : req.flash('error').toString(),
-			layout : 'flase'
+			error : req.flash('error').toString()
 		});
 	});
 	app.get('/idinner', function(req, res) {
@@ -208,8 +203,7 @@ module.exports = function(app) {
 			title: '多人聚餐',
 			user : req.session.user,
 			success : req.flash('success').toString(),
-			error : req.flash('error').toString(),
-			layout : 'flase'
+			error : req.flash('error').toString()
 		});
 	});
 	app.get('/iattractive', function(req, res) {
@@ -217,8 +211,7 @@ module.exports = function(app) {
 			title: '引力圈',
 			user : req.session.user,
 			success : req.flash('success').toString(),
-			error : req.flash('error').toString(),
-			layout : 'flase'
+			error : req.flash('error').toString()
 		});
 	});
 	app.get('/isinger', function(req, res) {
@@ -226,17 +219,72 @@ module.exports = function(app) {
 			title: '单身随缘',
 			user : req.session.user,
 			success : req.flash('success').toString(),
-			error : req.flash('error').toString(),
-			layout : 'flase'
+			error : req.flash('error').toString()
 		});
 	});
 	app.get('/iring', function(req, res) {
 		res.render('iring', {
 			user : req.session.user,
 			success : req.flash('success').toString(),
-			error : req.flash('error').toString(),
-			layout : 'flase'
+			error : req.flash('error').toString()
 		});
 	});
-
+	app.get('/user_info', function(req, res) {
+		res.render('user_info', {
+			user : req.session.user,
+			success : req.flash('success').toString(),
+			error : req.flash('error').toString()
+		});
+	});
+	app.get('/user_photo', function(req, res) {
+		res.render('user_photo', {
+			user: req.session.user,
+			success: req.flash('success').toString(),
+			error: req.flash('error').toString()
+		});
+	});
+	app.get('/user_history', function(req, res) {
+		res.render('user_history', {
+			user : req.session.user,
+			success : req.flash('success').toString(),
+			error : req.flash('error').toString()
+		});
+	});
+	app.get('/user_label', function(req, res) {
+		res.render('user_label', {
+			user : req.session.user,
+			success : req.flash('success').toString(),
+			error : req.flash('error').toString()
+		});
+	});
+	app.get('/modiy_password', function(req, res) {
+		res.render('modiy_password', {
+			user : req.session.user,
+			success : req.flash('success').toString(),
+			error : req.flash('error').toString()
+		});
+	});
+	app.post('/user_photo', function(req, res) {
+		var file_path = req.files.file.path;
+		console.log(req.files.file.type);
+		if (!file_path) {
+			req.flash('error', "路径不存在")
+			return res.redirect('/user_photo');
+		} else if (req.files.file.type.split('/')[0] != "image") {
+			req.flash('error', "上传的文件必须是图片格式")
+			return res.redirect('/user_photo');
+		} else if (req.files.file.size >2 * 1024 * 1024) {
+			req.flash('error', "上传文件不能大于2M")
+			return res.redirect('/user_photo');
+		} else {
+			console.log(req.files.file.size);
+			var file_path = file_path.split('/');
+			var file_path_last = file_path[file_path.length - 1];
+			res.render('user_photo', {
+				user : req.session.user,
+				title: '照片上传',
+				file_path: file_path_last
+			});
+		}
+	});
 }

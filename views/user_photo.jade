@@ -1,0 +1,41 @@
+include head
+script(type='text/javascript', src='script/jquery.Jcrop.js')
+link(rel='stylesheet', type='text/css', href='/stylesheet/jquery.Jcrop.css')
+
+.my_attraction
+	.navigation(style='border-bottom : 0px')
+		label#dinner_party.lab1
+		label#singer.lab2(style='background-position: 0px -38px;')
+		label#attractive.lab3
+		label#my_attractive.lab4
+	.userinfo_nav
+		.userinfo_navtxt
+			a#set_photo.set_photo(href="#" style="color:#5bc7d6") 设置头像
+			a#set_userinfo.set_userinfo(href="#") 基本信息
+			a#set_userhistory.set_userhistory(href="#") 履历
+			a#set_userlab.set_userlab(href="#") 个性标签
+			a#modiy_password.modiy_password(href="#") 修改密码
+	.userphpto_center
+		if file_path
+			.userphpto_up
+				img#target.target(src='temp/#{file_path}', alt='[Jcrop Example]')
+				#preview-pane
+					.preview-container
+						img.jcrop-preview(src='temp/#{file_path}', alt='Preview')
+					.preview-container1
+						img.jcrop-preview(src='temp/#{file_path}', alt='Preview')
+		else
+			.userphpto_up
+				h5#userphpto_text.userphpto_text 别藏了，上传头像让更多的人也认识你！
+				div#photo_demo.photo_demo
+		.userphpto_down
+			.big_photo
+			.small_photo
+			a#userphpto_sub.userphpto_sub(href="#")
+		form#upload_img.upload_img(action='/user_photo', method='post', enctype='multipart/form-data')
+			input#file.hide(type="file" name="file")
+	script
+		:coffee
+			upload_photo get_photo_size
+
+	//- include foot

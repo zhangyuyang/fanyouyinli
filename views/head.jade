@@ -2,17 +2,21 @@ html
   head 
     meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
     meta(http-equiv='Content-Language', content='zh-cn')
-    title 饭有引力2
+    title #{title}
     != css('stylus')
     link(rel='stylesheet', type='text/css', href='/stylesheet/resert.css')
     script(type='text/javascript', src='/bower_components/jquery/dist/jquery.js')
     != js('fanyouyinli')
   body
-  .xuxian
-    .fan_center
-      .fan
-    .user_info 林瑶
-    .user_info(style='margin-right: -406px;') 消息
-    .user_info(style='margin-right: -365px;') 私信
-    .user_info(style='margin-right: -324px;') 我的聚餐
-    .user_city_info 厦门
+    .xuxian
+      .fan_center
+        .fan
+      .user_info #{user.name}
+      .user_info(style='margin-right: -406px;') 消息
+      .user_info(style='margin-right: -365px;') 私信
+      .user_info(style='margin-right: -324px;') 我的聚餐
+      .user_city_info 厦门
+      if error
+        div.tips.error #{error}
+      if success
+        div.tips.error #{success}
