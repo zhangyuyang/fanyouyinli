@@ -82,6 +82,9 @@ function User(user) {
     this.name = user.name;
     this.sex = user.sex; 
     this.city = user.city;
+    this.photo0 = user.photo0;
+    this.photo1 = user.photo1;
+    this.photo2 = user.photo2;
 }
 
 module.exports = User;
@@ -100,7 +103,6 @@ User.prototype.save = function save(callback) {
     mongodb.open(function(err, db) {
         if (err) {
             return callback(err);
-            console.log("1111111111");
         }
         //读  users  集合
         db.collection('users', function(err, collection) {
@@ -147,8 +149,10 @@ User.get = function get(e_mail, callback) {
     });
 };
 
-User.update = function update(e_mail, password, callback) {
+User.update = function update(e_mail, data, callback) {
     //从数据库中更改用户的密码
+    console.log(data);
+    console.log(e_mail);
     mongodb.open(function(err, db) {
         if (err) {
             return callback(err);
@@ -159,7 +163,7 @@ User.update = function update(e_mail, password, callback) {
                 mongodb.close();
                 return  callback(err);
             };
-            collection.update({e_mail: e_mail},{"$set":{"password":password}}, function(err, doc) {
+            collection.update({e_mail: e_mail},{"$set": data}, function(err, doc) {
                 mongodb.close();
                 if (doc) {
                     //封装文档为 User 对象

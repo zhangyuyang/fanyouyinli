@@ -245,6 +245,7 @@ module.exports = function(app) {
 		});
 	});
 	app.get('/preview_photo', function(req, res) {
+		console.log(req.session.user);
 		res.render('preview_photo', {
 			user: req.session.user,
 			success: req.flash('success').toString(),
@@ -274,11 +275,14 @@ module.exports = function(app) {
 	});
 	app.post('/save_photo', function(req, res) {
 		var file_path = req.session.path;
-		res.render('save_photo', {
-			user : req.session.user,
-			title: '照片上传',
-			file_path: file_path
-		});
+		var file_email = req.session.user.e_mail;
+		var file_date = (new Date()).valueOf(); 
+		console.log(file_date);
+		// res.render('save_photo', {
+		// 	user : req.session.user,
+		// 	title: '照片上传',
+		// 	file_path: file_path
+		// });
 		//GM库里的方法，获取上传原图的宽度和高度
 		var methods = ["size"];
 		var get_image = gm(file_path);
@@ -289,19 +293,85 @@ module.exports = function(app) {
 		    source_height = result.height;
 		    console.log("原图宽度："+source_width);
 		    console.log("原图高度："+source_height);
+		    crop();
 		  });
 		});
-		//GM库里的crop截图方法
-			// gm(file_path).crop(100,100,60,60).write("/Users/zhangyuyang/Documents/zyy/node/fanyouyinli/public/temp/crop.png", function(err){
-			// 	if (err) return console.dir(arguments);
-   //  			console.log(this.outname + " created  ::  " + arguments[3]);
-			// });
 		// Jcrop获取截图框的顶点坐标 ,这个要写在另一个方法里
-		// console.log("111");
 		var preview_x, preview_y, preview_width;
 		preview_x = req.body.preview_x;
-		console.log("1212121"+preview_x);
+		preview_y = req.body.preview_y;
+		preview_width = req.body.preview_width;
+		console.log("预览图X坐标顶点"+preview_x);
+		console.log("预览图Y坐标顶点"+preview_y);
+		console.log("预览图拉伸的宽度（长度）"+preview_width);
+		// GM库里的crop截图方法
+		function crop(){
+			var last_x, last_y, last_width, ratio;
+			//constant参数是根据原图与预览图的比例，在竖着放的时候要用到这个参数，因为横着放的时候，CSS给定了图框的宽度为800
+			var constant = source_height * (800 / source_width);
+			if (source_width / source_height >= 1.87) {
+				//如果图片是横着放
+				ratio = source_width / 800;
+				console.log("横:"+ratio);
+				last_x = preview_x * ratio;
+				last_y = preview_y * ratio;
+				last_width = preview_width * ratio;
+			} else {
+				//图片是竖着放
+				ratio = source_height / constant;
+				console.log("竖:"+ratio);
+				console.log("竖preview_x:"+preview_x);
+				console.log("竖preview_y:"+preview_y);
+				console.log("竖preview_width:"+preview_width);
+				last_x = preview_x * ratio;
+				last_y = preview_y * ratio;
+				last_width = preview_width * ratio;
+			}
+			console.log("source_width: " + source_width);
+			console.log("source_height: " + source_height);
+			console.log("last_x:"+last_x);
+			console.log("last_y:"+last_y);
+			console.log("last_width:"+last_width);
+			console.log(__dirname);
+			gm(file_path).resize(712, 384).write(__dirname + "/../public/small/" + file_email+file_date+"_0.png", function(err){
+				if (err) return console.dir(arguments);
+    			console.log(this.outname + " created  ::  " + arguments[3]);
+			});
+			gm(file_path).crop(last_width, last_width, last_x, last_y).resize(60, 60).write(__dirname + "/../public/small/" + file_email+file_date+"_1.png", function(err){
+				if (err) return console.dir(arguments);
+    			console.log(this.outname + " created  ::  " + arguments[3]);
+			});
+			gm(file_path).crop(last_width, last_width, last_x, last_y).resize(30, 30).write(__dirname+ "/../public/small/" +file_email+file_date+"_2.png", function(err){
+				if (err) return console.dir(arguments);
+    			console.log(this.outname + " created  ::  " + arguments[3]);
+			});
+			//数据库操作
+			var test_photo0 = __dirname + "/../public/small/" + file_email+file_date+"_0.png";
+			var test_photo1 = 123;
+			var user_photos = new User({
+				e_mail : file_email,
+				photo0 : test_photo0,
+				photo1 : __dirname + "/../public/small/" + file_email+file_date+"_1.png",
+				photo2 : __dirname+ "/../public/small/" +file_email+file_date+"_2.png"
+			});
+			console.log("输出user_photos.photo0："+user_photos.photo0);
+			User.update(user_photos.e_mail, {
+				photo0 : user_photos.photo0,
+				photo1 : user_photos.photo1,
+				photo2 : user_photos.photo2
+			}, function(err, user) {
+				if (err) {
+					console.log(err);
+					req.flash('error', err);
+					res.redirect('/user_photo');
+				} else {
+					req.flash('success', "图片上传成功");
+					res.redirect('/user_info');
+					};
+				});
 
+		}
+		
 
 		// console.log("gm_size"+gm_size);
 	});

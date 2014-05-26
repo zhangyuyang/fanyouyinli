@@ -307,6 +307,7 @@ upload_photo = (callback)->
           height: Math.round(ry1 * boundy) + "px"
           marginLeft: "-" + Math.round(rx1 * c.x) + "px" #Math是JS内置对象，round（X）是把X四舍五入取最接近的数
           marginTop: "-" + Math.round(ry1 * c.y) + "px"
+        console.log c.x, c.y, c.w, c
         $('#preview_x').val(c.x)
         $('#preview_y').val(c.y)
         $('#preview_width').val(c.w)
