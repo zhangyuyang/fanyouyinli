@@ -11,12 +11,13 @@ html
     .xuxian
       .fan_center
         .fan
-      .user_info #{user.name}
-      .user_info(style='margin-right: -406px;') 消息
-      .user_info(style='margin-right: -365px;') 私信
-      .user_info(style='margin-right: -324px;') 我的聚餐
-      .user_city_info 厦门
-      if error
-        div.tips.error #{error}
-      if success
-        div.tips.error #{success}
+          if user
+              .user_info #{user.name}
+          .user_info(style='margin-right: -406px;') 消息
+          .user_info(style='margin-right: -365px;') 私信
+          .user_info(style='margin-right: -324px;') 我的聚餐
+          .user_city_info 厦门
+          if error
+            div.tips.error #{error}
+          if success
+            div.tips.error #{success}

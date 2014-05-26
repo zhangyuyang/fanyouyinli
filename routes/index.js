@@ -6,6 +6,7 @@ var crypto = require('crypto');
 var InviteUser = require('../models/user');
 var User = require('../models/user');
 var	fs = require('fs');
+var gm = require('gm')
 
 module.exports = function(app) {
 
@@ -243,6 +244,13 @@ module.exports = function(app) {
 			error: req.flash('error').toString()
 		});
 	});
+	app.get('/preview_photo', function(req, res) {
+		res.render('preview_photo', {
+			user: req.session.user,
+			success: req.flash('success').toString(),
+			error: req.flash('error').toString()
+		});
+	});
 	app.get('/user_history', function(req, res) {
 		res.render('user_history', {
 			user : req.session.user,
@@ -264,27 +272,64 @@ module.exports = function(app) {
 			error : req.flash('error').toString()
 		});
 	});
+	app.post('/save_photo', function(req, res) {
+		var file_path = req.session.path;
+		res.render('save_photo', {
+			user : req.session.user,
+			title: '照片上传',
+			file_path: file_path
+		});
+		//GM库里的方法，获取上传原图的宽度和高度
+		var methods = ["size"];
+		var get_image = gm(file_path);
+		var source_width, source_height;
+		methods.forEach(function(method){
+		  get_image[method](function(err, result){
+		    source_width = result.width;
+		    source_height = result.height;
+		    console.log("原图宽度："+source_width);
+		    console.log("原图高度："+source_height);
+		  });
+		});
+		//GM库里的crop截图方法
+			// gm(file_path).crop(100,100,60,60).write("/Users/zhangyuyang/Documents/zyy/node/fanyouyinli/public/temp/crop.png", function(err){
+			// 	if (err) return console.dir(arguments);
+   //  			console.log(this.outname + " created  ::  " + arguments[3]);
+			// });
+		// Jcrop获取截图框的顶点坐标 ,这个要写在另一个方法里
+		// console.log("111");
+		var preview_x, preview_y, preview_width;
+		preview_x = req.body.preview_x;
+		console.log("1212121"+preview_x);
+
+
+		// console.log("gm_size"+gm_size);
+	});
 	app.post('/user_photo', function(req, res) {
 		var file_path = req.files.file.path;
-		console.log(req.files.file.type);
+		//判断上传的照片是否合法
 		if (!file_path) {
 			req.flash('error', "路径不存在")
-			return res.redirect('/user_photo');
+			return res.redirect('/preview_photo');
 		} else if (req.files.file.type.split('/')[0] != "image") {
 			req.flash('error', "上传的文件必须是图片格式")
-			return res.redirect('/user_photo');
+			return res.redirect('/preview_photo');
 		} else if (req.files.file.size >2 * 1024 * 1024) {
 			req.flash('error', "上传文件不能大于2M")
-			return res.redirect('/user_photo');
+			return res.redirect('/preview_photo');
 		} else {
-			console.log(req.files.file.size);
-			var file_path = file_path.split('/');
-			var file_path_last = file_path[file_path.length - 1];
+			var file_path_name = file_path.split('/');
+			var file_path_last = file_path_name[file_path_name.length - 1];
+			req.session.path = file_path;
 			res.render('user_photo', {
-				user : req.session.user,
+				user: req.session.user,
 				title: '照片上传',
 				file_path: file_path_last
 			});
 		}
 	});
+
+
+
+
 }

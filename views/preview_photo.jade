@@ -1,7 +1,6 @@
 include head
 script(type='text/javascript', src='script/jquery.Jcrop.js')
 link(rel='stylesheet', type='text/css', href='/stylesheet/jquery.Jcrop.css')
-
 .my_attraction
 	.navigation(style='border-bottom : 0px')
 		label#dinner_party.lab1
@@ -16,31 +15,16 @@ link(rel='stylesheet', type='text/css', href='/stylesheet/jquery.Jcrop.css')
 			a#set_userlab.set_userlab(href="#") 个性标签
 			a#modiy_password.modiy_password(href="#") 修改密码
 	.userphpto_center
-		if file_path
-			.userphpto_up
-				img#target.target(src='temp/#{file_path}', alt='[Jcrop Example]')
-				#preview-pane
-					.preview-container
-						img.jcrop-preview(src='temp/#{file_path}', alt='Preview')
-					.preview-container1
-						img.jcrop-preview(src='temp/#{file_path}', alt='Preview')
-			form#to_save_phpto_from(action='/save_photo', method='post',enctype='multipart/form-data')
-				input#preview_x(name='preview_x', type='hidden')
-				input#preview_y(name='preview_y', type='hidden')
-				input#preview_width(name='preview_width', type='hidden')
-		else
-			.userphpto_up
-				h5#userphpto_text.userphpto_text 别藏了，上传头像让更多的人也认识你！
-				div#photo_demo.photo_demo
+		.userphpto_up
+			h5#userphpto_text.userphpto_text 别藏了，上传头像让更多的人也认识你！
+			div#photo_demo.photo_demo
 		.userphpto_down
 			.big_photo
 			.small_photo
 			a#userphpto_sub.userphpto_sub(href="#")
-			a#save_photo.save_photo(href="#")
 		form#upload_img.upload_img(action='/user_photo', method='post', enctype='multipart/form-data')
-			input#file(type="file" name="file")
-	script
-		:coffee
-			upload_photo get_photo_size
-
-	//- include foot
+			input#file.hide(type="file" name="file")
+script
+	:coffee
+		preview_photo()
+include foot

@@ -164,7 +164,7 @@ User.update = function update(e_mail, password, callback) {
                 if (doc) {
                     //封装文档为 User 对象
                     var user = new User(doc);
-                    callback(err, user); 
+                    callback(err, user);
                 } else {
                     callback(err, null);
                 }

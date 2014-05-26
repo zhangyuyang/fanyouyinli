@@ -111,7 +111,7 @@ $(document).ready ->
     $("#set_photo").css "color", "#5bc7d6"
   $("#set_photo").click ->
     $("#set_photo").css "color", "#5bc7d6"
-    window.location.href = "/user_photo"
+    window.location.href = "/preview_photo"
   $("#set_userinfo").click ->
     window.location.href = "/user_info"
   $("#set_userhistory").click ->
@@ -284,6 +284,12 @@ login = ->
 
 upload_photo = (callback)->
   $(document).ready ->  
+    $("#save_photo").click ->
+      $("#to_save_phpto_from").submit()
+    $("#userphpto_sub").click ->
+      $("#file").click()
+    $("#file").change ->
+      $("#upload_img").submit()
     updatePreview = (c) ->
       if parseInt(c.w) > 0
         rx = xsize / c.w #c.w是用户截图框框的宽度
@@ -301,6 +307,10 @@ upload_photo = (callback)->
           height: Math.round(ry1 * boundy) + "px"
           marginLeft: "-" + Math.round(rx1 * c.x) + "px" #Math是JS内置对象，round（X）是把X四舍五入取最接近的数
           marginTop: "-" + Math.round(ry1 * c.y) + "px"
+        $('#preview_x').val(c.x)
+        $('#preview_y').val(c.y)
+        $('#preview_width').val(c.w)
+
     jcrop_api = undefined
     boundx = undefined
     boundy = undefined
@@ -325,10 +335,7 @@ upload_photo = (callback)->
       jcrop_api = this
       $preview.appendTo jcrop_api.ui.holder
       callback()
-    $("#userphpto_sub").click ->
-      $("#file").click()
-    $("#file").change ->
-      $("#upload_img").submit()
+
       
 get_photo_size = ->
   $(document).ready ->  
@@ -345,7 +352,9 @@ get_photo_size = ->
     # $(".jcrop-vline right").css "height", "100"
     # $(".jcrop-vline").css "height", "100"
 
-  
-    
-
-
+preview_photo = ->
+  $(document).ready ->  
+    $("#userphpto_sub").click ->
+      $("#file").click()
+    $("#file").change ->
+      $("#upload_img").submit()
