@@ -4,3 +4,4 @@ js2coffee settings.js > settings.coffee
 js2coffee routes/index.js > routes/index.coffee
 js2coffee models/db.js > models/db.coffee
 js2coffee models/user.js > models/user.coffee
+js2coffee public/script/fanyouyinli.js > public/script/fanyouyinli.coffee
