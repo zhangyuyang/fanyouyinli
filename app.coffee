@@ -28,7 +28,7 @@ app.use express.bodyParser(
 # 照片上传后，保存到的默认路径
 app.set "views", __dirname + "/views"
 app.set "view engine", "jade"
-app.configure "dev", ->
+app.configure "production", ->
   console.log "dev"
   app.use partials()
   app.use express.urlencoded()
@@ -52,7 +52,9 @@ app.configure "dev", ->
   app.use flash()
   return
 
-require("./routes/index") app
+require("./routes/user_photo") app
+require("./routes/user_info") app
+require("./routes/page_jump") app
 app.use require("connect-assets")()
 http.createServer(app).listen app.get("port"), ->
   growl "node app.js 重启成功！"
