@@ -5,6 +5,7 @@ fs = require("fs")
 gm = require("gm")
 module.exports = (app) ->
   app.get "/", (req, res) ->
+    console.log '这是历史性的版本'
     res.render "home",
       title: "首页"
       user: req.session.user
