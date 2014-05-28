@@ -1,15 +1,59 @@
 include head
 .my_attraction
-	.navigation(style='border-bottom : 0px')
-		label#dinner_party.lab1
-		label#singer.lab2(style='background-position: 0px -38px;')
-		label#attractive.lab3
-		label#my_attractive.lab4
-	.userinfo_nav
-		.userinfo_navtxt
-			a#set_photo.set_photo(href="#") 设置头像
-			a#set_userinfo.set_userinfo(href="#") 基本信息
-			a#set_userhistory.set_userhistory(href="#" style="color:#5bc7d6") 履历
-			a#set_userlab.set_userlab(href="#") 个性标签
-			a#modiy_password.modiy_password(href="#") 修改密码
+  .navigation(style='border-bottom : 0px')
+    label#dinner_party.lab1
+    label#singer.lab2(style='background-position: 0px -38px')
+    label#attractive.lab3
+    label#my_attractive.lab4
+  .userinfo_nav
+    .userinfo_navtxt
+      a#set_photo.set_photo(href="#") 设置头像
+      a#set_userinfo.set_userinfo(href="#") 基本信息
+      a#set_userhistory.set_userhistory(href="#" style="color:#5bc7d6") 履历
+      a#set_userlab.set_userlab(href="#") 个性标签
+      a#modiy_password.modiy_password(href="#") 修改密码
+  .user_history_center
+    .worked
+      form#worked(method='post',action='/save_worked')
+        .worked_left
+          span(style='position : absolute; color : red; top : 140px') *
+          span 单位名称:
+          span 工作时间:
+          span 部门/职位:
+          span(style='margin-top : 40px') 多说几句:
+        .worked_right
+          input#company_name.company_name(name='company_name',type='text',value='请输入完整的公司名称')
+          select(name='work_year_s')
+            option(value='null') 请选择
+            - for (var x = 0; x < 30; x++)
+              option(value='#{2014 - x}') #{2014 - x}
+          span(style='position : absolute; top : 185px; left : 235px') 年
+          select(name='work_year_e')
+            option(value='null') 请选择
+            - for (var x = 0; x < 30; x++)
+              option(value='#{2014 - x}') #{2014 - x}
+          span(style='position : absolute; top : 185px; left : 327px') 年
+          input#job.job(name='job' ,type='text',value='请输入你所在部门和职位')
+          textarea#say_some.say_some(name='say_some')
+          a#word_sub.user_history_button(href='#')
+    .studed
+      form#studed(method='post',action='/save_studed')
+        .studed_left
+          span(style='position : absolute; color : red; top : 140px') *
+          span 学校类型:
+          span 学校名称:
+          span(style='margin-left : 10px; margin-top : 32px') 院系:
+          span(style='margin-left : 10px; margin-top : 40px') 回忆:
+        .studed_right
+          select(name='school_type') 
+            option(value='大学') 大学
+            option(value='中学') 中学
+            option(value='小学') 小学
+          input#school.school(value='请输入学校', name='school')
+          input#specialty.specialty(value='请输入完整的院系名称', name='specialty')
+          textarea#remember.remember(name='remember')
+          a#study_sub.user_history_button(href='#' style='background-position : 0px 35px')
+script
+  :coffee
+    user_history()
 include foot

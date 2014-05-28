@@ -1,0 +1,1 @@
+var user_history;user_history=function(){return $(document).ready(function(){$("#company_name").click(function(){return $("#company_name").val("")});return $("#job").click(function(){return $("#job").val("")})})};

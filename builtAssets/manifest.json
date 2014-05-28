@@ -1,7 +1,7 @@
 {
   "assets": {
     "city.js": "city-f6b1971ff438f3daed720e82c71b64b2.js",
-    "fanyouyinli.js": "fanyouyinli-426ce6edcf7f95f531cbc8d69bc013de.js",
+    "fanyouyinli.js": "fanyouyinli-0eaac0e3a3cfe6e3a57c269b90163a49.js",
     "home.js": "home-e7cbe1cc93d64df6fcbdf7f4638178cd.js",
     "login.js": "login-c7c7e4b0985489bb1b24fac00c88bd8c.js",
     "main_page.js": "main_page-78b84011e20ff3bbd885805a6033c8ba.js",
@@ -9,7 +9,8 @@
     "reg.js": "reg-b751b96980f4bf801e2d0b3ae0c45996.js",
     "select_date.js": "select_date-fdd579ed97d1078d51bf471e9123cb41.js",
     "resert.css": "resert-80440afa0666f5724973003ae11f8720.css",
-    "stylus.css": "stylus-6b2a65c74012e19a72cdc6267f0e9312.css"
+    "stylus.css": "stylus-7ebad1a5049b1f3ef72dc9f18965fa5c.css",
+    "user_history.js": "user_history-bd34376dd3f404665cc74e93b10258d7.js"
   },
   "files": {
     "city-f6b1971ff438f3daed720e82c71b64b2.js": {
@@ -98,9 +99,69 @@
     },
     "reg-b751b96980f4bf801e2d0b3ae0c45996.js": {
       "logical_path": "reg.js",
-      "mtime": "2014-05-27T14:46:32.000Z",
+      "mtime": "2014-05-28T04:12:33.000Z",
       "size": 1972,
       "digest": "b751b96980f4bf801e2d0b3ae0c45996"
+    },
+    "stylus-e9bde91e137f5d439adefa4d95b4fd52.css": {
+      "logical_path": "stylus.css",
+      "mtime": "2014-05-28T02:32:47.000Z",
+      "size": 20511,
+      "digest": "e9bde91e137f5d439adefa4d95b4fd52"
+    },
+    "stylus-6facd75411560a2fcc11ca7ba89b73a8.css": {
+      "logical_path": "stylus.css",
+      "mtime": "2014-05-28T02:33:45.000Z",
+      "size": 20511,
+      "digest": "6facd75411560a2fcc11ca7ba89b73a8"
+    },
+    "stylus-7e1ec69b7cdd032c2cd63e1756a566b6.css": {
+      "logical_path": "stylus.css",
+      "mtime": "2014-05-28T02:56:22.000Z",
+      "size": 20586,
+      "digest": "7e1ec69b7cdd032c2cd63e1756a566b6"
+    },
+    "stylus-21760db2ce36a2061ac7c674aee331bf.css": {
+      "logical_path": "stylus.css",
+      "mtime": "2014-05-28T03:03:54.000Z",
+      "size": 20642,
+      "digest": "21760db2ce36a2061ac7c674aee331bf"
+    },
+    "stylus-894a9f242619bbdfa638db494d511bba.css": {
+      "logical_path": "stylus.css",
+      "mtime": "2014-05-28T03:12:02.000Z",
+      "size": 20730,
+      "digest": "894a9f242619bbdfa638db494d511bba"
+    },
+    "stylus-5dec7857838e83a37d7794fece5672e2.css": {
+      "logical_path": "stylus.css",
+      "mtime": "2014-05-28T03:16:12.000Z",
+      "size": 20824,
+      "digest": "5dec7857838e83a37d7794fece5672e2"
+    },
+    "stylus-26f22ad3b9a5f131e77d3f26d8617c8e.css": {
+      "logical_path": "stylus.css",
+      "mtime": "2014-05-28T03:16:48.000Z",
+      "size": 20824,
+      "digest": "26f22ad3b9a5f131e77d3f26d8617c8e"
+    },
+    "fanyouyinli-0eaac0e3a3cfe6e3a57c269b90163a49.js": {
+      "logical_path": "fanyouyinli.js",
+      "mtime": "2014-05-28T07:13:14.000Z",
+      "size": 9716,
+      "digest": "0eaac0e3a3cfe6e3a57c269b90163a49"
+    },
+    "user_history-bd34376dd3f404665cc74e93b10258d7.js": {
+      "logical_path": "user_history.js",
+      "mtime": "2014-05-28T07:13:14.000Z",
+      "size": 213,
+      "digest": "bd34376dd3f404665cc74e93b10258d7"
+    },
+    "stylus-7ebad1a5049b1f3ef72dc9f18965fa5c.css": {
+      "logical_path": "stylus.css",
+      "mtime": "2014-05-28T03:48:22.000Z",
+      "size": 20906,
+      "digest": "7ebad1a5049b1f3ef72dc9f18965fa5c"
     }
   }
 }

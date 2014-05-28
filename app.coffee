@@ -28,7 +28,7 @@ app.use express.bodyParser(
 # 照片上传后，保存到的默认路径
 app.set "views", __dirname + "/views"
 app.set "view engine", "jade"
-app.configure "production", ->
+app.configure "development", ->
   console.log "dev"
   app.use partials()
   app.use express.urlencoded()

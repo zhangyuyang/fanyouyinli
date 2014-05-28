@@ -167,3 +167,79 @@ module.exports = (app) ->
       user: req.session.user
       success: req.flash("success").toString()
       error: req.flash("error").toString()
+
+  app.post "/save_worked", (req, res) ->
+    company_name = req.body.company_name
+    work_year_s = req.body.work_year_s
+    work_year_e = req.body.work_year_e
+    job = req.body.job    
+    say_some = req.body.say_some
+
+    console.log "company_name:"+company_name
+    console.log "work_year_s:"+work_year_s
+    console.log "work_year_e:"+work_year_e
+    console.log "job:"+job
+    console.log "say_some:"+say_some
+
+    user_history = new User(
+      e_mail : req.session.user.e_mail
+      company_name: company_name
+      work_year_s: work_year_s
+      work_year_e: work_year_e
+      job: job
+      say_some: say_some
+      )
+
+    User.update user_history.e_mail,
+      company_name: user_history.company_name,
+      work_year_s: user_history.work_year_s,
+      work_year_e: user_history.work_year_e,
+      job: user_history.job,
+      say_some: user_history.say_some
+    , (err, user) ->
+      if err
+        console.log "err"+err
+        req.flash "error", err
+        res.redirect "/"
+      else
+        console.log "success"+user
+        req.flash "success", "工作经历保存成功"
+        res.redirect "/"
+      return
+
+
+  app.post "/save_studed", (req, res) ->
+    school_type = req.body.school_type
+    school = req.body.school
+    specialty = req.body.specialty
+    remember = req.body.remember
+    
+    console.log "成功跳转到路由"
+    console.log "school_type:"+school_type
+    console.log "school:"+school
+    console.log "specialty:"+specialty
+    console.log "remember:"+remember
+
+    user_studed = new User(
+      e_mail : req.session.user.e_mail
+      school_type: school_type
+      school: school
+      specialty: specialty
+      remember: remember
+      )
+
+    User.update user_studed.e_mail,
+      school_type: user_studed.school_type,
+      school: user_studed.school,
+      specialty: user_studed.specialty,
+      remember: user_studed.remember
+    , (err, user) ->
+      if err
+        console.log "err"+err
+        req.flash "error", err
+        res.redirect "/"
+      else
+        console.log "success"+user
+        req.flash "success", "求学经历保存成功"
+        res.redirect "/"
+      return

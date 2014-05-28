@@ -38,6 +38,16 @@ User = (user) ->
   @photo0 = user.photo0
   @photo1 = user.photo1
   @photo2 = user.photo2
+  @company_name = user.company_name
+  @work_year_s = user.work_year_s
+  @work_year_e = user.work_year_e
+  @job = user.job
+  @say_some = user.say_some
+  @school_type = user.school_type
+  @school = user.school
+  @specialty = user.specialty
+  @remember = user.remember
+
   return
 mongodb = require("./db")
 module.exports = InviteUser
