@@ -98,7 +98,7 @@ module.exports = (app) ->
         req.flash "error", err
         return res.redirect("/find_password")
       else
-        old_password = "222222"
+        old_password = "333333"
         md5 = crypto.createHash("md5")
         console.log old_password
         new_password = md5.update(old_password).digest("base64")
@@ -181,21 +181,14 @@ module.exports = (app) ->
     console.log "job:"+job
     console.log "say_some:"+say_some
 
-    user_history = new User(
-      e_mail : req.session.user.e_mail
-      company_name: company_name
-      work_year_s: work_year_s
-      work_year_e: work_year_e
-      job: job
-      say_some: say_some
-      )
-
-    User.update user_history.e_mail,
-      company_name: user_history.company_name,
-      work_year_s: user_history.work_year_s,
-      work_year_e: user_history.work_year_e,
-      job: user_history.job,
-      say_some: user_history.say_some
+    User.update_array req.session.user.e_mail,
+      worked: {
+        company_name : req.body.company_name,
+        work_year_s : req.body.work_year_s,
+        work_year_e : req.body.work_year_e,
+        job : req.body.job,
+        say_some : req.body.say_some
+      }
     , (err, user) ->
       if err
         console.log "err"+err
@@ -204,7 +197,7 @@ module.exports = (app) ->
       else
         console.log "success"+user
         req.flash "success", "工作经历保存成功"
-        res.redirect "/"
+        res.redirect "/user_history"
       return
 
 
@@ -220,26 +213,20 @@ module.exports = (app) ->
     console.log "specialty:"+specialty
     console.log "remember:"+remember
 
-    user_studed = new User(
-      e_mail : req.session.user.e_mail
-      school_type: school_type
-      school: school
-      specialty: specialty
-      remember: remember
-      )
 
-    User.update user_studed.e_mail,
-      school_type: user_studed.school_type,
-      school: user_studed.school,
-      specialty: user_studed.specialty,
-      remember: user_studed.remember
+    User.update_array req.session.user.e_mail,
+      studed : {
+        school_type : req.body.school_type,
+        school : req.body.school,
+        specialty : req.body.specialty,
+        remember : req.body.remember
+      }
     , (err, user) ->
       if err
         console.log "err"+err
         req.flash "error", err
-        res.redirect "/"
       else
-        console.log "success"+user
+        console.log "这里是数据库反悔的success"+user
         req.flash "success", "求学经历保存成功"
-        res.redirect "/"
       return
+

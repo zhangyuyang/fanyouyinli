@@ -38,15 +38,8 @@ User = (user) ->
   @photo0 = user.photo0
   @photo1 = user.photo1
   @photo2 = user.photo2
-  @company_name = user.company_name
-  @work_year_s = user.work_year_s
-  @work_year_e = user.work_year_e
-  @job = user.job
-  @say_some = user.say_some
-  @school_type = user.school_type
-  @school = user.school
-  @specialty = user.specialty
-  @remember = user.remember
+  @worded = user.worded
+  @studed = user.studed
 
   return
 mongodb = require("./db")
@@ -195,18 +188,33 @@ User.update = update = (e_mail, data, callback) ->
       ,
         $set: data
       , (err, doc) ->
+        console.log "修改密码err："+err+"返回值"+doc
         mongodb.close()
         if doc
-          
           #封装文档为 User 对象
           user = new User(doc)
           callback err, user
         else
           callback err, null
-        return
-
-      return
-
-    return
-
-  return
+# 这里是数组操作
+User.update_array = update_array = (e_mail, data, callback) ->
+  
+  mongodb.open (err, db) ->
+    return callback(err)  if err
+    
+    #读取 User 集合
+    db.collection "users", (err, collection) ->
+      if err
+        mongodb.close()
+        return callback(err) 
+      collection.update {e_mail: e_mail}, {$set: data}, (err, result)->
+        console.log err, result
+        mongodb.close()
+        if err
+          console.log "这是在DB里面读的ERR"+err
+          callback err, null
+        else
+          console.log "这是在DB里面读的SUC"+result
+          #封装文档为 User 对象
+          # user = new User(result)
+          callback err, result
