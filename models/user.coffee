@@ -207,14 +207,9 @@ User.update_array = update_array = (e_mail, data, callback) ->
       if err
         mongodb.close()
         return callback(err) 
-      collection.update {e_mail: e_mail}, {$set: data}, (err, result)->
-        console.log err, result
+      collection.update {e_mail: e_mail}, {$push: data}, (err, result)->
         mongodb.close()
         if err
-          console.log "这是在DB里面读的ERR"+err
           callback err, null
         else
-          console.log "这是在DB里面读的SUC"+result
-          #封装文档为 User 对象
-          # user = new User(result)
           callback err, result

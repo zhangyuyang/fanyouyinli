@@ -175,29 +175,24 @@ module.exports = (app) ->
     job = req.body.job    
     say_some = req.body.say_some
 
-    console.log "company_name:"+company_name
-    console.log "work_year_s:"+work_year_s
-    console.log "work_year_e:"+work_year_e
-    console.log "job:"+job
-    console.log "say_some:"+say_some
-
     User.update_array req.session.user.e_mail,
       worked: {
-        company_name : req.body.company_name,
-        work_year_s : req.body.work_year_s,
-        work_year_e : req.body.work_year_e,
-        job : req.body.job,
-        say_some : req.body.say_some
+        company_name : company_name,
+        work_year_s : work_year_s,
+        work_year_e : work_year_e,
+        job : job,
+        say_some : say_some
       }
     , (err, user) ->
       if err
-        console.log "err"+err
         req.flash "error", err
-        res.redirect "/"
       else
-        console.log "success"+user
-        req.flash "success", "工作经历保存成功"
-        res.redirect "/user_history"
+        res.json
+          company_name : company_name,
+          work_year_s : work_year_s,
+          work_year_e : work_year_e,
+          job : job,
+          say_some : say_some
       return
 
 
@@ -206,27 +201,25 @@ module.exports = (app) ->
     school = req.body.school
     specialty = req.body.specialty
     remember = req.body.remember
-    
-    console.log "成功跳转到路由"
-    console.log "school_type:"+school_type
-    console.log "school:"+school
-    console.log "specialty:"+specialty
-    console.log "remember:"+remember
-
 
     User.update_array req.session.user.e_mail,
       studed : {
-        school_type : req.body.school_type,
-        school : req.body.school,
-        specialty : req.body.specialty,
-        remember : req.body.remember
+        school_type : school_type,
+        school : school,
+        specialty : specialty,
+        remember : remember
       }
     , (err, user) ->
       if err
-        console.log "err"+err
         req.flash "error", err
       else
-        console.log "这里是数据库反悔的success"+user
+        console.log "这里是数据库返回的成功条数"+user
         req.flash "success", "求学经历保存成功"
+        res.json
+          school_type: school_type,
+          school : school,
+          specialty : specialty,
+          remember : remember
+
       return
 
