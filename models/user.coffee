@@ -120,8 +120,10 @@ User::save = save = (callback) ->
         return callback(err)
       
       #为 e_mail 属性添加索引
-      collection.ensureIndex "e_mail",
-        unique: true
+      collection.ensureIndex "e_mail", unique: true, (err,doc) ->
+        if err
+          mongodb.close()
+          return callback(err)
 
       
       #写入 Users 文档
@@ -151,30 +153,18 @@ User.get = get = (e_mail, callback) ->
         return callback(err)
       
       #查找 e_mail 属性为 e_mail 的文档
-      collection.findOne
-        e_mail: e_mail
-      , (err, doc) ->
+      collection.findOne e_mail: e_mail , (err, doc) ->
         mongodb.close()
         if doc
-          
-          #封装文档为 User 对象
-          user = new User(doc)
-          callback err, user
+          callback err, doc
         else
           callback err, null
-        return
 
-      return
-
-    return
-
-  return
 
 User.update = update = (e_mail, data, callback) ->
   
   #从数据库中更改用户的密码
-  console.log data
-  console.log e_mail
+
   mongodb.open (err, db) ->
     return callback(err)  if err
     
@@ -188,7 +178,6 @@ User.update = update = (e_mail, data, callback) ->
       ,
         $set: data
       , (err, doc) ->
-        console.log "修改密码err："+err+"返回值"+doc
         mongodb.close()
         if doc
           #封装文档为 User 对象
@@ -196,9 +185,39 @@ User.update = update = (e_mail, data, callback) ->
           callback err, user
         else
           callback err, null
-# 这里是数组操作
-User.update_array = update_array = (e_mail, data, callback) ->
-  
+
+# 这里是更新(新增一个数组，即使这个数组存在，也重复添加)操作，可以传入一个变量或者一个MAP操作
+User.insert_array = (e_mail, data, callback) ->
+  console.log "这里是增加数组的数据库操作"
+  console.log data
+  mongodb.open (err, db) ->
+    if err
+      console.log "数据库打开出错"
+      console.log err
+    else  
+    db.collection "users", (err, collection) ->
+      if err
+        console.log "查询USER表集合"
+        mongodb.close()
+        return callback(err)
+      collection.update 
+        e_mail: e_mail
+      ,
+        $push: data
+      , (err, result)->
+        mongodb.close()
+        console.log "数据库关闭2"
+        if err
+          mongodb.close()
+          console.log err
+          callback err, null
+        else
+          callback err, result
+          mongodb.close()
+
+# 这里是更新(数组删除)操作，可以传入一个变量或者一个MAP操作
+User.delete_array = delete_array = (e_mail, data, callback) ->
+  console.log "这里是删除数组的数据库操作"
   mongodb.open (err, db) ->
     return callback(err)  if err
     
@@ -207,9 +226,19 @@ User.update_array = update_array = (e_mail, data, callback) ->
       if err
         mongodb.close()
         return callback(err) 
-      collection.update {e_mail: e_mail}, {$push: data}, (err, result)->
+      collection.update 
+        e_mail: e_mail
+      , 
+        $pull: data   
+      , (err, result)->
         mongodb.close()
+        console.log "数据库关闭1"
         if err
+          console.log "这是删除失败"
+          console.log err
           callback err, null
         else
+          console.log "这是删除成功"
           callback err, result
+
+

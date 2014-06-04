@@ -14,8 +14,28 @@ include head
       a#modiy_password.modiy_password(href="#") 修改密码
   .user_history_center
     .worked
-      //- 克隆的FORM
-      form#worked_clone.worked_clone(method='post',action='/save_worked')
+      if worked
+        -for(var i = 0; i < worked.length; i++)
+          form#work_preview.worked_preview(method='post',action='/save_worked',style="display : inline-block")
+            .worked_left
+              span(style='position : absolute; color : red; top : 3px') *
+              span 单位名称:
+              span 工作时间:
+              span 部门/职位:
+              span(style='margin-top : 40px') 多说几句:
+            .worked_right
+              h5#company_name1.preview_list #{worked[i].company_name}
+              h5#work_year_s1.work_year #{worked[i].work_year_s}
+              span(style='position : absolute; top : 50px; left : 82px') 年
+              h5#work_year_e1.work_year #{worked[i].work_year_e}
+              span(style='position : absolute; top : 50px; left : 175px') 年
+              h5#job1.preview_list #{worked[i].job}
+              h5#say_some1.say_some_list #{worked[i].say_some}
+              a#work_modify_botton1.modify_bottom(href='#')
+              a#work_delete_botton1.delete_bottom(href='#')
+              input#work_creattime1(value='#{worked[i].creat_time}', type='hidden') 
+      //- 克隆的prewiew
+      form#work_preview.worked_preview(method='post',action='/save_worked')
         .worked_left
           span(style='position : absolute; color : red; top : 3px') *
           span 单位名称:
@@ -23,15 +43,41 @@ include head
           span 部门/职位:
           span(style='margin-top : 40px') 多说几句:
         .worked_right
-          h5#company_name1.preview_list 公司名称
+          h5#company_name1.preview_list 程序出错
           h5#work_year_s1.work_year 2000
           span(style='position : absolute; top : 50px; left : 82px') 年
           h5#work_year_e1.work_year 2010
           span(style='position : absolute; top : 50px; left : 175px') 年
-          h5#job1.preview_list 这里是职位
-          h5#say_some1.say_some_list 多说几句
-          a#modify_bottom1.modify_bottom(href='#')
-          a#delete_bottom1.delete_bottom(href='#')
+          h5#job1.preview_list 程序出错
+          h5#say_some1.say_some_list 程序出错
+          a#work_modify_botton1.modify_bottom(href='#')
+          a#work_delete_botton1.delete_bottom(href='#')
+          input#work_creattime1(value='', type='hidden')
+
+      //- 克隆的work_save
+      form#work_save.work_save(method='post',action='/save_worked')
+        .worked_left
+          span(style='position : absolute; color : red; top : 3px') *
+          span 单位名称:
+          span 工作时间:
+          span 部门/职位:
+          span(style='margin-top : 40px') 多说几句:
+        .worked_right
+          input#company_name2.company_name(name='company_name',type='text',placeholder="请输入完整的公司名称")
+          select#work_year_s2
+            option(value='null') 请选择
+            - for (var x = 0; x < 30; x++)
+              option(value='#{2014 - x}') #{2014 - x}
+          span(style='position : absolute; top : 50px; left : 82px') 年
+          select#work_year_e2
+            option(value='null') 请选择
+            - for (var x = 0; x < 30; x++)
+              option(value='#{2014 - x}') #{2014 - x}
+          span(style='position : absolute; top : 50px; left : 175px') 年
+          input#job2.job(name='job' ,type='text',placeholder="请输入你的职位")
+          textarea#say_some2.say_some(name='say_some',placeholder="说点什么吧")
+          a#work_save_button.work_save_button(href='#')
+          input#work_creattime2(value='', type='hidden')
 
       form#worked(method='post',action='/save_worked')
         .worked_left
@@ -41,7 +87,7 @@ include head
           span 部门/职位:
           span(style='margin-top : 40px') 多说几句:
         .worked_right
-          input#company_name.company_name(name='company_name',type='text',value='请输入完整的公司名称')
+          input#company_name.company_name(name='company_name',type='text',placeholder="请输入完整的公司名称")
           select#work_year_s
             option(value='null') 请选择
             - for (var x = 0; x < 30; x++)
@@ -52,13 +98,33 @@ include head
             - for (var x = 0; x < 30; x++)
               option(value='#{2014 - x}') #{2014 - x}
           span(style='position : absolute; top : 50px; left : 175px') 年
-          input#job.job(name='job' ,type='text',value='请输入你所在部门和职位')
-          textarea#say_some.say_some(name='say_some')
+          input#job.job(name='job' ,type='text',placeholder="请输入你所在部门和职位")
+          textarea#say_some.say_some(name='say_some',placeholder="说点什么吧")
           a#word_sub.user_history_button(href='#',type='hide')
+          input#work_creattime(value='', type='hidden')
+
 
     .studed
-      //- 克隆的FORM
-      form#studed_clone.studed_clone(method='post',action='/save_studed')
+      //- 这里是studed
+      if study
+        -for(var i = 0; i < study.length; i++)
+          form#studed_prewiew.studed_clone(method='post',style='display : inline-block')
+            .studed_left
+              span(style='position : absolute; color : red; top : 140px') *
+              span 学校类型:
+              span 学校名称:
+              span(style='margin-left : 10px; margin-top : 32px') 院系:
+              span(style='margin-left : 10px; margin-top : 40px') 回忆:
+            .studed_right
+              h5#school_type1.preview_studed #{study[i].school_type}
+              h5#school1.preview_studed(style='margin-top : 38px;') #{study[i].school}
+              h5#specialty1.preview_studed(style='margin-top : 35px;') #{study[i].specialty}
+              h5#remember1.preview_studed(style='margin-top : 43px; margin-bottom : 20px') #{study[i].remember}
+              a#modify_bottom1.studed_modify_bottom(href='#')
+              a#delete_bottom1.studed_delete_bottom(href='#')
+              input#study_creattime1(value='#{study[i].creat_time}', type='hidden')
+      //- 克隆的prewiew
+      form#studed_prewiew.studed_clone(method='post')
         .studed_left
           span(style='position : absolute; color : red; top : 140px') *
           span 学校类型:
@@ -66,14 +132,35 @@ include head
           span(style='margin-left : 10px; margin-top : 32px') 院系:
           span(style='margin-left : 10px; margin-top : 40px') 回忆:
         .studed_right
-          h5#school_type1.preview_studed 大学asdasdsaadas
+          h5#school_type1.preview_studed 如果看到这里，说明程序错误
           h5#school1.preview_studed(style='margin-top : 38px;') 大学asdasdas
           h5#specialty1.preview_studed(style='margin-top : 35px;') 大学asdasd
           h5#remember1.preview_studed(style='margin-top : 43px; margin-bottom : 20px') 大学asdasd
           a#modify_bottom1.modify_bottom(href='#')
           a#delete_bottom1.delete_bottom(href='#')
+          input#study_creattime1(value='', type='hidden')
 
-      form#studed(method='post',action='/save_studed')
+      //- 克隆的studed_save
+      form#studed_save.studed_clone(method='post')
+        .studed_left
+          span(style='position : absolute; color : red; top : 140px') *
+          span 学校类型:
+          span 学校名称:
+          span(style='margin-left : 10px; margin-top : 32px') 院系:
+          span(style='margin-left : 10px; margin-top : 40px') 回忆:
+        .studed_right
+          select#school_type2(name='school_type') 
+            option(value='大学') 大学
+            option(value='中学') 中学
+            option(value='小学') 小学
+          input#school2.school(name='school', placeholder="学校")
+          input#specialty2.specialty(name='specialty', placeholder="请输入完整的院系名称")
+          textarea#remember2.remember(name='remember', placeholder="回忆")
+          a#studed_save_button.studed_save_button(href='#')
+          input#study_creattime2(value='', type='hidden')
+
+
+      form#studed(method='post')
         .studed_left
           span(style='position : absolute; color : red; top : 140px') *
           span 学校类型:
@@ -85,10 +172,11 @@ include head
             option(value='大学') 大学
             option(value='中学') 中学
             option(value='小学') 小学
-          input#school.school(value='请输入学校', name='school')
-          input#specialty.specialty(value='请输入完整的院系名称', name='specialty')
-          textarea#remember.remember(name='remember')
-          a#study_sub.user_history_button(href='#' style='background-position : 0px 35px')
+          input#school.school(name='school', placeholder="学校")
+          input#specialty.specialty(name='specialty', placeholder="请输入完整的院系名称")
+          textarea#remember.remember(name='remember', placeholder="回忆")
+          a#study_sub.user_history_button(href='#', style='background-position : 0px 35px')
+          input#study_creattime(value='', type='hidden')
 
 script
   :coffee

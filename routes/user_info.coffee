@@ -135,6 +135,7 @@ module.exports = (app) ->
     reg_mail = req.body.reg_mail
     reg_city = req.body.reg_city
     regname = req.body.reg_name
+
     user = new User(
       e_mail: reg_mail
       password: reg_password
@@ -144,15 +145,18 @@ module.exports = (app) ->
     )
     
     #检查E-MAIL是否存在
-    User.get user.e_mail, (err, doc) ->
-      err = "邮箱已经存在，请重新申请"  if doc
+    User.get reg_mail, (err, doc) ->
+      console.log "检验EMAIL是否存在"
       if err
+        err = "邮箱已经存在，请重新申请"  
         req.flash "error", err
         return res.redirect("/reg")
       
       #如果不存在則新增用戶
       user.save (err) ->
+        console.log "新增用户"
         if err
+          console.log "新增错误"
           console.log err
           req.flash "error", err
           res.redirect "/"
@@ -163,25 +167,38 @@ module.exports = (app) ->
         return
 
   app.get "/user_history", (req, res) ->
-    res.render "user_history",
-      user: req.session.user
-      success: req.flash("success").toString()
-      error: req.flash("error").toString()
+    console.log req.session.user.e_mail
+    User.get req.session.user.e_mail, (err, user) ->
+      if err
+        console.log "错误"+err
+      else 
+        console.log user.worked
+      res.render "user_history",
+        user: req.session.user
+        success: req.flash("success").toString()
+        error: req.flash("error").toString()
+        worked : user.worked
+        study : user.study
 
-  app.post "/save_worked", (req, res) ->
+
+
+
+  app.post "/insert_worked", (req, res) ->
     company_name = req.body.company_name
     work_year_s = req.body.work_year_s
     work_year_e = req.body.work_year_e
     job = req.body.job    
     say_some = req.body.say_some
+    creat_time = req.body.creat_time
 
-    User.update_array req.session.user.e_mail,
+    User.insert_array req.session.user.e_mail,
       worked: {
         company_name : company_name,
         work_year_s : work_year_s,
         work_year_e : work_year_e,
         job : job,
-        say_some : say_some
+        say_some : say_some,
+        creat_time : creat_time
       }
     , (err, user) ->
       if err
@@ -192,34 +209,95 @@ module.exports = (app) ->
           work_year_s : work_year_s,
           work_year_e : work_year_e,
           job : job,
-          say_some : say_some
+          say_some : say_some,
+          creat_time : creat_time
       return
 
 
-  app.post "/save_studed", (req, res) ->
+  app.post "/delete_work", (req, res) ->
+    company_name = req.body.company_name
+    work_year_s = req.body.work_year_s
+    work_year_e = req.body.work_year_e
+    job = req.body.job    
+    say_some = req.body.say_some
+    creat_time = req.body.creat_time
+
+    User.delete_array req.session.user.e_mail,
+      worked: {
+        company_name : company_name,
+        work_year_s : work_year_s,
+        work_year_e : work_year_e,
+        job : job,
+        say_some : say_some,
+        creat_time : creat_time
+      }
+    , (err, info) ->
+      if err
+        console.log "删除数据失败"+info
+        res.json
+          status : false
+      else
+        console.log "删除数据成功"+info
+        res.json
+          status : true
+      return
+
+
+
+
+
+  app.post "/insert_study", (req, res) ->
     school_type = req.body.school_type
     school = req.body.school
     specialty = req.body.specialty
-    remember = req.body.remember
+    remember = req.body.remember    
+    creat_time = req.body.creat_time
 
-    User.update_array req.session.user.e_mail,
-      studed : {
+    User.insert_array req.session.user.e_mail,
+      study: {
         school_type : school_type,
         school : school,
         specialty : specialty,
-        remember : remember
+        remember : remember,
+        creat_time : creat_time
       }
     , (err, user) ->
       if err
         req.flash "error", err
       else
-        console.log "这里是数据库返回的成功条数"+user
-        req.flash "success", "求学经历保存成功"
         res.json
-          school_type: school_type,
+          school_type : school_type,
           school : school,
           specialty : specialty,
-          remember : remember
-
+          remember : remember,
+          creat_time : creat_time
       return
+
+
+  app.post "/delete_study", (req, res) ->
+    school_type = req.body.school_type
+    school = req.body.school
+    specialty = req.body.specialty
+    remember = req.body.remember    
+    creat_time = req.body.creat_time
+
+    User.delete_array req.session.user.e_mail,
+      study: {
+        school_type : school_type,
+        school : school,
+        specialty : specialty,
+        remember : remember,
+        creat_time : creat_time
+      }
+    , (err, info) ->
+      if err
+        console.log "删除数据失败"+info
+        res.json
+          status : false
+      else
+        console.log "删除数据成功"+info
+        res.json
+          status : true
+      return
+
 

@@ -1,10 +1,14 @@
 reg = ->
   $(document).ready ->
+    eMaliReg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/
+    nameReg = /[^\x00-\x80]/
+    passwordReg = /^[a-zA-Z0-9]{6,}$/
     $("#find_password_button").click ->
       console.log "find_password_button这个按钮已经点了"
       $("#find_password_form").submit()
       return
     $("#reg_button").click ->
+      console.log "到注册页面"
       reg_eMail = document.getElementById("reg_mail")
       reg_password = document.getElementById("reg_password")
       reg_name = document.getElementById("reg_name")
