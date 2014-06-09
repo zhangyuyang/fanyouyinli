@@ -4,3 +4,6 @@
 # = require login
 # = require photo
 # = require user_history
+# = require user_tag
+# = require modify_password
+# = require js_dinner

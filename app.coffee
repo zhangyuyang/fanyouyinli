@@ -55,6 +55,7 @@ app.configure "development", ->
 require("./routes/user_photo") app
 require("./routes/user_info") app
 require("./routes/page_jump") app
+require("./routes/dinner") app
 app.use require("connect-assets")()
 http.createServer(app).listen app.get("port"), ->
   growl "node app.js 重启成功！"

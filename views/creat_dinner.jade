@@ -1,0 +1,117 @@
+include head
+!= js('select_date')
+script(type='text/javascript', src='script/jquery.Jcrop.js')
+link(rel='stylesheet', type='text/css', href='/stylesheet/jquery.Jcrop.css')
+
+.my_attraction
+	.navigation(style='border-bottom : 0px')
+		label#dinner_party.lab1
+		label#singer.lab2(style='background-position: 0px -38px;')
+		label#attractive.lab3
+		label#my_attractive.lab4
+	//- .userinfo_nav
+	//- 	.userinfo_navtxt
+	//- 		a#set_photo.set_photo(href="#", style="color:#5bc7d6") 设置头像
+	//- 		a#set_userinfo.set_userinfo(href="#") 基本信息
+	//- 		a#set_userhistory.set_userhistory(href="#") 履历
+	//- 		a#set_userlab.set_userlab(href="#") 个性标签
+	//- 		a#modiy_password.modiy_password(href="#") 修改密码
+	.creat_dinner_center
+		.dinner_text_border
+			.dinner_text2 准备
+			.dinner_text3 遇见志同道合的他们
+
+		.dinner_left
+			span.dinner_left_text
+				h5. 标题
+			span.dinner_left_text
+				h5. 地点
+			span.dinner_left_text
+				h5. 开始时间
+			span.dinner_left_text
+				h5. 人数上限
+			span.dinner_left_text
+				h5. 费用
+			span.dinner_left_text
+				h5. 添加标签
+			span.dinner_left_text(style='margin-top: 260px')
+				h5. 详细描述
+			span.dinner_left_text(style='margin-top: 150px')
+				h5. 封面
+			span.dinner_left_text
+				h5. 手机号
+		.dinner_right
+			form#creat_dinner_form
+				span.dinner_right_span
+					input#dinner_tag_input.dinner_tag_input
+					h5.dinner_right_remark 起一个让人看一眼就明白的标题
+				span.dinner_right_span
+					select#dining_locations(name='dining_locations',style='width: 100px;') 
+						option(value='咖啡') 咖啡
+						option(value='桌游') 桌游
+						option(value='奶茶') 奶茶
+					span.dinner_right_remark(style='margin-right: 10px') 厦门
+					input#dining_locations_info.dining_locations_input
+				span.dinner_right_span
+					input#dinner_time_input.dinner_time_input
+					span.dinner_time_select
+						//- select.sel_year
+						//- |年
+						select.sel_month
+						|月
+						select.sel_day
+						|日
+				span.dinner_right_span
+					input#number_of_meals.number_of_meals
+				span.dinner_right_span
+					input#payment_method.payment_method(type='radio',name='payment_method',value='AA制')
+					h5.AA_zhi AA制
+					input#payment_method.payment_method(style='margin-top: 4px',type='radio',name='payment_method',value='我请客') 
+					h5.woqingke 我请客
+				span.dinner_right_span
+					.my_lab_div1
+						if tag
+							-for(var i = 0; i < tag.length; i++)		
+								div#my_lab_clone.my_lab_form
+									h5#my_leb_text.my_leb_text1 #{tag[i]}
+									a#delete_my_leb.delete_my_leb(href='#')
+					.add_lab_div1
+						input#add_lab_input.add_lab_input
+						a#add_lab_button.add_lab_button(href='#')
+					.push_lab_div
+						if push_info
+							-for(var i = 0; i < push_info.length; i++)
+								div#push_lab_form.push_lab_form
+									a#push_leb_button.push_leb_button(href='#')
+									h5#push_leb_text.my_leb_text #{push_info[i].tag_name}
+				span.dinner_right_span
+					textarea#description.description
+					h5.description_text 你们将要吃哪些可口的东西
+					h5.description_text 人均大概消费多少
+					h5.description_text 赴宴的人如何更好的找到你的饭桌
+					h5.description_text 关于饭局的更多特色
+				span.dinner_right_span(style='margin-top: 350px;')
+					a#add_cover.add_cover(href='#')
+					h5.dinner_right_remark.add_cover_text 用一张好看的照片代表你的饭局
+				span.dinner_right_span
+					input#tel_of_meals.number_of_meals
+					h5.dinner_right_remark 只有确认参与的人才会获取你的手机号，同时你也能获取他们的手机号
+				span.dinner_right_span
+					a#creat_dinner_submit.creat_dinner_submit(href='#')
+					h5.dinner_right_remark.add_cover_text(style='margin-right: 445px;') 最重要的是，分享让更多人加入
+
+
+script
+	:coffee
+		$ ->
+			# 出生年月插件
+			$.ms_DatePicker
+				YearSelector: ".sel_year"
+				MonthSelector: ".sel_month"
+				DaySelector: ".sel_day"
+
+			return
+		user_tag()
+		creat_dinner()
+
+	//- include foot

@@ -1,4 +1,4 @@
-
+mongodb = require("./db")
 #
 # * GET users listing.
 # 
@@ -9,40 +9,8 @@ InviteUser = (invite_user) ->
   @e_mail = invite_user.e_mail
   @city = invite_user.city
   @about_me = invite_user.about_me
-  return
 
-#将用户数据存入数据库中
-#!这里，save的方法名，为什么不加prototype，invite_user就获取不到值
 
-#读  InviteUser  集合
-
-#为 name 属性添加索引
-
-#写入 InviteUser 文档
-
-#从数据库中查询出用户的数据
-
-#读取 InviteUser 集合
-
-#查找 e_mail 属性为 e_mail 的文档
-
-#封装文档为 InviteUser 对象
-
-# 注册表  regUser addClass
-User = (user) ->
-  @e_mail = user.e_mail
-  @password = user.password
-  @name = user.name
-  @sex = user.sex
-  @city = user.city
-  @photo0 = user.photo0
-  @photo1 = user.photo1
-  @photo2 = user.photo2
-  @worded = user.worded
-  @studed = user.studed
-
-  return
-mongodb = require("./db")
 module.exports = InviteUser
 InviteUser::save = save = (callback) ->
   invite_user =
@@ -98,6 +66,19 @@ InviteUser.get = get = (e_mail, callback) ->
     return
 
   return
+
+User = (user) ->
+  @e_mail = user.e_mail
+  @password = user.password
+  @name = user.name
+  @sex = user.sex
+  @city = user.city
+  @photo0 = user.photo0
+  @photo1 = user.photo1
+  @photo2 = user.photo2
+  @worded = user.worded
+  @studed = user.studed
+  @tag = user.tag
 
 module.exports = User
 User::save = save = (callback) ->
@@ -192,28 +173,26 @@ User.insert_array = (e_mail, data, callback) ->
   console.log data
   mongodb.open (err, db) ->
     if err
+      db.close()
       console.log "数据库打开出错"
       console.log err
     else  
     db.collection "users", (err, collection) ->
       if err
         console.log "查询USER表集合"
-        mongodb.close()
+        db.close()
         return callback(err)
       collection.update 
         e_mail: e_mail
       ,
         $push: data
       , (err, result)->
-        mongodb.close()
+        db.close()
         console.log "数据库关闭2"
         if err
-          mongodb.close()
-          console.log err
           callback err, null
         else
           callback err, result
-          mongodb.close()
 
 # 这里是更新(数组删除)操作，可以传入一个变量或者一个MAP操作
 User.delete_array = delete_array = (e_mail, data, callback) ->

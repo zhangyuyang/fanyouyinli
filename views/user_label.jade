@@ -12,4 +12,25 @@ include head
 			a#set_userhistory.set_userhistory(href="#") 履历
 			a#set_userlab.set_userlab(href="#" style="color:#5bc7d6") 个性标签
 			a#modiy_password.modiy_password(href="#") 修改密码
+	.user_history_center
+		.my_lab_div
+			if tag
+				-for(var i = 0; i < tag.length; i++)		
+					div#my_lab_clone.my_lab_form
+						h5#my_leb_text.my_leb_text1 #{tag[i]}
+						a#delete_my_leb.delete_my_leb(href='#')
+
+		.add_lab_div
+			input#add_lab_input.add_lab_input
+			a#add_lab_button.add_lab_button(href='#')
+		.push_lab_div
+			if push_info
+				-for(var i = 0; i < push_info.length; i++)
+					div#push_lab_form.push_lab_form
+						a#push_leb_button.push_leb_button(href='#')
+						h5#push_leb_text.my_leb_text #{push_info[i].tag_name}
+script
+	:coffee
+		user_tag()
+
 include foot

@@ -1,6 +1,7 @@
 crypto = require("crypto")
 InviteUser = require("../models/user")
 User = require("../models/user")
+Tag = require("../models/tag")
 fs = require("fs")
 gm = require("gm")
 module.exports = (app) ->
@@ -300,4 +301,60 @@ module.exports = (app) ->
           status : true
       return
 
+  app.post "/add_tag", (req, res) ->
+    console.log "插入用户表"
+    my_tag = req.body.my_tag
+    User.insert_array req.session.user.e_mail,
+      tag: my_tag
+    , (err, user) ->
+      if err
+        console.log err
+      else 
+        console.log "判断标签是否存在标签表"
+        Tag.get my_tag, (err,result) ->
+          if err
+            console.log err
+          else
+            console.log "标签表是否存在"+result
+            if result
+              Tag.update my_tag, (err,result) ->
+                if err
+                  console.log "6666"
+                  console.log err
+                else 
+                  console.log "77777"
+                  console.log "success"
+                  res.json
+                    status : true
+            else
+              console.log "result[null]"
+              tag = new Tag(
+                tag_name : my_tag
+                frequency : 1
+                )
+              tag.save (err) ->
+                console.log "标签保存到标签表里"
+                if err
+                  console.log errs
+                else 
+                  res.json
+                    status : true
 
+
+
+
+  app.post "/delete_tag", (req, res) ->
+    tag = req.body.tag
+    console.log tag
+    User.delete_array req.session.user.e_mail,
+      tag: tag
+    , (err, info) ->
+      if err
+        console.log "删除数据失败"+info
+        res.json
+          status : false
+      else
+        console.log "删除数据成功"+info
+        res.json
+          status : true
+      return

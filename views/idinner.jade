@@ -59,7 +59,8 @@ include head
         a(href='#') 地点类型
         a(href='#') 就餐距离
         a(href='#') 标签
-        a.go_dinner(href='#')
+        a#go_dinner.go_dinner(href='#')
+        form#great_dinner(method='get',action='/creat_dinner')
       .dinner_now
         span.dinner_photo
         span.dinner_photo_info
@@ -146,4 +147,7 @@ include head
           p 星期一  18：00
         a.dinner_jion_btn(href='#')
         span.treat
+script
+  :coffee
+    creat_dinner()
 include foot

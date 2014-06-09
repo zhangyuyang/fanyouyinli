@@ -1,6 +1,7 @@
 crypto = require("crypto")
 InviteUser = require("../models/user")
 User = require("../models/user")
+Tag = require("../models/tag")
 fs = require("fs")
 gm = require("gm")
 module.exports = (app) ->
@@ -81,7 +82,59 @@ module.exports = (app) ->
 
     return
   app.get "/user_label", (req, res) ->
-    res.render "user_label",
-      user: req.session.user
-      success: req.flash("success").toString()
-      error: req.flash("error").toString()
+    push_info1 = undefined
+    console.log "1111+"+push_info1
+    User.get req.session.user.e_mail, (err, user) ->
+      if err
+        console.log "错误"+err
+      else 
+        console.log user.tag
+        # 到数据库里读取推送数据
+        Tag.get_push (err,push_info) ->
+          if err
+            console.log err
+            push_info = ''
+          else
+            console.log push_info
+            push_info1 = push_info
+          res.render "user_label",
+            user: req.session.user
+            tag: user.tag
+            success: req.flash("success").toString()
+            error: req.flash("error").toString()
+            push_info: push_info1
+
+  app.post "/modify_password", (req, res) ->
+    e_mail = req.session.user.e_mail
+    current_password = req.body.current_password
+    new_password = req.body.new_password
+    console.log current_password
+    console.log new_password
+    User.get e_mail, (err, user) ->
+      unless user
+        err = "邮箱不存在！"
+        req.flash "error", err
+        return res.redirect("/modiy_password")
+      else
+        md5 = crypto.createHash("md5")
+        current_password = md5.update(current_password).digest("base64")
+        if user.password != current_password
+          console.log current_password
+          console.log user.password
+          err = "原密码不正确"
+          req.flash "error", err
+          return res.redirect("/modiy_password")
+        else
+          md5 = crypto.createHash("md5")
+          console.log new_password
+          password1 = md5.update(new_password).digest("base64")
+          User.update e_mail, {password:password1}, (err, user) ->
+            if err
+              console.log "err"+err
+              req.flash "error", err
+              res.redirect "/find_password"
+            else
+              console.log "success"+user
+              req.flash "success", "修改密码成功"
+              res.redirect "/modiy_password"
+            return
