@@ -5,6 +5,7 @@ Tag = require("../models/tag")
 Dinner = require("../models/dinner")
 fs = require("fs")
 gm = require("gm")
+validator = require('validator')
 
 module.exports = (app) ->
   app.get "/creat_dinner", (req, res) ->
@@ -46,7 +47,6 @@ module.exports = (app) ->
     console.log dinner_tag_input
     console.log dining_locations
     console.log dining_locations_info
-    console.log "这里是服务器端的"
     console.log dining_hours
     console.log dining_minute
     console.log dinner_time
@@ -55,8 +55,45 @@ module.exports = (app) ->
     console.log string_tag
     console.log description
     console.log tel_of_meals
-    console.log "服务器端口结束"
 
+    console.log "这里是服务器端的校验"
+    if !validator.isByteLength dinner_tag_input, 2 ,10
+      console.log "dinner_tag_input校验不通过"
+      req.flash "err", "标题必须在2-50个字节"
+      res.redirect "/idinner"
+      return false
+    if !validator.isByteLength dining_locations_info, 2 ,10 
+      console.log "dining_locations_info校验不通过"
+      req.flash "err", "地址不超过50个字"
+      res.redirect "/idinner"
+      return false
+    date_reg = /^(?:(?:(?:(?:(?:1[6-9]|[2-9][0-9])?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))([-/.])(?:0?2\1(?:29)))|(?:(?:(?:1[6-9]|[2-9][0-9])?[0-9]{2})([-/.])(?:(?:(?:0?[13578]|1[02])\2(?:31))|(?:(?:0?[13-9]|1[0-2])\2(?:29|30))|(?:(?:0?[1-9])|(?:1[0-2]))\2(?:0?[1-9]|1[0-9]|2[0-8]))))$/
+    if !date_reg.test(dinner_time)
+      console.log "dinner_time校验不通过"
+      req.flash "err", "时间类型不是YYYY-MM-DD"
+      res.redirect "/idinner"
+      return false
+    if !validator.isNumeric number_of_meals
+      console.log "number_of_meals校验不通过"
+      req.flash "err", "人数必须为1-50位"
+      res.redirect "/idinner"
+      return false
+    if number_of_meals < 0 || number_of_meals > 50
+      console.log "number_of_meals校验不通过"
+      req.flash "err", "人数必须为1-50位"
+      res.redirect "/idinner"
+      return false
+    if validator.isNull description
+      console.log "description校验不通过"
+      req.flash "err", "描述为必填"
+      res.redirect "/idinner"
+      return false
+    telphone_reg = /^1[3|5][0-9]\d{4,8}$/
+    if !telphone_reg.test(tel_of_meals)
+      console.log "tel_of_meals校验不通过"
+      req.flash "err", "电话号码填写不正确"
+      res.redirect "/idinner"
+      return false
     dinner = new Dinner(
       e_mail: req.session.user.e_mail
       dinner_tag: dinner_tag_input
@@ -71,9 +108,6 @@ module.exports = (app) ->
       description: description
       tel_of_meals: tel_of_meals
     )
-    console.log "dinner."
-    console.log dinner.dining_hours
-    console.log dinner.dining_minute
     dinner.save (err, dinner) ->
       console.log "新增聚餐"
       if err

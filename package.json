@@ -11,7 +11,8 @@
     "mongodb": ">= 0.9.9",
     "connect-mongo": ">= 0.1.7",
     "express-partials": "*",
-    "connect-flash": "*"
+    "connect-flash": "*",
+    "validator": "*"
   }
 
 }

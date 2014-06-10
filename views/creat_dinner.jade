@@ -1,4 +1,5 @@
 include head
+script(type='text/javascript', src='bower_components/validator-js/validator.min.js')
 script(type='text/javascript', src='script/jquery.Jcrop.js')
 link(rel='stylesheet', type='text/css', href='/stylesheet/jquery.Jcrop.css')
 
@@ -43,7 +44,9 @@ link(rel='stylesheet', type='text/css', href='/stylesheet/jquery.Jcrop.css')
 			form#creat_dinner_form
 				span.dinner_right_span
 					input#dinner_tag_input.dinner_tag_input
-					h5.dinner_right_remark 起一个让人看一眼就明白的标题
+					h5#dinner_tag_input_tip1.dinner_right_remark(style='float:left;') 起一个让人看一眼就明白的标题
+					img(src="images/blue_triangle.png")#dinner_tag_input_tr.dinner_right_tr
+					h5#dinner_tag_input_tip.dinner_tag_input_tip 标题必须在2-50个字节!
 				span.dinner_right_span
 					select#dining_locations(name='dining_locations',style='width: 100px;') 
 						option(value='咖啡') 咖啡
@@ -51,6 +54,8 @@ link(rel='stylesheet', type='text/css', href='/stylesheet/jquery.Jcrop.css')
 						option(value='奶茶') 奶茶
 					span.dinner_right_remark(style='margin-right: 10px') 厦门
 					input#dining_locations_info.dining_locations_input
+					h5#dinner_locations_info_tip.dinner_time_tip 地址不超过50字
+					img(src="images/blue_triangle.png")#dinner_locations_info_tr.dinner_time_tr
 				span.dinner_right_span
 					input#dinner_time_input.dinner_time_input(placeholder='2014-01-01')
 					span.dinner_time_select
@@ -64,8 +69,13 @@ link(rel='stylesheet', type='text/css', href='/stylesheet/jquery.Jcrop.css')
 						option(value='30') 30
 						option(value='45') 45
 					h5.dinner_right_remark 分
+					h5#dinner_time_tip.dinner_time_tip 请按格式输入日期!
+					img(src="images/blue_triangle.png")#dinner_time_tr.dinner_time_tr
+					
 				span.dinner_right_span
 					input#number_of_meals.number_of_meals
+					h5#number_of_meals_tip.dinner_time_tip(style='margin-right: 540px;') 人数必须为1-50位
+					img(src="images/blue_triangle.png")#number_of_meals_tr.dinner_time_tr
 				span.dinner_right_span
 					input#payment_method.payment_method(type='radio',name='payment_method',value='AA制')
 					h5.AA_zhi AA制
@@ -93,17 +103,36 @@ link(rel='stylesheet', type='text/css', href='/stylesheet/jquery.Jcrop.css')
 					h5.description_text 人均大概消费多少
 					h5.description_text 赴宴的人如何更好的找到你的饭桌
 					h5.description_text 关于饭局的更多特色
+					h5#description_tip.dinner_time_tip(style='margin-top: 50px') 详细描述为必填
+					img(src="images/blue_triangle.png",style='margin-top: 43px')#description_tr.dinner_time_tr
 				span.dinner_right_span(style='margin-top: 350px;')
 					a#add_cover.add_cover(href='#')
 					h5.dinner_right_remark.add_cover_text 用一张好看的照片代表你的饭局
 				span.dinner_right_span
 					input#tel_of_meals.number_of_meals
-					h5.dinner_right_remark 只有确认参与的人才会获取你的手机号，同时你也能获取他们的手机号
+					h5#get_dinner_num.dinner_right_remark 只有确认参与的人才会获取你的手机号，同时你也能获取他们的手机号
+					h5#tel_of_meals_tip.dinner_time_tip(style='margin-right: 500px') 请填写正确的手机号码
+					img(src="images/blue_triangle.png")#tel_of_meals_tr.dinner_time_tr
 				span.dinner_right_span
 					a#creat_dinner_submit.creat_dinner_submit(href='#')
 					h5.dinner_right_remark.add_cover_text(style='margin-right: 445px;') 最重要的是，分享让更多人加入
-
-
+				form#upload_img.upload_img(action='/user_photo', method='post', enctype='multipart/form-data')
+					input#file(type="file",name="file",class='hide' )
+				.add_dinner_photo_border
+					.preview_dinner_photo_text 图片预览:
+					.preview_dinner_photo 
+						img#target.target(style='width: auto;margin-left:20px;',src='images/prewivw_dinner_photo.png', alt='[Jcrop Example]')
+						a#inner_button.inner_button(href='#')
+					.preview_dinner_choice_text 
+						h5(style='margin-left: -5px; margin-top: 5px; margin-bottom:5px;') 你也可以选择我们为你推选的照片
+						a#choice_min_photo.choice_min_photo
+						a#choice_min_photo.choice_min_photo
+						a#choice_min_photo.choice_min_photo
+						a#choice_min_photo.choice_min_photo
+						a#choice_min_photo.choice_min_photo
+						a#choice_min_photo.choice_min_photo
+						a#choice_min_photo.choice_min_photo
+						a#choice_min_photo.choice_min_photo
 script
 	:coffee
 		user_tag()
