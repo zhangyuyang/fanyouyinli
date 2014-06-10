@@ -1,5 +1,4 @@
 include head
-!= js('select_date')
 script(type='text/javascript', src='script/jquery.Jcrop.js')
 link(rel='stylesheet', type='text/css', href='/stylesheet/jquery.Jcrop.css')
 
@@ -53,14 +52,18 @@ link(rel='stylesheet', type='text/css', href='/stylesheet/jquery.Jcrop.css')
 					span.dinner_right_remark(style='margin-right: 10px') 厦门
 					input#dining_locations_info.dining_locations_input
 				span.dinner_right_span
-					input#dinner_time_input.dinner_time_input
+					input#dinner_time_input.dinner_time_input(placeholder='2014-01-01')
 					span.dinner_time_select
-						//- select.sel_year
-						//- |年
-						select.sel_month
-						|月
-						select.sel_day
-						|日
+					select#hours(name='hours',style='width: 100px;') 
+						-for(var i = 0; i < 24; i++)
+							option(value='#{i}') #{i}
+					h5.dinner_right_remark 时
+					select#minute(name='minute',style='width: 100px; margin-left: 30px;') 
+						option(value='0') 0
+						option(value='15') 15
+						option(value='30') 30
+						option(value='45') 45
+					h5.dinner_right_remark 分
 				span.dinner_right_span
 					input#number_of_meals.number_of_meals
 				span.dinner_right_span
@@ -103,14 +106,6 @@ link(rel='stylesheet', type='text/css', href='/stylesheet/jquery.Jcrop.css')
 
 script
 	:coffee
-		$ ->
-			# 出生年月插件
-			$.ms_DatePicker
-				YearSelector: ".sel_year"
-				MonthSelector: ".sel_month"
-				DaySelector: ".sel_day"
-
-			return
 		user_tag()
 		creat_dinner()
 

@@ -26,7 +26,6 @@ user_tag = ->
 				, (data, status) ->
 						console.log "这里是JS的add_tag"
 						if status
-							console.log data.info
 							alert status+"success"
 						else 
 							alert status+"error"
@@ -49,6 +48,8 @@ user_tag = ->
 			console.log "准备提交数据了"
 			dinner_tag_input = $("#dinner_tag_input").val()
 			dining_locations = $("#dining_locations").val()
+			hours = $("#hours").val()
+			minute = $("#minute").val()
 			dining_locations_info = $("#dining_locations_info").val()
 			dinner_time_input = $("#dinner_time_input").val()
 			number_of_meals = $("#number_of_meals").val()
@@ -71,6 +72,8 @@ user_tag = ->
 			$.post "/creat_dinner",
 				dinner_tag_input: dinner_tag_input
 				dining_locations: dining_locations
+				hours: hours
+				minute: minute
 				dining_locations_info: dining_locations_info
 				dinner_time_input: dinner_time_input
 				number_of_meals: number_of_meals
@@ -82,11 +85,6 @@ user_tag = ->
 				console.log "这里是JS的add_tag"
 				if status
 					console.log "这里有data"+data
-					# alert status+"success"
-					# clone_tag = $("#my_lab_clone").clone()
-					# clone_tag.find("#my_leb_text").html hope_add_tag
-					# $(".my_lab_div").append clone_tag
-					# clone_tag.find('#delete_my_leb').bind 'click', delete_tag
 				else 
 					console.log "err"
 					alert status+"error"

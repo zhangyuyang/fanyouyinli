@@ -35,6 +35,8 @@ module.exports = (app) ->
     dinner_tag_input = req.body.dinner_tag_input
     dining_locations = req.body.dining_locations
     dining_locations_info = req.body.dining_locations_info
+    dining_hours = req.body.hours
+    dining_minute = req.body.minute
     dinner_time = req.body.dinner_time_input
     number_of_meals = req.body.number_of_meals
     payment_method = req.body.payment_method
@@ -44,16 +46,22 @@ module.exports = (app) ->
     console.log dinner_tag_input
     console.log dining_locations
     console.log dining_locations_info
+    console.log "这里是服务器端的"
+    console.log dining_hours
+    console.log dining_minute
     console.log dinner_time
     console.log number_of_meals
     console.log payment_method
     console.log string_tag
     console.log description
     console.log tel_of_meals
+    console.log "服务器端口结束"
 
     dinner = new Dinner(
       e_mail: req.session.user.e_mail
-      dinner_tag_input: dinner_tag_input
+      dinner_tag: dinner_tag_input
+      dining_hours: dining_hours
+      dining_minute: dining_minute
       dining_locations: dining_locations
       dining_locations_info: dining_locations_info
       dinner_time: dinner_time
@@ -63,6 +71,9 @@ module.exports = (app) ->
       description: description
       tel_of_meals: tel_of_meals
     )
+    console.log "dinner."
+    console.log dinner.dining_hours
+    console.log dinner.dining_minute
     dinner.save (err, dinner) ->
       console.log "新增聚餐"
       if err
@@ -76,19 +87,3 @@ module.exports = (app) ->
         req.flash "success", "创建聚餐成功"
         res.redirect "/idinner"
       return
-
-    # Dinner.insert_array req.session.user.e_mail, 
-    #   dinner_tag : dinner_tag_input
-    #   dining_locations : dining_locations
-    #   dining_locations_info : dining_locations_info
-    #   dinner_time : dinner_time
-    #   number_of_meals : number_of_meals
-    #   payment_method : payment_method
-    #   string_tag : string_tag
-    #   description : description
-    #   tel_of_meals : tel_of_meals
-    # , (err, info) ->
-    #   if err
-    #     console.log "错误"+err
-    #   else 
-    #     console.log info

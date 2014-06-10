@@ -2,6 +2,8 @@ mongodb = require("./db")
 Dinner = (dinner) ->
   @e_mail = dinner.e_mail
   @dinner_tag = dinner.dinner_tag
+  @dining_hours = dinner.dining_hours
+  @dining_minute = dinner.dining_minute
   @dining_locations = dinner.dining_locations
   @dining_locations_info = dinner.dining_locations_info
   @dinner_time = dinner.dinner_time
@@ -16,6 +18,8 @@ Dinner::save = (callback)->
   dinner =
     e_mail: @e_mail
     dinner_tag: @dinner_tag
+    dining_hours: @dining_hours
+    dining_minute: @dining_minute
     dining_locations: @dining_locations
     dining_locations_info: @dining_locations_info
     dinner_time: @dinner_time
@@ -26,6 +30,9 @@ Dinner::save = (callback)->
     tel_of_meals: @tel_of_meals
   mongodb.open (err, db)->
     console.log "数据库打开"
+    console.log dinner.e_mail
+    console.log dinner.dining_hours
+    console.log dinner.dining_minute
     return callback(err) if err
     db.collection "dinners", (err, collection)->
       if err
