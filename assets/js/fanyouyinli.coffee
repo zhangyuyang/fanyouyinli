@@ -7,3 +7,4 @@
 # = require user_tag
 # = require modify_password
 # = require js_dinner
+# = require dinner_photo

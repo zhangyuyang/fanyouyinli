@@ -19,16 +19,19 @@ user_tag = ->
 				$.post "/add_tag",
 					my_tag: hope_add_tag
 				, (data, status) ->
-						console.log "这里是JS的add_tag"
-						if status
-							console.log data.info
-							alert status+"success"
-							clone_tag = $("#my_lab_clone").clone()
-							clone_tag.find("#my_leb_text").html hope_add_tag
-							$(".my_lab_div").append clone_tag
-							clone_tag.find('#delete_my_leb').bind 'click', delete_tag
-						else 
-							alert status+"error"
+					console.log "这里是JS的add_tag++"
+					console.log data
+					if status
+						console.log "ss"+status
+						alert status+"success"
+						clone_tag = $("#my_lab_clone").clone()
+						console.log "ssss"+clone_tag
+						$(".my_lab_div").append clone_tag
+						clone_tag.find("#my_leb_text").html hope_add_tag
+						clone_tag.find('#delete_my_leb').bind 'click', delete_tag
+					else 
+						console.log "zhelicuole"
+						alert status+"error"
 		delete_tag = ->
 			delete_tag_form = $(this).parent()
 			tag_text = delete_tag_form.find("#my_leb_text").text()

@@ -314,19 +314,11 @@ module.exports = (app) ->
         Tag.get my_tag, (err,result) ->
           if err
             console.log err
+            res.json
+              status : false
           else
             console.log "标签表是否存在"+result
-            if result
-              Tag.update my_tag, (err,result) ->
-                if err
-                  console.log "6666"
-                  console.log err
-                else 
-                  console.log "77777"
-                  console.log "success"
-                  res.json
-                    status : true
-            else
+            if result is null
               console.log "result[null]"
               tag = new Tag(
                 tag_name : my_tag
@@ -336,7 +328,23 @@ module.exports = (app) ->
                 console.log "标签保存到标签表里"
                 if err
                   console.log errs
+                  res.json
+                    status : false
+                else
+                  console.log "标签成功进表浅表，应该没问题"
+                  res.json
+                    status : true
+                  console.log "AAAAAA"
+            else
+              Tag.update my_tag, (err,result) ->
+                if err
+                  console.log "6666"
+                  console.log err
+                  res.json
+                    status : false
                 else 
+                  console.log "77777"
+                  console.log "success"
                   res.json
                     status : true
 

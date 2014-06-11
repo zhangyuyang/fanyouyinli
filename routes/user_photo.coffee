@@ -137,7 +137,7 @@ module.exports = (app) ->
   # console.log("gm_size"+gm_size);
   app.post "/user_photo", (req, res) ->
     file_path = req.files.file.path
-    
+    console.log file_path
     #判断上传的照片是否合法
     unless file_path
       req.flash "error", "路径不存在"

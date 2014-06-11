@@ -116,13 +116,14 @@ link(rel='stylesheet', type='text/css', href='/stylesheet/jquery.Jcrop.css')
 				span.dinner_right_span
 					a#creat_dinner_submit.creat_dinner_submit(href='#')
 					h5.dinner_right_remark.add_cover_text(style='margin-right: 445px;') 最重要的是，分享让更多人加入
-				form#upload_img.upload_img(action='/user_photo', method='post', enctype='multipart/form-data')
+				form#upload_img.upload_img(action='/dinner_photo', method='post', enctype='multipart/form-data')
 					input#file(type="file",name="file",class='hide' )
-				.add_dinner_photo_border
+				div#add_dinner_photo_border.add_dinner_photo_border
 					.preview_dinner_photo_text 图片预览:
 					.preview_dinner_photo 
-						img#target.target(style='width: auto;margin-left:20px;',src='images/prewivw_dinner_photo.png', alt='[Jcrop Example]')
-						a#inner_button.inner_button(href='#')
+						img#target.target
+						//- img#target.target(style='width: auto;',src='images/prewivw_dinner_photo.png')
+					a#inner_button.inner_button(href='#')
 					.preview_dinner_choice_text 
 						h5(style='margin-left: -5px; margin-top: 5px; margin-bottom:5px;') 你也可以选择我们为你推选的照片
 						a#choice_min_photo.choice_min_photo
@@ -137,5 +138,5 @@ script
 	:coffee
 		user_tag()
 		creat_dinner()
-
+		upload_dinner_photo()
 	//- include foot

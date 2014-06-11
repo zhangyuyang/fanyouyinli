@@ -1,0 +1,71 @@
+<html>
+<body>
+<input type="button" value="Zswang 路过！" onclick="button_Click()" />
+<div id="div_panel" style="display:none;width:200px;height:200px;background-color:Red;">
+<br />
+</div>
+
+
+
+
+
+<script type="text/javascript">
+function $(id) { return document.getElementById(id); }
+
+function button_Click() {
+$("div_panel").style.display = "";
+
+
+addEventHandler(document, "mousedown", document_MouseDown);
+}
+
+// 添加元素和事件的绑定
+function addEventHandler(target, type, func) {
+if (target.addEventListener)
+target.addEventListener(type, func, false);
+else if (target.attachEvent)
+target.attachEvent("on" + type, func);
+else target["on" + type] = func;
+}
+
+
+// 移除元素和事件的绑定
+function removeEventHandler(target, type, func) {
+if (target.removeEventListener)
+target.removeEventListener(type, func, false);
+else if (target.detachEvent)
+target.detachEvent("on" + type, func);
+else delete target["on" + type];
+}
+
+function document_MouseDown(e) {
+	// 初始化
+	var element = typeof event != "undefined" ? event.srcElement : e.target;
+	// event等于event.srcElement,展现出来的元素
+	// e.target也是展现出来的元素
+	// 于是element就等于展现出来的元素
+	// downPanel初始化FALSE
+	var downPanel = false;
+
+	while (element) {
+		// 寻找element元素是不是我们点击的元素
+		downPanel = element == $("div_panel");
+		// 如果downPanel为真，则停止执行后面语句
+		// 因为点到的是元素内部，不用消失
+		if (downPanel) {
+			break;
+		}
+		// element等于他的父元素
+		console.log(element)
+		element = element.parentNode;
+	}
+	// 如果一直是假的，说明点击的地方在元素外部，则元素消失
+	// 移除监听事件，元素消失
+	if (!downPanel) {
+		removeEventHandler(document, "mousedown", document_MouseDown);
+		$("div_panel").style.display = "none";
+	}
+}
+</script>
+</body>
+</html>
