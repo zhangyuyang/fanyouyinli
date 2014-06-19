@@ -1,33 +1,42 @@
-upload_dinner_photo = ->
-    $(document).ready ->  
-        updatePreview = (c) ->
-            if parseInt(c.w) > 0
-                rx = xsize / c.w #c.w是用户截图框框的宽度
-                  #rx是预览元素的宽度（60）/用户截取的宽度的比例
-                ry = ysize / c.h
-                rx1 = xsize1 / c.w
-                ry1 = ysize1 / c.h
-                $pimg.css #$pimg.css的作用是把原图，按照（rx * boundx）等比例缩放了
-                    width: Math.round(rx * boundx) + "px"
-                    height: Math.round(ry * boundy) + "px"
-                    marginLeft: "-" + Math.round(rx * c.x) + "px" #Math是JS内置对象，round（X）是把X四舍五入取最接近的数
-                    marginTop: "-" + Math.round(ry * c.y) + "px"
+change = ->
+	console.log "进到change里面了"
+	
+	pic = document.getElementById("dinner_photo_preview")
+	file = document.getElementById("file")
+	ext = file.value.substring(file.value.lastIndexOf(".") + 1).toLowerCase()
 
+	# gif在IE浏览器暂时无法显示
+	if ext isnt "png" and ext isnt "jpg" and ext isnt "jpeg"
+		console.log "文件必须为图片！"
+		alert "文件必须为图片！"
+		return false
+	
+	# IE浏览器
+	if document.all
+		file.select()
+		reallocalpath = document.selection.createRange().text
+		ie6 = /msie 6/i.test(navigator.userAgent)
+		
+		# IE6浏览器设置img的src为本地路径可以直接显示图片
+		if ie6
+			pic.src = reallocalpath
+		else
+			# 非IE6版本的IE由于安全问题直接设置img的src无法显示本地图片，但是可以通过滤镜来实现
+			pic.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='image',src=\"" + reallocalpath + "\")"
+			
+			# 设置img的src为base64编码的透明图片 取消显示浏览器默认图片
+			pic.src = "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+	else
+		html5Reader file
+	return
+html5Reader = (file) ->
+	file = file.files[0]
+	console.log file
+	reader = new FileReader()
+	reader.readAsDataURL file
+	reader.onload = (e) ->
+		pic = document.getElementById("dinner_photo_preview")
+		pic.src = @result
+		return
 
-                $('#preview_x').val(c.x)
-                $('#preview_y').val(c.y)
-                $('#preview_width').val(c.w)
-
-        jcrop_api = undefined
-        boundx = undefined
-        boundy = undefined
-        $preview = $("#preview-pane")
-        $pcnt = $("#preview-pane .preview-container")
-        $pimg = $("#preview-pane .preview-container img")
-        xsize = $pcnt.width() #pcnt是preview-pane下preview-container这个元素,xsize也就是预览元素的宽度，可以自己设定
-        ysize = $pcnt.height()
-
-        api = $.Jcrop("#target",
-            allowSelect: false,
-            baseClass : "add"
-        )
+	return

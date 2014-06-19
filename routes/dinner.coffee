@@ -6,6 +6,7 @@ Dinner = require("../models/dinner")
 fs = require("fs")
 gm = require("gm")
 validator = require('validator')
+ObjectID = require('mongodb').ObjectID
 
 module.exports = (app) ->
   app.get "/creat_dinner", (req, res) ->
@@ -31,8 +32,36 @@ module.exports = (app) ->
             error: req.flash("error").toString()
             push_info: push_info1
 
+  app.get "/get_dinners", (req, res) ->
+    console.log "idinner服务器端"
+    console.log req.session.user.e_mail
+
+    Dinner.get 
+      e_mail : req.session.user.e_mail
+    , (err, dinners) ->
+      if err
+        console.log "报错了"
+        console.log err
+        res.render "idinner",
+          error: req.flash("error").toString()
+      else
+        console.log "查询正确"
+        res.json
+          dinners: dinners
+
+
+
+  app.get "/idinner", (req, res) ->
+    res.render "idinner",
+      title: "多人聚餐"
+      user: req.session.user
+      success: req.flash("success").toString()
+      error: req.flash("error").toString()
+
 
   app.post "/creat_dinner", (req, res) ->
+    console.log "服务器层"
+    dinner_image = undefined
     dinner_tag_input = req.body.dinner_tag_input
     dining_locations = req.body.dining_locations
     dining_locations_info = req.body.dining_locations_info
@@ -44,19 +73,55 @@ module.exports = (app) ->
     string_tag = req.body.string_tag
     description = req.body.description
     tel_of_meals = req.body.tel_of_meals
-    console.log dinner_tag_input
-    console.log dining_locations
-    console.log dining_locations_info
-    console.log dining_hours
-    console.log dining_minute
-    console.log dinner_time
-    console.log number_of_meals
-    console.log payment_method
-    console.log string_tag
-    console.log description
-    console.log tel_of_meals
+    dinner_image = req.body.dinner_image
 
-    console.log "这里是服务器端的校验"
+
+
+    # 去掉图片头文件
+    base64Data = dinner_image.replace /^data:image\/\w+;base64,/, ""
+    dataBuffer = new Buffer(base64Data, "base64")
+    # 为图片编写文件名
+    timestamp = (new Date()).valueOf()
+    dinner_img_name = req.session.user.e_mail+timestamp+".png"
+    fs.writeFile "public/temp/"+dinner_img_name, dataBuffer, (err) ->
+      if err
+        console.log "聚餐图片保存失败"
+        console.log err
+      else
+        console.log "聚餐图片保存成功"
+      return
+    # 调用GM库
+    new_dirname = __dirname.substring 0, __dirname.length - 7
+    console.log new_dirname
+
+    gm(new_dirname + "/public/temp/"+dinner_img_name).resize(406, 263).write __dirname + "/../public/dinner_image/big/" + dinner_img_name, (err) ->
+      return console.dir(arguments)  if err
+      console.log @outname + " created  ::  " + arguments[3]
+      return
+    gm(new_dirname + "/public/temp/"+dinner_img_name).resize(203, 132).write __dirname + "/../public/dinner_image/small/" + dinner_img_name, (err) ->
+      return console.dir(arguments)  if err
+      console.log @outname + " created  ::  " + arguments[3]
+      return
+    # 修改格式后，图片保存的路径
+    dinner_image_big = "dinner_image/big/" + dinner_img_name
+    dinner_image_small = "dinner_image/small/" + dinner_img_name
+    
+
+
+    # console.log "11111111"
+    # console.log dinner_image
+    # console.log dinner_tag_input
+    # console.log dining_locations
+    # console.log dining_locations_info
+    # console.log dining_hours
+    # console.log dining_minute
+    # console.log dinner_time
+    # console.log number_of_meals
+    # console.log payment_method
+    # console.log string_tag
+    # console.log description
+    # console.log tel_of_meals
+    # console.log "这里是服务器端的校验"
     if !validator.isByteLength dinner_tag_input, 2 ,10
       console.log "dinner_tag_input校验不通过"
       req.flash "err", "标题必须在2-50个字节"
@@ -94,6 +159,11 @@ module.exports = (app) ->
       req.flash "err", "电话号码填写不正确"
       res.redirect "/idinner"
       return false
+    if dinner_image == '' || dinner_image == undefined
+      console.log "dinner_image校验不通过"
+      req.flash "err", "封面不存在"
+      res.redirect "/idinner"
+
     dinner = new Dinner(
       e_mail: req.session.user.e_mail
       dinner_tag: dinner_tag_input
@@ -107,6 +177,8 @@ module.exports = (app) ->
       string_tag: string_tag
       description: description
       tel_of_meals: tel_of_meals
+      dinner_image_big: dinner_image_big
+      dinner_image_small: dinner_image_small
     )
     dinner.save (err, dinner) ->
       console.log "新增聚餐"
@@ -117,7 +189,29 @@ module.exports = (app) ->
         res.redirect "/"
       else
         console.log "新增成功"
-        req.session.dinner = dinner
+        # req.session.dinner = dinner
         req.flash "success", "创建聚餐成功"
         res.redirect "/idinner"
       return
+
+
+  app.get "/idinner/:id", (req, res) ->
+    # 这里得到的req.params.id只是字符串，需要包装成ObjectID类型的
+    select_id = ObjectID.createFromHexString(req.params.id)
+    Dinner.get 
+      _id : select_id
+    , (err, dinners) ->
+      console.log dinners[0]
+      if err
+        console.log "报错了"
+        console.log err
+        res.render "idinner",
+          error: req.flash("error").toString()
+      else
+        console.log "查询正确"
+        res.render "dinner_list",
+              title: "多人聚餐"
+              user: req.session.user
+              success: req.flash("success").toString()
+              error: req.flash("error").toString()
+              dinners : dinners

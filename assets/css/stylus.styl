@@ -805,6 +805,7 @@ a
   width 25%
 
 .idinner_left
+  float left
   height 100%
   width 70.5%
 
@@ -827,23 +828,26 @@ a
     text-decoration none
 
 .dinner_now
+  display none
   position relative
   width 100%
   height 156px
   margin-top 20px
   border-bottom 1px #dedede dashed
 
-.dinner_photo
+.idinner_photo_border
   display inline-block
   width 203px
   height 132px
-  margin-left -1px
-  background-image url(../images/xianxiajucan_07.png)
+.dinner_photo
+  display inline-block
+  // width 203px
+  // height 132px
 
 .dinner_photo_info
   position absolute
   display inline-block
-  width 240px
+  width 340px
   height 132px
   margin-left 12px
   h2
@@ -865,11 +869,11 @@ a
 .dinner_date
   position absolute
   top -2px
-  left 560px
+  left 558px
   height 50px
   width 110px
   p
-    margin-top 2px
+    margin-top 5px
     left 578px
     height 50px
     width 100%
@@ -883,15 +887,15 @@ a
 
 .dinner_jion_btn
   position absolute
-  top 75px
-  left 612px
+  top 63px
+  left 590px
   height 57px
   width 58px
   background-image url(../images/xianxiajucan_10.png)
 
 .treat
   position absolute
-  top 118px
+  top 110px
   left 540px
   height 13px
   width 60px
@@ -962,33 +966,16 @@ a
 .small_lab
   position absolute
   top 42px
-  height 30px
-  width 240px
-  label
-    display inline-block
-    margin-top 4px
-    height 26px
-    width 74px
-    font-size 13px
-    color #5c5c5c
-    background-color #f8f8f8
-    p
-      margin-top 8px
-      height 10px
-      width 100%
-      font-size 13px
-      color #5c5c5c
-      text-align center
-      background-color #f8f8f8
+  // height 30px
+  width 340px
+
+
 
 .friends_photo
-  margin-top 80px
   display inline-block
   height 48px
-  width 46px
+  width 48px
   margin-right 5px
-  margin-top 84px
-  background-image url(../images/xianxiajucan_13.png)
 
 .iat_navigation
   label
@@ -2045,8 +2032,9 @@ a
   height 527px
   width 542px
   border 1px #dddddd solid
-  top 700px
+  top 400px
   left 180px
+  background-color white
 .preview_dinner_photo_text
   display block
   font-size 12px
@@ -2070,7 +2058,7 @@ a
   // border 1px red solid
   height 150px
   width 415px
-.choice_min_photo
+.choice_min_photo1
   display inline-block
   width 95px
   height 62px
@@ -2079,6 +2067,205 @@ a
   background-image url(../images/add_dinner_photo.png)
   background-position -414px -286px
   margin-bottom 5px
-.add-holder
-  // width auto
-  background-image url(../images/prewivw_dinner_photo.png)
+.cmp2
+  display inline-block
+  width 95px
+  height 62px
+  margin-left -3px
+  margin-right 7px
+  background-image url(../images/bowl2.png)
+  background-position 0px 0px
+  margin-bottom 5px
+.cmp3
+  display inline-block
+  width 95px
+  height 62px
+  margin-left -3px
+  margin-right 7px
+  background-image url(../images/user_info.png)
+  background-position 0px 0px
+  margin-bottom 5px
+.cmp4
+  display inline-block
+  width 95px
+  height 62px
+  margin-left -3px
+  margin-right 7px
+  background-image url(../images/add_lab_modiy_pasd.png)
+  background-position 0px 0px
+  margin-bottom 5px
+.cmp5
+  display inline-block
+  width 95px
+  height 62px
+  margin-left -3px
+  margin-right 7px
+  background-image url(../images/test.png)
+  background-position 0px 0px
+  margin-bottom 5px
+.cmp6
+  display inline-block
+  width 95px
+  height 62px
+  margin-left -3px
+  margin-right 7px
+  background-image url(../images/save_photo.png)
+  background-position 0px 0px
+  margin-bottom 5px
+.cmp7
+  display inline-block
+  width 95px
+  height 62px
+  margin-left -3px
+  margin-right 7px
+  background-image url(../images/upload_photo.png)
+  background-position 0px 0px
+  margin-bottom 5px
+.cmp8
+  display inline-block
+  width 95px
+  height 62px
+  margin-left -3px
+  margin-right 7px
+  background-image url(../images/linyao.png)
+  background-position 0px 0px
+  margin-bottom 5px
+
+.preview_dinner_photo
+  // border 1px red solid
+  width 430px
+  height 270px
+.friends_photo_border
+  // border 1px red solid
+  position absolute
+  top 83px
+.dinners_lab_info
+  display inline-block
+  margin-top 8px
+  height 10px
+  width 100%
+  font-size 13px
+  color #5c5c5c
+  text-align center
+  background-color #f8f8f8
+.dinners_lab
+  display none
+  margin-top 4px
+  height 26px
+  width 74px
+  font-size 13px
+  color #5c5c5c
+  background-color #f8f8f8
+.idinner_list_title
+  // border 1px red solid 
+  margin-top 30px
+  height 40px
+  width 100%
+  h5
+    color #808080
+    font-size 24px
+.idinner_list_main_photo
+  // margin-right 10px
+  float left
+.idinner_list_tag_border
+  display inline-block
+  float right
+  // margin-left 10px
+  height 50px
+  width 277px
+.idinner_list_tag
+  display inline-block
+  background-color #f8f8f8
+  // width 30px
+  padding 7px 20px
+  margin-right 3px
+  text-align center
+  font-size 13px
+.idinner_list_start_time_border
+  // border 1px red solid
+  float right
+  width 277px
+  margin-bottom 7px
+.idinner_list_start_text
+  // border 1px yellow solid
+  margin-left 20px
+  font-size 13px
+  color #5c5c5c
+  // float right
+.idinner_list_start_info
+  // border 1px blue  solid
+  margin-right 60px
+  font-size 13px
+  color #5c5c5c
+  // float left
+.idinner_list_creator_border
+  // border 1px red solid
+  float right
+  width 277px
+  height 100px
+  margin-top 5px
+.idinner_list_creator_text
+  margin-left 35px
+  font-size 13px
+  color #5c5c5c
+.idinner_list_creator_photo
+  margin-left 2px
+.idinner_list_creator_info
+  display block
+  // border 1px black solid
+  font-size 12px
+  color #999999
+  margin-top 5px
+  margin-left 22px
+.idinner_list_last_info
+  background-color #f4f4f4
+  color #808080
+  float left
+  height 60px
+  width 114px
+  font-size 17px
+  line-height 60px
+.book_table
+  float left
+  height 60px
+  width 130px
+  background-image url(../images/book_table.png)
+  background-position 0px -62px
+  background-repeat no-repeat
+.dinner_list_2
+  border 1px red solid
+  margin-top 50px
+  height 300px
+  width 100%
+  float left
+.dinner_list_2_left
+  float left
+  // border 1px red solid
+
+  width 350px
+.idinner_list_main_photo_border
+  display inline-block
+  float left
+  width 400px
+  height 263px
+.span_title
+  font-size 14px
+  color #ff8262
+.dinner_list_description
+  color #5c5c5c
+  font-size 12px
+  margin-bottom 6px
+.dinner_list_2_right
+  // border 1px red solid
+
+  width 275px
+  float right
+.dinner_list_place
+  display block
+  margin-top 20px
+  color #5c5c5c
+  font-size 12px
+.dinner_list_3
+  float left
+  border 1px red solid
+  width 100%

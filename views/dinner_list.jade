@@ -1,0 +1,102 @@
+include head
+script(type='text/javascript', src='bower_components/moment/min/moment-with-langs.js')
+.my_attraction
+  
+  .navigation(style='border-bottom: 1px #bbbbbb solid; width:69%; height: 55px;')
+    label#dinner_party.lab1(style='background-position: 0px 0px;')
+    label#singer.lab2
+    label#iring.lab3
+    label#my_attractive.lab4
+  
+  .idinner_center(style="margin-top: 0px")
+    .idinner_right
+      .idinner_today
+        h5 今天 05月22日 星期一
+    .idinner_left
+      .idinner_list_title
+        h5 #{dinners[0].dinner_tag}
+      div.idinner_list_main_photo_border
+        img.idinner_list_main_photo(src= "/"+'#{dinners[0].dinner_image_big}')
+      .idinner_list_tag_border
+        -for(i = 0; i < dinners[0].string_tag.length; i++)
+          label.idinner_list_tag #{dinners[0].string_tag[i]}
+      div.idinner_list_start_time_border
+        span.idinner_list_start_text 开始时间：
+        span.idinner_list_start_info #{dinners[0].dinner_time} #{dinners[0].dining_hours}:#{dinners[0].dining_minute}
+      div.idinner_list_start_time_border
+        span.idinner_list_start_text 费用方式：
+        span.idinner_list_start_info #{dinners[0].payment_method}
+      div.idinner_list_creator_border
+        span.idinner_list_creator_text 发起人：
+        img.idinner_list_creator_photo(src="/small/11@qq.com1401114677914_1.png")
+        span.idinner_list_creator_info 发起人联系电话将于预定位子后获得
+      div.idinner_list_last_info
+        span(style="float: left;margin-left: 25px") 只剩
+        span(style="font-size: 26px;float: left;") 2
+        span(style="float: left") 位》
+      a.book_table(href="#")
+      div.dinner_list_2
+        div.dinner_list_2_left
+          span.span_title 详细描述
+          p.dinner_list_description(style="margin-top:20px") 营业时间：XXXXX
+          p.dinner_list_description 必须提前一天电话预约
+          p.dinner_list_description 糯米券有效期为2个月
+        div.dinner_list_2_right
+          span.span_title 聚餐地点
+          span.dinner_list_place 黑糖咖啡xx27号
+          img.googel_map(src="/images/googel_map.png")
+      div.dinner_list_3
+        span
+        span
+          img
+          a
+          li
+          a
+          a
+        span
+          img
+          a
+          li
+          a
+          a
+        span
+          img
+          a
+          li
+          a
+          a
+        span
+          img
+          a
+          li
+          a
+          a
+      div
+        span
+        span
+          textarea
+        span
+          img
+          span
+            a
+            span
+            span
+            span
+        span
+          img
+          span
+            a
+            span
+            span
+            span
+
+
+
+
+
+
+
+script
+  :coffee
+    dinners_main()
+include foot

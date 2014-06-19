@@ -41,9 +41,9 @@ link(rel='stylesheet', type='text/css', href='/stylesheet/jquery.Jcrop.css')
 			span.dinner_left_text
 				h5. 手机号
 		.dinner_right
-			form#creat_dinner_form
+			form#creat_dinner_form(enctype="multipart/form-data",type="post",action="creat_dinner")
 				span.dinner_right_span
-					input#dinner_tag_input.dinner_tag_input
+					input#dinner_tag_input.dinner_tag_input(name="dinner_tag_input")
 					h5#dinner_tag_input_tip1.dinner_right_remark(style='float:left;') 起一个让人看一眼就明白的标题
 					img(src="images/blue_triangle.png")#dinner_tag_input_tr.dinner_right_tr
 					h5#dinner_tag_input_tip.dinner_tag_input_tip 标题必须在2-50个字节!
@@ -53,11 +53,11 @@ link(rel='stylesheet', type='text/css', href='/stylesheet/jquery.Jcrop.css')
 						option(value='桌游') 桌游
 						option(value='奶茶') 奶茶
 					span.dinner_right_remark(style='margin-right: 10px') 厦门
-					input#dining_locations_info.dining_locations_input
+					input#dining_locations_info.dining_locations_input(name="dining_locations_info")
 					h5#dinner_locations_info_tip.dinner_time_tip 地址不超过50字
 					img(src="images/blue_triangle.png")#dinner_locations_info_tr.dinner_time_tr
 				span.dinner_right_span
-					input#dinner_time_input.dinner_time_input(placeholder='2014-01-01')
+					input#dinner_time_input.dinner_time_input(placeholder="2014-01-01",name="dinner_time_input")
 					span.dinner_time_select
 					select#hours(name='hours',style='width: 100px;') 
 						-for(var i = 0; i < 24; i++)
@@ -81,6 +81,8 @@ link(rel='stylesheet', type='text/css', href='/stylesheet/jquery.Jcrop.css')
 					h5.AA_zhi AA制
 					input#payment_method.payment_method(style='margin-top: 4px',type='radio',name='payment_method',value='我请客') 
 					h5.woqingke 我请客
+					input#payment_method.payment_method(style='margin-top: 4px',type='radio',name='payment_method',value='各付各') 
+					h5.woqingke 各付各
 				span.dinner_right_span
 					.my_lab_div1
 						if tag
@@ -121,22 +123,20 @@ link(rel='stylesheet', type='text/css', href='/stylesheet/jquery.Jcrop.css')
 				div#add_dinner_photo_border.add_dinner_photo_border
 					.preview_dinner_photo_text 图片预览:
 					.preview_dinner_photo 
-						img#target.target
-						//- img#target.target(style='width: auto;',src='images/prewivw_dinner_photo.png')
+						img#dinner_photo_preview.dinner_photo_preview(src='images/prewivw_dinner_photo.png')
 					a#inner_button.inner_button(href='#')
+					a#inner_button1.inner_button(href='#', style="background-position : -413px -73px; display: none")
 					.preview_dinner_choice_text 
 						h5(style='margin-left: -5px; margin-top: 5px; margin-bottom:5px;') 你也可以选择我们为你推选的照片
-						a#choice_min_photo.choice_min_photo
-						a#choice_min_photo.choice_min_photo
-						a#choice_min_photo.choice_min_photo
-						a#choice_min_photo.choice_min_photo
-						a#choice_min_photo.choice_min_photo
-						a#choice_min_photo.choice_min_photo
-						a#choice_min_photo.choice_min_photo
-						a#choice_min_photo.choice_min_photo
+						a#choice_min_photo1.choice_min_photo1(href="#")
+						a#choice_min_photo2.choice_min_photo2.cmp2(href="#")
+						a#choice_min_photo3.choice_min_photo3.cmp3(href="#")
+						a#choice_min_photo4.choice_min_photo4.cmp4(href="#")
+						a#choice_min_photo5.choice_min_photo5.cmp5(href="#")
+						a#choice_min_photo6.choice_min_photo6.cmp6(href="#")
+						a#choice_min_photo7.choice_min_photo7.cmp7(href="#")
+						a#choice_min_photo8.choice_min_photo8.cmp8(href="#")
 script
 	:coffee
-		user_tag()
-		creat_dinner()
-		upload_dinner_photo()
+		user_tag1()
 	//- include foot

@@ -2,6 +2,7 @@ crypto = require("crypto")
 InviteUser = require("../models/user")
 User = require("../models/user")
 Tag = require("../models/tag")
+Dinner = require("../models/dinner")
 fs = require("fs")
 gm = require("gm")
 module.exports = (app) ->
@@ -39,14 +40,7 @@ module.exports = (app) ->
 
     return
 
-  app.get "/idinner", (req, res) ->
-    res.render "idinner",
-      title: "多人聚餐"
-      user: req.session.user
-      success: req.flash("success").toString()
-      error: req.flash("error").toString()
 
-    return
 
   app.get "/iattractive", (req, res) ->
     res.render "iattractive",

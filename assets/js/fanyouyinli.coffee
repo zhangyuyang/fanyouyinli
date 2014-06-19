@@ -8,3 +8,5 @@
 # = require modify_password
 # = require js_dinner
 # = require dinner_photo
+# = require img_adapter
+# = require dinners_main

@@ -12,6 +12,8 @@ Dinner = (dinner) ->
   @string_tag = dinner.string_tag
   @description = dinner.description
   @tel_of_meals = dinner.tel_of_meals
+  @dinner_image_big = dinner.dinner_image_big
+  @dinner_image_small = dinner.dinner_image_small
 module.exports = Dinner
 
 Dinner::save = (callback)->
@@ -28,17 +30,16 @@ Dinner::save = (callback)->
     string_tag: @string_tag
     description: @description
     tel_of_meals: @tel_of_meals
-  mongodb.open (err, db)->
-    console.log "数据库打开"
-    console.log dinner.e_mail
-    console.log dinner.dining_hours
-    console.log dinner.dining_minute
-    return callback(err) if err
-    db.collection "dinners", (err, collection)->
+    dinner_image_big: @dinner_image_big
+    dinner_image_small: @dinner_image_small
+  mongodb.open (err, db) ->
+    if err
+      db.close()
+      return callback(err)
+    db.collection "dinners", (err, collection) ->
       if err
         db.close()
         return callback(err)
-
       collection.insert dinner,
         safe: true
       , (err, dinner) ->
@@ -46,29 +47,18 @@ Dinner::save = (callback)->
         callback err, dinner
         return
 
-
-Dinner.insert_array = (e_mail, data, callback) ->
-  console.log "这里是增加数组的数据库操作"
-  console.log data
+Dinner.get = (date, callback) ->
   mongodb.open (err, db) ->
     if err
       db.close()
-      console.log "数据库打开出错"
-      console.log err
-    else  
+      return callback(err)
     db.collection "dinners", (err, collection) ->
       if err
-        console.log "查询USER表集合"
         db.close()
         return callback(err)
-      collection.update 
-        e_mail: e_mail
-      ,
-        $push: data
-      , (err, result)->
+      collection.find(date).toArray (err, doc) ->
         db.close()
-        console.log "数据库关闭2"
-        if err
-          callback err, null
+        if doc
+          callback err, doc
         else
-          callback err, result
+          callback err, null
