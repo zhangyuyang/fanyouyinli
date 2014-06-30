@@ -16,8 +16,25 @@ html
           .user_info(style='margin-right: -406px;') 消息
           .user_info(style='margin-right: -365px;') 私信
           .user_info(style='margin-right: -324px;') 我的聚餐
-          .user_city_info 厦门
+          .user_city_info 
+            span#now_city.now_city #{city}
+            a#chengshisanjiao.chengshisanjiao(href="#")
+            .choice_city
+              span.choice_city_text1 选择你常居住的城市
+              span.choice_city_text2_border
+                a#beijing.choice_city_name(style="margin-left: 0px;",href="#") 北京
+                a#shanghai.choice_city_name(href="#") 上海
+                a#guangzhou.choice_city_name(href="#") 广州
+                a#xiamen.choice_city_name(href="#") 厦门
+                a#shenzhen.choice_city_name(href="#") 深圳
+                a#hangzhou.choice_city_name(href="#") 杭州
+              span.choice_city_text3_border
+                a#no_my_city.choice_city_name.no_my_city(href="#") 没有你所在的城市?
+
           if error
             div.tips.error #{error}
           if success
             div.tips.error #{success}
+  script
+    :coffee
+      choice_city()

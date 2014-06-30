@@ -129,8 +129,8 @@ user_tag1 = ->
 				# downPanel初始化FALSE
 				downPanel = false
 				if element[0] == $("#inner_button")[0]
-					$("#file").click()
-					$("#inner_button").css "background-position","-413px -73px"
+                    $("#file").click()
+                    $("#inner_button").css "background-position","-413px -73px"
 				else
 					i = 0
 					while i < 10
@@ -196,7 +196,8 @@ user_tag1 = ->
 			description = $("#description").val()
 			tel_of_meals = $("#tel_of_meals").val()
 			dinner_image = $("#dinner_photo_preview")[0].src
-
+			city = $(".now_city").html()
+			console.log city
 			# # 开始做校验
 			val = $("input:radio[name=\"payment_method\"]:checked").val()
 			unless val?
@@ -290,6 +291,7 @@ user_tag1 = ->
 				dinner_image: dinner_image
 				image_adaptation_width: image_adaptation_width
 				image_adaptation_height: image_adaptation_height 
+				city: city
 			, (data, status) ->
 				console.log "这里是JS的add_tag"
 				if status

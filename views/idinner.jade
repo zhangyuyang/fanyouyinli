@@ -1,5 +1,5 @@
 include head
-script(type='text/javascript', src='bower_components/moment/min/moment-with-langs.js')
+script(type='text/javascript', src='../bower_components/moment/min/moment-with-langs.js')
 .my_attraction
   
   .navigation(style='border-bottom: 1px #bbbbbb solid; width:69%; height: 55px;')
@@ -11,7 +11,7 @@ script(type='text/javascript', src='bower_components/moment/min/moment-with-lang
   .idinner_center(style="margin-top: 0px")
     .idinner_right
       .idinner_today
-        h5 今天 05月22日 星期一
+        h5#today_date 今天 05月22日 星期一
       h3.label_text(style='margin-top:73px; margin-left:20px;') 活力饭友
       .photo_mini1
         .idinner_lie
@@ -55,18 +55,26 @@ script(type='text/javascript', src='bower_components/moment/min/moment-with-lang
           p.idinner_user_info 手绘地图-燕子
     .idinner_left
       span#idinner_navigation.idinner_navigation
-        a(href='#', style='color: #5bc7d6;') 全部
-        a(href='#') 费用
-        a(href='#') 地点类型
-        a(href='#') 就餐距离
-        a(href='#') 标签
+        a#jump_all(href='#', style='color: #5bc7d6;') 全部
+        a#jump_pay(href='#') 费用
+        a#jump_address(href='#') 地点类型
+        //- a#jump_distance(href='#') 就餐距离
+        //- a#jump_tags(href='#') 标签
         a#go_dinner.go_dinner(href='#')
         form#great_dinner(method='get',action='/creat_dinner')
+        span#idinner_navigation_pay.idinner_navigation_pay
+          a#AAzhi(href='#') AA制
+          a#gefuge(href='#') 各付各
+          a#woqingke(href='#') 我请客
+        span#idinner_navigation_address.idinner_navigation_address
+          a#jiuba(href='#') 酒吧
+          a#zhuoyou(href='#') 桌游
+          a#kafeiting(href='#') 咖啡厅
       div#dinner_now.dinner_now
-        .idinner_photo_border
+        a.idinner_photo_border(href="#")
           img#dinner_photo.dinner_photo(src="dinner_image/small/11@qq.com1402995083615.png")
         span.dinner_photo_info
-          h2#dinner_name 这里是标题
+          a.dinner_name(href="#") 这里是标题
           h6#dining_locations_info 这里是详细地址
           div#small_lab.small_lab
             label#dinners_lab.dinners_lab
@@ -81,75 +89,9 @@ script(type='text/javascript', src='bower_components/moment/min/moment-with-lang
         span.dinner_date
           h1#dinner_date 05/22
           p#dinner_week 星期一  18：00
-        a#dinner_jion_btn.dinner_jion_btn(href='#')
+        a.dinner_jion_btn(href='#')
         span.treat
           p#treat AA制
-
-
-      //- .dinner_now
-      //-   span.dinner_photo
-      //-   span.dinner_photo_info
-      //-     h2 艺术爱好者们交友聚餐啦
-      //-     h6 思明区华南路27号黑糖咖啡
-      //-     .small_lab
-      //-       label
-      //-         p 玩游戏
-      //-       label
-      //-         p 玩游戏不玩
-      //-       label
-      //-         p 玩游戏
-      //-     a.friends_photo(href='#')
-      //-     a.friends_photo(href='#')
-      //-     a.friends_photo(href='#')
-      //-     a.friends_photo(href='#')
-      //-   span.dinner_date
-      //-     h1 05/22
-      //-     p 星期一  18：00
-      //-   a.dinner_jion_btn(href='#')
-      //-   span.treat
-      //- h3.label_text 往期聚餐
-      //- .dinner_now
-      //-   span.dinner_photo
-      //-   span.dinner_photo_info
-      //-     h2 艺术爱好者们交友聚餐啦
-      //-     h6 思明区华南路27号黑糖咖啡
-      //-     .small_lab
-      //-       label
-      //-         p 玩游戏
-      //-       label
-      //-         p 玩游戏不玩
-      //-       label
-      //-         p 玩游戏
-      //-     a.friends_photo(href='#')
-      //-     a.friends_photo(href='#')
-      //-     a.friends_photo(href='#')
-      //-     a.friends_photo(href='#')
-      //-   span.dinner_date
-      //-     h1 05/22
-      //-     p 星期一  18：00
-      //-   a.dinner_jion_btn(href='#')
-      //-   span.treat
-      //- .dinner_now
-      //-   span.dinner_photo
-      //-   span.dinner_photo_info
-      //-     h2 艺术爱好者们交友聚餐啦
-      //-     h6 思明区华南路27号黑糖咖啡
-      //-     .small_lab
-      //-       label
-      //-         p 玩游戏
-      //-       label
-      //-         p 玩游戏不玩
-      //-       label
-      //-         p 玩游戏
-      //-     a.friends_photo(href='#')
-      //-     a.friends_photo(href='#')
-      //-     a.friends_photo(href='#')
-      //-     a.friends_photo(href='#')
-      //-   span.dinner_date
-      //-     h1 05/22
-      //-     p 星期一  18：00
-      //-   a.dinner_jion_btn(href='#')
-      //-   span.treat
 script
   :coffee
     dinners_main()

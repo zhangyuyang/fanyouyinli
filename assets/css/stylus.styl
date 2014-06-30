@@ -277,17 +277,19 @@ body
   position absolute
   top 222px
   left 313px
-  width 318px
-  height 29px
+  width 324px
+  height 34px
   font-size 18px
+  outline none
 
 .login_password
   position absolute
   top 275px
   left 313px
-  width 318px
-  height 29px
+  width 324px
+  height 34px
   font-size 18px
+  outline none
 
 .login_button
   position absolute
@@ -652,7 +654,7 @@ a
     color #336699
     text-decoration none
   &:hover
-    text-decoration underline
+    text-decoration none
 
 .my_attraction_ico
   margin-left 19px
@@ -816,11 +818,13 @@ a
 .idinner_navigation
   display block
   border-bottom 1px #dedede dashed
-  height 34px
+  height 24px
   width 99%
+  margin-bottom 20px
+  margin-top 12px
   a
     display inline-block
-    margin-top 12px
+    // margin-top 12px
     margin-left 22px
     margin-right -5px
     color #5c5c5c
@@ -828,17 +832,21 @@ a
     text-decoration none
 
 .dinner_now
+  float left
   display none
   position relative
   width 100%
   height 156px
-  margin-top 20px
+  margin-top 40px
+  margin-bottom -20px
   border-bottom 1px #dedede dashed
 
 .idinner_photo_border
   display inline-block
   width 203px
   height 132px
+  // border 1px red solid
+  margin-top 0px
 .dinner_photo
   display inline-block
   // width 203px
@@ -850,17 +858,20 @@ a
   width 340px
   height 132px
   margin-left 12px
-  h2
+  a
     position absolute
     display inline-block
     height 20px
     width 240px
     font-size 18px
     color #808080
+    margin-left 0px
+    margin-top 0px
   h6
     position absolute
     display inline-block
-    top 24px
+    left 4px
+    top 32px
     height 16px
     width 240px
     font-size 12px
@@ -891,6 +902,7 @@ a
   left 590px
   height 57px
   width 58px
+  margin-top 10px
   background-image url(../images/xianxiajucan_10.png)
 
 .treat
@@ -914,7 +926,7 @@ a
 
 .idinner_today
   float right
-  height 36px
+  height 34px
   width 235px
   border 1px #bbbbbb solid
   h5
@@ -960,7 +972,8 @@ a
   height 31px
   width 168px
   margin-right 1px !important
-  margin-top 1px !important
+  margin-top -10px !important
+
   background-image url(../images/xianxiajucan_03.png)
 
 .small_lab
@@ -2248,6 +2261,7 @@ a
   float left
   width 400px
   height 263px
+  overflow hidden
 .span_title
   display block
   font-size 14px
@@ -2365,3 +2379,110 @@ a
   margin-left 5px
   font-size 12px
   color #999999
+.idinner_navigation_pay
+  display none
+  height 20px
+  width 100%
+  // border 1px red solid
+  margin-top -5px
+.idinner_navigation_address
+  display none
+  height 20px
+  width 100%
+  // border 1px red solid
+  margin-top -5px
+.clone_border
+  border 0px red solid
+.chengshisanjiao
+  float right
+  // border 1px red solid
+  margin-top 5px
+  margin-left 3px
+  height 10px
+  width 10px
+  background-image url(../images/chengshisanjiao.png)
+  background-position 0px 0px
+  background-repeat no-repeat
+.choice_city
+  display none
+  position absolute
+  // float left
+  border 6px #cbcbcb solid
+  min-height 105px
+  width 290px
+  left 50px
+  top -16px
+  background-color white
+  z-index 1
+.choice_city_text1
+  display block
+  font-size 14px
+  margin-top 13px
+  margin-left 15px
+.choice_city_text2_border
+  display block
+  border-top 1px #dddddd solid
+  margin-top 15px
+  min-height 50px
+  width 88%
+  margin-left 15px
+.choice_city_name
+  display inline-block
+  color #b5b5b5
+  font-size 14px
+  margin-left 17px
+  margin-top 15px
+  margin-bottom -7px
+.choice_city_text3_border
+  display block
+  min-height 20px
+  width 100%
+.no_my_city
+  font-size 10px
+  margin-top 0px
+  margin-left 15px
+.baidu_map
+  width 240px
+  height 240px
+  overflow hidden
+  margin 0px
+.hidden_login
+  position absolute
+  top 110px
+  height 340px
+  width 500px
+  border 1px #bbbbbb solid
+  z-index 1
+  display none
+  background-color white
+.login_img
+  height 145px
+  width 424px
+  margin-left 38px
+  background-image url(../images/login_img.jpg)
+  background-position 0px 0px
+.hidden_login_input
+  margin-top 20px
+  font-size 18px
+  width 350px
+  margin-left 40px
+  padding-left 5px
+.hidden_login_aline
+  display block
+  margin-left 10px
+.hidden_login_button
+  float right
+  height 30px
+  width 116px
+  display block
+  margin-right 68px
+  margin-top 20px
+  background-image url(../images/new_07.png)
+  background-repeat no-repeat
+  background-position 0px 0px
+.hidden_login_text1
+  float right
+  font-size 16px
+  color red
+  margin-top 27px
+  margin-right 40px

@@ -1,5 +1,6 @@
 include head
-script(type='text/javascript', src='bower_components/moment/min/moment-with-langs.js')
+script(type='text/javascript', src='../bower_components/moment/min/moment-with-langs.js')
+script(type='text/javascript', src='http://api.map.baidu.com/api?v=2.0&ak=1ZpVLsC9WnVW09ACTkcKbIOB')
 .my_attraction
   
   .navigation(style='border-bottom: 1px #bbbbbb solid; width:69%; height: 55px;')
@@ -11,7 +12,7 @@ script(type='text/javascript', src='bower_components/moment/min/moment-with-lang
   .idinner_center(style="margin-top: 0px")
     .idinner_right
       .idinner_today
-        h5 今天 05月22日 星期一
+        h5#today_date 今天 05月22日 星期一1
     .idinner_left
       .idinner_list_title
         h5 #{dinners[0].dinner_tag}
@@ -38,13 +39,11 @@ script(type='text/javascript', src='bower_components/moment/min/moment-with-lang
       div.dinner_list_2
         div.dinner_list_2_left
           span.span_title 详细描述
-          p.dinner_list_description(style="margin-top:20px") 营业时间：XXXXX
-          p.dinner_list_description 必须提前一天电话预约
-          p.dinner_list_description 糯米券有效期为2个月
+          p.dinner_list_description(style="margin-top:20px") #{dinners[0].description}
         div.dinner_list_2_right
           span.span_title 聚餐地点
           span.dinner_list_place 黑糖咖啡xx27号
-          img.googel_map(src="/images/googel_map.png")
+          div#baidu_map.baidu_map
       div.dinner_list_3 
         span.span_title 你将遇到的人
         span.dinner_list_users
@@ -87,18 +86,18 @@ script(type='text/javascript', src='bower_components/moment/min/moment-with-lang
             a.critics 林遥:
             span.critics_info 期待期待
             span.critics_time 09-08 10：12
-            span
-        span
-          img
-          span
-            a
-            span
-            span
-            span
 
-
-
-
+    .hidden_login
+      .login_img
+      div.login_text1(style="margin-top: 0px; margin-left: 87px") 恭候大驾
+      span.hidden_login_aline
+        span.login_text2.text_all(style="margin-left: 0px") 邮箱:
+        input#hidden_login_email.hidden_login_input
+      span.hidden_login_aline
+        span.login_text2.text_all(style="margin-left: 0px") 密码:
+        input#hidden_login_password.hidden_login_input(type="password")
+      a#hidden_login_button.hidden_login_button(href="#")
+      span.hidden_login_text1 请先登陆
 
 
 

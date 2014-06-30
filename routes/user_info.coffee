@@ -4,12 +4,16 @@ User = require("../models/user")
 Tag = require("../models/tag")
 fs = require("fs")
 gm = require("gm")
+Dinner = require("../models/dinner")
 module.exports = (app) ->
   app.get "/", (req, res) ->
     console.log '这是历史性的版本'
+    req.session.city = "上海"
+    console.log req.session.city
     res.render "home",
       title: "首页"
       user: req.session.user
+      city: req.session.city
       success: req.flash("success").toString()
       error: req.flash("error").toString()
     return
@@ -51,6 +55,7 @@ module.exports = (app) ->
     res.render "login",
       title: "用户登入"
       user: req.session.user
+      city: req.session.city
       success: req.flash("success").toString()
       error: req.flash("error").toString()
 
@@ -59,12 +64,13 @@ module.exports = (app) ->
   app.get "/modiy_password", (req, res) ->
     res.render "modiy_password",
       user: req.session.user
+      city: req.session.city
       success: req.flash("success").toString()
       error: req.flash("error").toString()
-
     return
 
   app.post "/login", (req, res) ->
+    console.log req.session.city
     #生成口令的散列值  
     md5 = crypto.createHash("md5")
     #注意：这里req.body.login_password，body后面，接的是页面元素name的值，不是JS里面，接受元素ID的值，这里容易搞错
@@ -77,6 +83,7 @@ module.exports = (app) ->
         req.flash "error", "用户口令错误"
         return res.redirect("/login")
       req.session.user = doc
+      req.session.city = req.session.city
       res.redirect "/ifanyor"
       return
     return
@@ -86,9 +93,9 @@ module.exports = (app) ->
   app.get "/find_password", (req, res) ->
     res.render "find_password",
       user: req.session.user
+      city: req.session.city
       success: req.flash("success").toString()
       error: req.flash("error").toString()
-
     return
 
   app.post "/find_password", (req, res) ->
@@ -121,9 +128,9 @@ module.exports = (app) ->
   app.get "/reg", (req, res) ->
     res.render "reg",
       user: req.session.user
+      city: req.session.city
       success: req.flash("success").toString()
       error: req.flash("error").toString()
-
     return
 
   app.post "/reg", (req, res) ->
@@ -136,7 +143,7 @@ module.exports = (app) ->
     reg_mail = req.body.reg_mail
     reg_city = req.body.reg_city
     regname = req.body.reg_name
-
+    
     user = new User(
       e_mail: reg_mail
       password: reg_password
@@ -176,11 +183,11 @@ module.exports = (app) ->
         console.log user.worked
       res.render "user_history",
         user: req.session.user
+        city: req.session.city
         success: req.flash("success").toString()
         error: req.flash("error").toString()
         worked : user.worked
         study : user.study
-
 
 
 
@@ -348,9 +355,6 @@ module.exports = (app) ->
                   res.json
                     status : true
 
-
-
-
   app.post "/delete_tag", (req, res) ->
     tag = req.body.tag
     console.log tag
@@ -366,3 +370,31 @@ module.exports = (app) ->
         res.json
           status : true
       return
+
+  app.post "/modify_user_city", (req, res) ->
+    console.log "进入modify_user_city"
+    city = req.body.city
+    console.log req.body.city
+    try
+      e_mail = req.session.user.e_mail
+    catch e
+      e_mail = "ceshi@qq.com"
+    Dinner.get 
+      city : city
+    , (err, dinners) ->
+      if err
+        console.log "报错了"
+        console.log err
+        res.render "idinner",
+          city: req.session.city
+          error: req.flash("error").toString()
+      else
+        req.session.city = req.body.city
+        console.log "modify_user_city查询正确"
+        console.log dinners
+        console.log req.session.city
+        console.log "11111xxxxx"
+        res.json
+          dinners: dinners
+          status : true
+          city: req.session.city

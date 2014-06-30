@@ -1,0 +1,27 @@
+today_date = ->
+	console.log "1111"
+	week = undefined
+	switch moment().format('dddd')
+		when "Monday"
+			week = "星期一"
+			console.log "星期一"
+		when "Tuesday"
+			week = "星期二"
+			console.log "星期二"
+		when "Wednesday"
+			week = "星期三"
+			console.log "星期三"
+		when "Thursday"
+			week = "星期四"
+			console.log "星期四"
+		when "Friday"
+			week = "星期五"
+			console.log "星期五"
+		when "Saturday"
+			week = "星期六"
+			console.log "星期六"
+		when "Monday"
+			week = "星期天"
+			console.log "星期天"
+	$("#today_date").html "今天 " + (moment().format('L').substring 0,2) + "月" + (moment().format('L').substring 3,5) + "日 " + week
+console.log "时间和日期加载结束"

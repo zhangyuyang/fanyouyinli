@@ -10,3 +10,6 @@
 # = require dinner_photo
 # = require img_adapter
 # = require dinners_main
+# = require today_date
+# = require choice_city
+# = require book_table

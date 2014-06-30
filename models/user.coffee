@@ -147,19 +147,21 @@ User.update = update = (e_mail, data, callback) ->
   #从数据库中更改用户的密码
 
   mongodb.open (err, db) ->
-    return callback(err)  if err
+    if err
+      db.close()
+      return callback(err)
     
     #读取 User 集合
     db.collection "users", (err, collection) ->
       if err
-        mongodb.close()
+        db.close()
         return callback(err)
       collection.update
         e_mail: e_mail
       ,
         $set: data
       , (err, doc) ->
-        mongodb.close()
+        db.close()
         if doc
           #封装文档为 User 对象
           user = new User(doc)

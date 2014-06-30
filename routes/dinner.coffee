@@ -20,43 +20,89 @@ module.exports = (app) ->
         # 到数据库里读取推送数据
         Tag.get_push (err,push_info) ->
           if err
-            console.log err
+            console.log errs
             push_info = ''
           else
             console.log push_info
             push_info1 = push_info
           res.render "creat_dinner",
             user: req.session.user
+            city: req.session.city
             tag: user.tag
             success: req.flash("success").toString()
             error: req.flash("error").toString()
             push_info: push_info1
 
-  app.get "/get_dinners", (req, res) ->
+  app.post "/get_dinners", (req, res) ->
     console.log "idinner服务器端"
-    console.log req.session.user.e_mail
-
+    # console.log req.session.user.e_mail
+    console.log req.session.city
     Dinner.get 
-      e_mail : req.session.user.e_mail
+      city : req.session.city
     , (err, dinners) ->
       if err
         console.log "报错了"
         console.log err
         res.render "idinner",
+          city: req.session.city
           error: req.flash("error").toString()
       else
         console.log "查询正确"
         res.json
           dinners: dinners
 
+  app.post "/get_dinners_sort", (req, res) ->
+    console.log "idinner服务器端"
+    console.log req.session.user.e_mail
+    console.log req.body.sort_type
+    console.log req.body.sort_flag
+    console.log req.session.city
+    if req.body.sort_flag == "A"
+      Dinner.get_for_sort
+        e_mail : req.session.user.e_mail
+        payment_method : req.body.sort_type
+        city : req.session.city
+      , (err, dinners) ->
+        if err
+          console.log "报错了"
+          console.log err
+          res.render "idinner",
+            city: req.session.city
+            error: req.flash("error").toString()
+        else
+          console.log dinners
+          console.log "查询正确"
+          res.json
+            dinners: dinners
+    else if req.body.sort_flag == "B"
+      Dinner.get_for_sort
+        e_mail : req.session.user.e_mail
+        dining_locations : req.body.sort_type
+        city : req.session.city
+      , (err, dinners) ->
+        if err
+          console.log "报错了"
+          console.log err
+          res.render "idinner", 
+            city: req.session.city
+            error: req.flash("error").toString()
+        else
+          console.log dinners
+          console.log "flag == b"
+          res.json
+            dinners: dinners
 
 
   app.get "/idinner", (req, res) ->
+    console.log "这里是app.get /idinner"
+    console.log req.session.city
     res.render "idinner",
       title: "多人聚餐"
       user: req.session.user
+      city: req.session.city
       success: req.flash("success").toString()
       error: req.flash("error").toString()
+      city: req.session.city
 
 
   app.post "/creat_dinner", (req, res) ->
@@ -74,6 +120,7 @@ module.exports = (app) ->
     description = req.body.description
     tel_of_meals = req.body.tel_of_meals
     dinner_image = req.body.dinner_image
+    city = req.body.city
 
 
 
@@ -179,6 +226,7 @@ module.exports = (app) ->
       tel_of_meals: tel_of_meals
       dinner_image_big: dinner_image_big
       dinner_image_small: dinner_image_small
+      city: city
     )
     dinner.save (err, dinner) ->
       console.log "新增聚餐"
@@ -212,6 +260,15 @@ module.exports = (app) ->
         res.render "dinner_list",
               title: "多人聚餐"
               user: req.session.user
+              city: req.session.city
               success: req.flash("success").toString()
               error: req.flash("error").toString()
               dinners : dinners
+
+  app.get "/book_table", (req, res) ->
+    if req.session.user
+      console.log "说明用户登陆了"
+    else
+      console.log "说明用户没有登陆"
+      res.json
+        falg : false

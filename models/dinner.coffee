@@ -14,6 +14,7 @@ Dinner = (dinner) ->
   @tel_of_meals = dinner.tel_of_meals
   @dinner_image_big = dinner.dinner_image_big
   @dinner_image_small = dinner.dinner_image_small
+  @city = dinner.city
 module.exports = Dinner
 
 Dinner::save = (callback)->
@@ -32,6 +33,7 @@ Dinner::save = (callback)->
     tel_of_meals: @tel_of_meals
     dinner_image_big: @dinner_image_big
     dinner_image_small: @dinner_image_small
+    city: @city
   mongodb.open (err, db) ->
     if err
       db.close()
@@ -48,6 +50,24 @@ Dinner::save = (callback)->
         return
 
 Dinner.get = (date, callback) ->
+  mongodb.close()
+  mongodb.open (err, db) ->
+    if err
+      db.close()
+      return callback(err)
+    db.collection "dinners", (err, collection) ->
+      if err
+        db.close()
+        return callback(err)
+      collection.find(date).toArray (err, doc) ->
+        db.close()
+        if doc
+          callback err, doc
+        else
+          callback err, null
+
+Dinner.get_for_sort = (date, callback) ->
+  console.log date
   mongodb.open (err, db) ->
     if err
       db.close()

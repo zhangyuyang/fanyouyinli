@@ -7,6 +7,7 @@ module.exports = (app) ->
   app.get "/user_photo", (req, res) ->
     res.render "user_photo",
       user: req.session.user
+      city: req.session.city
       success: req.flash("success").toString()
       error: req.flash("error").toString()
 
@@ -16,16 +17,11 @@ module.exports = (app) ->
     console.log req.session.user
     res.render "preview_photo",
       user: req.session.user
+      city: req.session.city
       success: req.flash("success").toString()
       error: req.flash("error").toString()
 
   app.post "/save_photo", (req, res) ->
-    
-    # res.render('save_photo', {
-    #   user : req.session.user,
-    #   title: '照片上传',
-    #   file_path: file_path
-    # });
     #GM库里的方法，获取上传原图的宽度和高度
     
     # Jcrop获取截图框的顶点坐标 ,这个要写在另一个方法里
