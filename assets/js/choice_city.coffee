@@ -55,7 +55,7 @@ post_choice_city = (choice_city) ->
 		if data
 			console.log "修改城市成功"
 			$(".now_city").html choice_city
-			window.location.href = "/idinner"
+			location.reload true
 		else
 			console.log "修改城市失败"
 			$(".now_city").html "城市选择失败"
@@ -67,8 +67,7 @@ choice_city = ->
 			# 这个是上面方法的入口
 			addEventHandler document, "mousedown", document_MouseDown
 			$("#beijing").click ->
-				console.log "这里点击了北京1"
-				# post_choice_city "北京"
+				post_choice_city "北京"
 
 			$("#shanghai").click ->
 				post_choice_city "上海"
@@ -76,8 +75,8 @@ choice_city = ->
 			$("#guangzhou").click ->
 				post_choice_city "广州"
 
-			# $("#xiamen").click ->
-				# post_choice_city "厦门"
+			$("#xiamen").click ->
+				post_choice_city "厦门"
 
 			$("#shenzhen").click ->
 				post_choice_city "深圳"

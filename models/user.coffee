@@ -25,7 +25,7 @@ InviteUser::save = save = (callback) ->
     return callback(err)  if err
     db.collection "invite_users", (err, collection) ->
       if err
-        mongodb.close()
+        db.close()
         return callback(err)
       collection.ensureIndex "e_mail",
         unique: true
@@ -33,7 +33,7 @@ InviteUser::save = save = (callback) ->
       collection.insert invite_user,
         safe: true
       , (err, invite_user) ->
-        mongodb.close()
+        db.close()
         callback err, invite_user
         return
 
@@ -48,12 +48,12 @@ InviteUser.get = get = (e_mail, callback) ->
     return callback(err)  if err
     db.collection "invite_users", (err, collection) ->
       if err
-        mongodb.close()
+        db.close()
         return callback(err)
       collection.findOne
         e_mail: e_mail
       , (err, doc) ->
-        mongodb.close()
+        db.close()
         if doc
           invite_user = new InviteUser(doc)
           callback err, invite_user
@@ -97,13 +97,13 @@ User::save = save = (callback) ->
     #读  users  集合
     db.collection "users", (err, collection) ->
       if err
-        mongodb.close()
+        db.close()
         return callback(err)
       
       #为 e_mail 属性添加索引
       collection.ensureIndex "e_mail", unique: true, (err,doc) ->
         if err
-          mongodb.close()
+          db.close()
           return callback(err)
 
       
@@ -111,7 +111,7 @@ User::save = save = (callback) ->
       collection.insert user,
         safe: true
       , (err, user) ->
-        mongodb.close()
+        db.close()
         callback err, user
         return
 
@@ -130,12 +130,12 @@ User.get = get = (e_mail, callback) ->
     #读取 User 集合
     db.collection "users", (err, collection) ->
       if err
-        mongodb.close()
+        db.close()
         return callback(err)
       
       #查找 e_mail 属性为 e_mail 的文档
       collection.findOne e_mail: e_mail , (err, doc) ->
-        mongodb.close()
+        db.close()
         if doc
           callback err, doc
         else
@@ -205,14 +205,14 @@ User.delete_array = delete_array = (e_mail, data, callback) ->
     #读取 User 集合
     db.collection "users", (err, collection) ->
       if err
-        mongodb.close()
+        db.close()
         return callback(err) 
       collection.update 
         e_mail: e_mail
       , 
         $pull: data   
       , (err, result)->
-        mongodb.close()
+        db.close()
         console.log "数据库关闭1"
         if err
           console.log "这是删除失败"

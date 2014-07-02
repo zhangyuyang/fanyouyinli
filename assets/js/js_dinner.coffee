@@ -190,7 +190,8 @@ user_tag1 = ->
 			dining_locations = $("#dining_locations").val()
 			hours = $("#hours").val()
 			minute = $("#minute").val()
-			dining_locations_info = $("#dining_locations_info").val()
+			dining_locations_info = $("#page_city").html() + $("#dining_locations_info").val() 
+			console.log dining_locations_info
 			dinner_time_input = $("#dinner_time_input").val()
 			number_of_meals = $("#number_of_meals").val()
 			description = $("#description").val()
@@ -224,6 +225,7 @@ user_tag1 = ->
 			if !validator.isByteLength dining_locations_info, 2 ,10 
 				$("#dinner_locations_info_tip").css "display","inline"
 				$("#dinner_locations_info_tr").css "display","inline-block"
+				$("#dining_locations_info").focus()
 				return false
 			else
 				$("#dinner_locations_info_tip").css "display","none"
@@ -275,7 +277,7 @@ user_tag1 = ->
 			if $("#file").val() is '' or $("#file").val() == null
 				alert "封面为必选"
 				return false
-
+			console.log "下面JS开始POST数据了 "
 			$.post "/creat_dinner",
 				dinner_tag_input: dinner_tag_input
 				dining_locations: dining_locations
@@ -294,8 +296,10 @@ user_tag1 = ->
 				city: city
 			, (data, status) ->
 				console.log "这里是JS的add_tag"
-				if status
+				if data.status
 					console.log "这里有data"+data
+					location.reload true
 				else 
 					console.log "err"
 					alert status+"error"
+					console.log "新增聚餐失败错误"

@@ -42,7 +42,7 @@ script(type='text/javascript', src='http://api.map.baidu.com/api?v=2.0&ak=1ZpVLs
           p.dinner_list_description(style="margin-top:20px") #{dinners[0].description}
         div.dinner_list_2_right
           span.span_title 聚餐地点
-          span.dinner_list_place 黑糖咖啡xx27号
+          span.dinner_list_place #{dinners[0].dining_locations_info}
           div#baidu_map.baidu_map
       div.dinner_list_3 
         span.span_title 你将遇到的人

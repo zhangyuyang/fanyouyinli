@@ -35,7 +35,6 @@ module.exports = (app) ->
 
   app.post "/get_dinners", (req, res) ->
     console.log "idinner服务器端"
-    # console.log req.session.user.e_mail
     console.log req.session.city
     Dinner.get 
       city : req.session.city
@@ -94,7 +93,6 @@ module.exports = (app) ->
 
 
   app.get "/idinner", (req, res) ->
-    console.log "这里是app.get /idinner"
     console.log req.session.city
     res.render "idinner",
       title: "多人聚餐"
@@ -106,6 +104,7 @@ module.exports = (app) ->
 
 
   app.post "/creat_dinner", (req, res) ->
+    console.log "到了"
     console.log "服务器层"
     dinner_image = undefined
     dinner_tag_input = req.body.dinner_tag_input
@@ -155,20 +154,6 @@ module.exports = (app) ->
     
 
 
-    # console.log "11111111"
-    # console.log dinner_image
-    # console.log dinner_tag_input
-    # console.log dining_locations
-    # console.log dining_locations_info
-    # console.log dining_hours
-    # console.log dining_minute
-    # console.log dinner_time
-    # console.log number_of_meals
-    # console.log payment_method
-    # console.log string_tag
-    # console.log description
-    # console.log tel_of_meals
-    # console.log "这里是服务器端的校验"
     if !validator.isByteLength dinner_tag_input, 2 ,10
       console.log "dinner_tag_input校验不通过"
       req.flash "err", "标题必须在2-50个字节"
@@ -234,12 +219,14 @@ module.exports = (app) ->
         console.log "新增错误"
         console.log err
         req.flash "error", err
-        res.redirect "/"
+        res.json
+          status: false
       else
         console.log "新增成功"
         # req.session.dinner = dinner
         req.flash "success", "创建聚餐成功"
-        res.redirect "/idinner"
+        res.json
+          status: true
       return
 
 
@@ -271,4 +258,4 @@ module.exports = (app) ->
     else
       console.log "说明用户没有登陆"
       res.json
-        falg : false
+        flag : false

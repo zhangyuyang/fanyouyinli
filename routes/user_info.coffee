@@ -86,7 +86,34 @@ module.exports = (app) ->
       req.session.city = req.session.city
       res.redirect "/ifanyor"
       return
-    return
+
+  app.post "/hidden_login", (req, res) ->
+    console.log req.session.city
+    console.log req.body.hidden_login_password
+    # 生成口令的散列值  
+    md5 = crypto.createHash("md5")
+    #注意：这里req.body.login_password，body后面，接的是页面元素name的值，不是JS里面，接受元素ID的值，这里容易搞错
+    login_password = md5.update(req.body.hidden_login_password).digest("base64")
+    User.get req.body.hidden_login_email, (err, doc) ->
+      unless doc
+        req.flash "error", "用户不存在"
+        res.json
+          status: false
+          tips: "用户不存在"
+        return
+      unless doc.password is login_password
+        req.flash "error", "用户密码错误"
+        res.json
+          status: false
+          tips: "用户密码错误"
+        return
+      req.session.user = doc
+      req.session.city = doc.city
+      res.json
+        status: true
+        tips: "登陆成功"
+        city: doc.city
+      return
 
 
 
@@ -379,22 +406,20 @@ module.exports = (app) ->
       e_mail = req.session.user.e_mail
     catch e
       e_mail = "ceshi@qq.com"
-    Dinner.get 
+    User.update e_mail,
       city : city
-    , (err, dinners) ->
+    , (err, doc) ->
       if err
         console.log "报错了"
         console.log err
-        res.render "idinner",
+        res.render "/",
           city: req.session.city
           error: req.flash("error").toString()
       else
         req.session.city = req.body.city
         console.log "modify_user_city查询正确"
-        console.log dinners
         console.log req.session.city
-        console.log "11111xxxxx"
+        console.log doc
         res.json
-          dinners: dinners
           status : true
           city: req.session.city

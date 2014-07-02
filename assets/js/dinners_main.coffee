@@ -82,18 +82,8 @@ dinners_main = ->
 				dinners_preview data
 			else
 				console.log status
-		$("#beijing").click ->
-			post_choice_city "北京"
-		$("#shanghai").click ->
-			post_choice_city "上海"
-		$("#guangzhou").click ->
-			post_choice_city "广州"
-		$("#xiamen").click ->
-			post_choice_city "厦门"
-		$("#shenzhen").click ->
-			post_choice_city "深圳"
-		$("#hangzhou").click ->
-			post_choice_city "杭州"
+
+
 		$("#go_dinner").click ->
 			$("#great_dinner").submit()
 		$("#dinner_jion_btn").click ->
@@ -227,6 +217,7 @@ dinners_main = ->
 			$("#idinner_navigation_address").css "display":"none"
 			$("#idinner_navigation").css "height":"24px","margin-bottom":"0px"
 			return false
+		map_add = $(".dinner_list_place").html()
 		# 百度地图API
 		map = new BMap.Map("baidu_map")
 		# 默认创建地图的时候，坐标定位在北京
@@ -238,9 +229,9 @@ dinners_main = ->
 		myGeo = new BMap.Geocoder()
 
 		# 将地址解析结果显示在地图上,并调整地图视野
-		myGeo.getPoint "厦门市禹洲大学城", ((point) ->
+		myGeo.getPoint map_add, ((point) ->
 			if point
-				map.centerAndZoom point, 16
+				map.centerAndZoom point, 18
 				map.addOverlay new BMap.Marker(point)
 			return
 		), "北京市"
