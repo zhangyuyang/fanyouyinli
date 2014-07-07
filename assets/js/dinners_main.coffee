@@ -1,23 +1,24 @@
 dinners_main = ->
 	preview_dinners = 0
 	$(document).ready ->
+		page_number = undefined
 		# 一进来先加载时间
 		today_date()
 		fit_height = (elements, nums) ->
 			if nums < 0
-				elements.css "height":"200px"
+				elements.css "height":"100px"
 				$("#Pagination").css "display":"none"
 			else
 				$("#Pagination").css "display":"inline-block"
 				switch nums
 					when 0
-						elements.css "height":"200px"
+						elements.css "height":"100px"
 					when 1
 						elements.css "height":"360px"
 					when 2
-						elements.css "height":"520px"
+						elements.css "height":"400px"
 					when 3
-						elements.css "height":"680px"
+						elements.css "height":"600px"
 					when 4
 						elements.css "height":"840px"
 					when 5
@@ -126,8 +127,8 @@ dinners_main = ->
 			city : now_city
 		, (data, status) ->
 			if status
-				console.log "data"
-				console.log data
+				console.log data.dinners.length
+				page_number = Math.ceil(data.dinners.length/10)
 				dinners_preview data
 				
 			else
@@ -163,9 +164,7 @@ dinners_main = ->
 				city : $("#now_city").html()
 			, (data, status) ->
 				if status
-					console.log "data2"
-					console.log data
-					# location.reload true
+					page_number = Math.ceil(data.dinners.length/10)
 					dinners_preview data
 
 				else
@@ -185,8 +184,8 @@ dinners_main = ->
 				city : $("#now_city").html()
 			, (data, status) ->
 				if status
+					page_number = Math.ceil(data.dinners.length/10)
 					dinners_preview data
-
 				else
 					console.log "7777"
 					console.log status
@@ -206,6 +205,7 @@ dinners_main = ->
 				city : $("#now_city").html()
 			, (data, status) ->
 				if status
+					page_number = Math.ceil(data.dinners.length/10)
 					dinners_preview data
 				else
 					console.log status
@@ -236,8 +236,8 @@ dinners_main = ->
 				city : $("#now_city").html()
 			, (data, status) ->
 				if status
+					page_number = Math.ceil(data.dinners.length/10)
 					dinners_preview data
-					console.log data
 				else
 					console.log status
 		$("#zhuoyou").click ->
@@ -255,6 +255,7 @@ dinners_main = ->
 				city : $("#now_city").html()
 			, (data, status) ->
 				if status
+					page_number = Math.ceil(data.dinners.length/10)
 					dinners_preview data
 				else
 					console.log status
@@ -273,6 +274,7 @@ dinners_main = ->
 				city : $("#now_city").html()
 			, (data, status) ->
 				if status
+					page_number = Math.ceil(data.dinners.length/10)
 					dinners_preview data
 				else
 					console.log status
@@ -299,9 +301,7 @@ dinners_main = ->
 		# 下面是加载分页
 		InitPagination = ->
 			# num_entries是显示的总页数
-			# num_entries = $("div.dinner_now_border").length;
-			num_entries = 100
-			
+			num_entries = page_number
 			# 创建分页
 			$("#Pagination").pagination num_entries,
 				num_edge_entries: 2 #边缘页数
