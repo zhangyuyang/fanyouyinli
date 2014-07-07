@@ -149,10 +149,11 @@ user_tag1 = ->
 						removeEventHandler document, "mousedown", document_MouseDown
 						$("#add_dinner_photo_border").css "display","none"
 				$("#file").change ->
+					console.log "#file.change"
 					# 使用change()里面的方法，来校验上传图片的格式
 					change()
 					# 根据上传的图片进行预览
-
+					console.log "#file.change1"
 					# 获取替换图片的路径地址
 					console.log $("#file").val().split("\\").pop()
 					# 替换图片
@@ -191,14 +192,12 @@ user_tag1 = ->
 			hours = $("#hours").val()
 			minute = $("#minute").val()
 			dining_locations_info = $("#page_city").html() + $("#dining_locations_info").val() 
-			console.log dining_locations_info
 			dinner_time_input = $("#dinner_time_input").val()
 			number_of_meals = $("#number_of_meals").val()
 			description = $("#description").val()
 			tel_of_meals = $("#tel_of_meals").val()
 			dinner_image = $("#dinner_photo_preview")[0].src
 			city = $(".now_city").html()
-			console.log city
 			# # 开始做校验
 			val = $("input:radio[name=\"payment_method\"]:checked").val()
 			unless val?

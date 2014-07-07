@@ -1,97 +1,116 @@
 include head
 script(type='text/javascript', src='../bower_components/moment/min/moment-with-langs.js')
-.my_attraction
-  
-  .navigation(style='border-bottom: 1px #bbbbbb solid; width:69%; height: 55px;')
-    label#dinner_party.lab1(style='background-position: 0px 0px;')
-    label#singer.lab2
-    label#iring.lab3
-    label#my_attractive.lab4
-  
-  .idinner_center(style="margin-top: 0px")
-    .idinner_right
-      .idinner_today
-        h5#today_date 今天 05月22日 星期一
-      h3.label_text(style='margin-top:73px; margin-left:20px;') 活力饭友
-      .photo_mini1
-        .idinner_lie
-          a(href='#')
-          p.idinner_user_info 灵大动
-        .idinner_lie
-          a(href='#')
-          p.idinner_user_info 三二八
-        .idinner_lie
-          a(href='#')
-          p.idinner_user_info 灵大动
-        .idinner_lie
-          a(href='#')
-          p.idinner_user_info 灵大动
-        .idinner_lie
-          a(href='#')
-          p.idinner_user_info 三二八
-        .idinner_lie
-          a(href='#')
-          p.idinner_user_info 灵大动
-      h3.label_text(style='margin-top:228px; margin-left:20px;') 最近加入
-      .photo_mini1
-        .idinner_lie
-          a(href='#')
-          p.idinner_user_info 灵大动
-        .idinner_lie
-          a(href='#')
-          p.idinner_user_info 三二八
-        .idinner_lie
-          a(href='#')
-          p.idinner_user_info 灵大动
-      .photo_mini1
-        .idinner_lie
-          a(href='#')
-          p.idinner_user_info 开心
-        .idinner_lie
-          a(href='#')
-          p.idinner_user_info 湛蓝
-        .idinner_lie
-          a(href='#')
-          p.idinner_user_info 手绘地图-燕子
-    .idinner_left
-      span#idinner_navigation.idinner_navigation
-        a#jump_all(href='#', style='color: #5bc7d6;') 全部
-        a#jump_pay(href='#') 费用
-        a#jump_address(href='#') 地点类型
-        //- a#jump_distance(href='#') 就餐距离
-        //- a#jump_tags(href='#') 标签
-        a#go_dinner.go_dinner(href='#')
-        form#great_dinner(method='get',action='/creat_dinner')
-        span#idinner_navigation_pay.idinner_navigation_pay
-          a#AAzhi(href='#') AA制
-          a#gefuge(href='#') 各付各
-          a#woqingke(href='#') 我请客
-        span#idinner_navigation_address.idinner_navigation_address
-          a#jiuba(href='#') 酒吧
-          a#zhuoyou(href='#') 桌游
-          a#kafeiting(href='#') 咖啡厅
-      div#dinner_now.dinner_now
-        a.idinner_photo_border(href="#")
-          img#dinner_photo.dinner_photo(src="dinner_image/small/11@qq.com1402995083615.png")
-        span.dinner_photo_info
-          a.dinner_name(href="#") 这里是标题
-          h6#dining_locations_info 这里是详细地址
-          div#small_lab.small_lab
-            label#dinners_lab.dinners_lab
-              p#dinners_lab_info.dinners_lab_info 这里是标签
-          .friends_photo_border
-            img.friends_photo(src="/small/11@qq.com1401181314903_1.png")
-            img.friends_photo(src="/small/11@qq.com1401181314903_1.png")
-            img.friends_photo(src="/small/11@qq.com1401181314903_1.png")
-            img.friends_photo(src="/small/11@qq.com1401181314903_1.png")
-            img.friends_photo(src="/small/11@qq.com1401181314903_1.png")
+script(type='text/javascript', src='../pagination_zh/lib/jquery.pagination.js')
+script(type='text/javascript', src='http://api.map.baidu.com/api?v=2.0&ak=1ZpVLsC9WnVW09ACTkcKbIOB')
+.body_border
+  .my_attraction
+    
+    .navigation(style='border-bottom: 1px #bbbbbb solid; width:69%; height: 55px;')
+      label#dinner_party.lab1(style='background-position: 0px 0px;')
+      label#singer.lab2
+      label#iring.lab3
+      label#my_attractive.lab4
+    
+    .idinner_center(style="margin-top: 0px")
+      .idinner_right
+        .idinner_today
+          h5#today_date 今天 05月22日 星期一
+        h3.label_text(style='margin-top:73px; margin-left:20px;') 活力饭友
+        .photo_mini1
+          .idinner_lie
+            a(href='#')
+            p.idinner_user_info 灵大动
+          .idinner_lie
+            a(href='#')
+            p.idinner_user_info 三二八
+          .idinner_lie
+            a(href='#')
+            p.idinner_user_info 灵大动
+          .idinner_lie
+            a(href='#')
+            p.idinner_user_info 灵大动
+          .idinner_lie
+            a(href='#')
+            p.idinner_user_info 三二八
+          .idinner_lie
+            a(href='#')
+            p.idinner_user_info 灵大动
+        h3.label_text(style='margin-top:228px; margin-left:20px;') 最近加入
+        .photo_mini1
+          .idinner_lie
+            a(href='#')
+            p.idinner_user_info 灵大动
+          .idinner_lie
+            a(href='#')
+            p.idinner_user_info 三二八
+          .idinner_lie
+            a(href='#')
+            p.idinner_user_info 灵大动
+        .photo_mini1
+          .idinner_lie
+            a(href='#')
+            p.idinner_user_info 开心
+          .idinner_lie
+            a(href='#')
+            p.idinner_user_info 湛蓝
+          .idinner_lie
+            a(href='#')
+            p.idinner_user_info 手绘地图-燕子
+      .idinner_left
+        span#idinner_navigation.idinner_navigation
+          a#jump_all(href='#', style='color: #5bc7d6;') 全部
+          a#jump_pay(href='#') 费用
+          a#jump_address(href='#') 地点类型
+          //- a#jump_distance(href='#') 就餐距离
+          //- a#jump_tags(href='#') 标签
+          a#go_dinner.go_dinner(href='#')
+          form#great_dinner(method='get',action='/creat_dinner')
+          span#idinner_navigation_pay.idinner_navigation_pay
+            a#AAzhi(href='#') AA制
+            a#gefuge(href='#') 各付各
+            a#woqingke(href='#') 我请客
+          span#idinner_navigation_address.idinner_navigation_address
+            a#jiuba(href='#') 酒吧
+            a#zhuoyou(href='#') 桌游
+            a#kafeiting(href='#') 咖啡厅
 
-        span.dinner_date
-          h1#dinner_date 05/22
-          p#dinner_week 星期一  18：00
-        a.dinner_jion_btn(href='#')
-        span.treat
-          p#treat AA制
+        
+        
+          
+        div#dinner_now_border.dinner_now_border_prewiew
+        div#remove_elements
+          div#dinner_now_border0.dinner_now_border
+          div#dinner_now_border1.dinner_now_border
+          //- div#dinner_now_border2.dinner_now_border
+          //- div#dinner_now_border3.dinner_now_border
+            //- div#dinner_now_border4.dinner_now_border
+            //- div#dinner_now_border5.dinner_now_border
+            //- div#dinner_now_border6.dinner_now_border  
+        // 这里显示分页
+        div#Pagination.pagination
+        div#dinner_now.dinner_now
+          a.idinner_photo_border(href="#")
+            img#dinner_photo.dinner_photo(src="dinner_image/small/11@qq.com1402995083615.png")
+          span.dinner_photo_info
+            a.dinner_name(href="#") 这里是标题
+            h6#dining_locations_info 这里是详细地址
+            div#small_lab.small_lab
+              label#dinners_lab.dinners_lab
+                p#dinners_lab_info.dinners_lab_info 这里是标签
+            .friends_photo_border
+              img.friends_photo(src="/small/11@qq.com1401181314903_1.png")
+              img.friends_photo(src="/small/11@qq.com1401181314903_1.png")
+              img.friends_photo(src="/small/11@qq.com1401181314903_1.png")
+              img.friends_photo(src="/small/11@qq.com1401181314903_1.png")
+              img.friends_photo(src="/small/11@qq.com1401181314903_1.png")
+
+          span.dinner_date
+            h1#dinner_date 05/22
+            p#dinner_week 星期一  18：00
+          a.dinner_jion_btn(href='#')
+          span.treat
+            p#treat AA制
+
 script
   :coffee
     dinners_main()

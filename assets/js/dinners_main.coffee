@@ -1,20 +1,68 @@
 dinners_main = ->
+	preview_dinners = 0
 	$(document).ready ->
 		# 一进来先加载时间
 		today_date()
+		fit_height = (elements, nums) ->
+			if nums < 0
+				elements.css "height":"200px"
+				$("#Pagination").css "display":"none"
+			else
+				$("#Pagination").css "display":"inline-block"
+				switch nums
+					when 0
+						elements.css "height":"200px"
+					when 1
+						elements.css "height":"360px"
+					when 2
+						elements.css "height":"520px"
+					when 3
+						elements.css "height":"680px"
+					when 4
+						elements.css "height":"840px"
+					when 5
+						elements.css "height":"1000px"
+					when 6
+						elements.css "height":"1160px"
+					when 7
+						elements.css "height":"1320px"
+					when 8
+						elements.css "height":"1480px"
+					when 9
+						elements.css "height":"1640px"
+					when 10
+						elements.css "height":"1800px"
 		dinners_preview = (data) ->
+			console.log "111111sa"
 			i = 0
+			console.log "222222sa"
 			while i < data.dinners.length
 				clone_dinner = $("#dinner_now").clone()
 				clone_dinner.addClass "clone_border"
-				$("#idinner_navigation").append clone_dinner
-
+				clone_dinner.addClass "flag_preview"
+				preview_dinners = i
+				if i >= 0 && i <=9
+					console.log "这里开始循环给dinner_now_border0"
+					$("#dinner_now_border0").append clone_dinner
+				else if i > 9 && i <= 19
+					$("#dinner_now_border1").append clone_dinner
+				else if i > 19 && i <= 29
+					$("#dinner_now_border2").append clone_dinner
+				else if i > 29 && i <= 39
+					$("#dinner_now_border3").append clone_dinner
+				else if i > 39 && i <= 49
+					$("#dinner_now_border4").append clone_dinner
+				else if i > 49 && i <= 59
+					$("#dinner_now_border5").append clone_dinner
+				else if i > 59 && i <= 69
+					$("#dinner_now_border6").append clone_dinner
 				j = 0
-				while j < data.dinners[i].string_tag.length
+				while j < 1
 					clone_dinners_lab = $("#dinners_lab").clone()
 					$("#small_lab").append clone_dinners_lab
 					clone_dinners_lab.find("#dinners_lab_info").html data.dinners[i].string_tag[j]
-					clone_dinners_lab.css "display":"inline-block"
+					(clone_dinners_lab).css "display":"inline-block"
+					console.log "标签循环j"+ j
 					j++
 
 				clone_dinner.css "display":"inline-block"
@@ -68,10 +116,9 @@ dinners_main = ->
 				clone_dinner.find(".dinner_jion_btn").attr "href", "idinner/"+data.dinners[i]._id
 				clone_dinner.find(".idinner_photo_border").attr "href", "idinner/"+data.dinners[i]._id
 				clone_dinner.find(".dinner_name").attr "href", "idinner/"+data.dinners[i]._id
-				# clone_dinner.find("#dinner_jion_btn").click ->
-				#   console.log "dinner_jion_btn点击 了"
-				#   window.location.href= "/get_dinner_list"
 				i++ 
+			# 调取分页的方法进行分页
+			initPagination = InitPagination()
 		# 获取当前城市
 		now_city = $("#now_city").html()
 		console.log now_city
@@ -79,7 +126,10 @@ dinners_main = ->
 			city : now_city
 		, (data, status) ->
 			if status
+				console.log "data"
+				console.log data
 				dinners_preview data
+				
 			else
 				console.log status
 
@@ -99,7 +149,11 @@ dinners_main = ->
 			$("#idinner_navigation_address").css "display":"none"
 			return false
 		$("#AAzhi").click ->
-			$("div.clone_border").remove()
+			$("#dinner_now_border").empty()
+			k = 0
+			while k < 10
+				$("#dinner_now_border"+k).empty()
+				k++
 			$("#AAzhi").css "color":"#5bc7d6"
 			$("#gefuge").css "color":"#5c5c5c"
 			$("#woqingke").css "color":"#5c5c5c"
@@ -109,11 +163,19 @@ dinners_main = ->
 				city : $("#now_city").html()
 			, (data, status) ->
 				if status
+					console.log "data2"
+					console.log data
+					# location.reload true
 					dinners_preview data
+
 				else
 					console.log status
 		$("#gefuge").click ->
-			$("div.clone_border").remove()
+			$("#dinner_now_border").empty()
+			k = 0
+			while k < 10
+				$("#dinner_now_border"+k).empty()
+				k++
 			$("#AAzhi").css "color":"#5c5c5c"
 			$("#gefuge").css "color":"#5bc7d6"
 			$("#woqingke").css "color":"#5c5c5c"
@@ -130,7 +192,11 @@ dinners_main = ->
 					console.log status
 			console.log "444444"
 		$("#woqingke").click ->
-			$("div.clone_border").remove()
+			$("#dinner_now_border").empty()
+			k = 0
+			while k < 10
+				$("#dinner_now_border"+k).empty()
+				k++
 			$("#AAzhi").css "color":"#5c5c5c"
 			$("#gefuge").css "color":"#5c5c5c"
 			$("#woqingke").css "color":"#5bc7d6"
@@ -156,7 +222,11 @@ dinners_main = ->
 			return false
 
 		$("#jiuba").click ->
-			$("div.clone_border").remove()
+			$("#dinner_now_border").empty()
+			k = 0
+			while k < 10
+				$("#dinner_now_border"+k).empty()
+				k++
 			$("#kafeiting").css "color":"#5c5c5c"
 			$("#zhuoyou").css "color":"#5c5c5c"
 			$("#jiuba").css "color":"#5bc7d6"
@@ -171,7 +241,11 @@ dinners_main = ->
 				else
 					console.log status
 		$("#zhuoyou").click ->
-			$("div.clone_border").remove()
+			$("#dinner_now_border").empty()
+			k = 0
+			while k < 10
+				$("#dinner_now_border"+k).empty()
+				k++
 			$("#kafeiting").css "color":"#5c5c5c"
 			$("#zhuoyou").css "color":"#5bc7d6"
 			$("#jiuba").css "color":"#5c5c5c"
@@ -185,7 +259,11 @@ dinners_main = ->
 				else
 					console.log status
 		$("#kafeiting").click ->
-			$("div.clone_border").remove()
+			$("#dinner_now_border").empty()
+			k = 0
+			while k < 10
+				$("#dinner_now_border"+k).empty()
+				k++
 			$("#kafeiting").css "color":"#5bc7d6"
 			$("#zhuoyou").css "color":"#5c5c5c"
 			$("#jiuba").css "color":"#5c5c5c"
@@ -217,6 +295,44 @@ dinners_main = ->
 			$("#idinner_navigation_address").css "display":"none"
 			$("#idinner_navigation").css "height":"24px","margin-bottom":"0px"
 			return false
+		
+		# 下面是加载分页
+		InitPagination = ->
+			# num_entries是显示的总页数
+			# num_entries = $("div.dinner_now_border").length;
+			num_entries = 100
+			
+			# 创建分页
+			$("#Pagination").pagination num_entries,
+				num_edge_entries: 2 #边缘页数
+				num_display_entries: 4 #主体页数
+				callback: pageselectCallback
+				items_per_page: 1 #每页显示1项
+				prev_text: "上一页"
+				next_text: "下一页"
+			return
+		# 这里initPagination好像没什么用，直接调用InitPagination()就可以初始化
+		pageselectCallback = (page_index, jq) ->
+			console.log "6666sa"
+			console.log "page_index"+page_index
+			new_content = $("#dinner_now_border" +(page_index)).clone()
+			new_content.css "display":"block"
+			console.log new_content
+			$("#dinner_now_border").empty().append new_content #装载对应分页的内容
+			# $(this).css "display":"block"
+			console.log "flag_preview" + $(".flag_preview").length
+			console.log "preview_dinners" + (preview_dinners+1)
+			fit_height $("#dinner_now_border"), ($(".flag_preview").length-(preview_dinners+1))
+			fit_height $("#dinner_now_border" +(page_index)), ($(".flag_preview").length-(preview_dinners+1))
+
+			false
+		console.log "3333sa"
+		
+		console.log "4444sa"
+
+		# 预定位子功能
+		book_table()
+
 		map_add = $(".dinner_list_place").html()
 		# 百度地图API
 		map = new BMap.Map("baidu_map")
@@ -235,5 +351,5 @@ dinners_main = ->
 				map.addOverlay new BMap.Marker(point)
 			return
 		), "北京市"
-		# 预定位子功能
-		book_table()
+
+

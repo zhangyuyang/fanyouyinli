@@ -120,7 +120,7 @@ module.exports = (app) ->
     tel_of_meals = req.body.tel_of_meals
     dinner_image = req.body.dinner_image
     city = req.body.city
-
+    console.log dinner_image
 
 
     # 去掉图片头文件
@@ -140,11 +140,11 @@ module.exports = (app) ->
     new_dirname = __dirname.substring 0, __dirname.length - 7
     console.log new_dirname
 
-    gm(new_dirname + "/public/temp/"+dinner_img_name).resize(406, 263).write __dirname + "/../public/dinner_image/big/" + dinner_img_name, (err) ->
+    gm(new_dirname + "/public/temp/"+dinner_img_name).resize(400, 260).write __dirname + "/../public/dinner_image/big/" + dinner_img_name, (err) ->
       return console.dir(arguments)  if err
       console.log @outname + " created  ::  " + arguments[3]
       return
-    gm(new_dirname + "/public/temp/"+dinner_img_name).resize(203, 132).write __dirname + "/../public/dinner_image/small/" + dinner_img_name, (err) ->
+    gm(new_dirname + "/public/temp/"+dinner_img_name).resize(200, 130).write __dirname + "/../public/dinner_image/small/" + dinner_img_name, (err) ->
       return console.dir(arguments)  if err
       console.log @outname + " created  ::  " + arguments[3]
       return
