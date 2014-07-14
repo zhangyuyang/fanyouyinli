@@ -43,16 +43,18 @@ script(type='text/javascript', src='http://api.map.baidu.com/api?v=2.0&ak=1ZpVLs
         div.dinner_list_2_right
           span.span_title 聚餐地点
           span.dinner_list_place #{dinners[0].dining_locations_info}
-          div#baidu_map.baidu_map
+          //- div#baidu_map.baidu_map
       div.dinner_list_3 
         span.span_title 你将遇到的人
-        span.dinner_list_users
-          div.dinner_list_little_photo_border
-            img.dinner_list_little_photo_img(src="/temp/11@qq.com1402995083615.png")
-          a.dinner_list_username XX
-          span.dinner_list_span 厦门大学 学生
-          a.dinner_list_agree_user(href="#")
-          a.dinner_refuse(href="#") 拒绝
+        if user
+          if dinners[0].creater == user.photo0         
+            span.dinner_list_users
+              div.dinner_list_little_photo_border
+                img.dinner_list_little_photo_img(src="/temp/11@qq.com1402995083615.png")
+              a.dinner_list_username XX11
+              span.dinner_list_span 厦门大学 学生
+              a.dinner_list_agree_user(href="#")
+              a.dinner_refuse(href="#") 拒绝
         span.dinner_list_users
           div.dinner_list_little_photo_border
             img.dinner_list_little_photo_img(src="/temp/11@qq.com1402995083615.png")
@@ -98,10 +100,19 @@ script(type='text/javascript', src='http://api.map.baidu.com/api?v=2.0&ak=1ZpVLs
         input#hidden_login_password.hidden_login_input(type="password")
       a#hidden_login_button.hidden_login_button(href="#")
       span.hidden_login_text1 请先登陆
-
-
-
+    //- 这里是当前用户的信息
+    if user 
+      div#hidden_info
+        input#user_photo0(value='#{user.photo0}',type='hidden')
+        input#creater(value='#{dinners[0].creater}',type='hidden')
+        -for(var i = 0; i < dinners[0].apply_members.length; i++)
+          if dinners[0].apply_members[i].flag == "F"
+            input.apply_members(value='#{dinners[0].apply_members[i].photo0}',type='')
+          if dinners[0].apply_members[i].flag == "T"
+            input.members(value='#{dinners[0].apply_members[i].photo0}',type='')
 script
   :coffee
     dinners_main()
+    # 在页面加载之前，先判断用户有没有加入此聚餐，如果有，预定位子按钮变灰色
+    dinner_list()
 include foot

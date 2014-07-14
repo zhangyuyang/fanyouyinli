@@ -8,6 +8,7 @@ gm = require("gm")
 validator = require('validator')
 ObjectID = require('mongodb').ObjectID
 
+
 module.exports = (app) ->
   app.get "/creat_dinner", (req, res) ->
     push_info1 = undefined
@@ -18,20 +19,36 @@ module.exports = (app) ->
       else 
         console.log user.tag
         # 到数据库里读取推送数据
-        Tag.get_push (err,push_info) ->
+        Tag.get_push (err, push_info) ->
           if err
             console.log errs
             push_info = ''
           else
-            console.log push_info
             push_info1 = push_info
-          res.render "creat_dinner",
-            user: req.session.user
-            city: req.session.city
-            tag: user.tag
-            success: req.flash("success").toString()
-            error: req.flash("error").toString()
-            push_info: push_info1
+            # 获取发起聚餐人的头像
+            User.get req.session.user.e_mail, (err, user) ->
+              if err
+                console.log err
+                res.render "creat_dinner",
+                  user: req.session.user
+                  city: req.session.city
+                  tag: user.tag
+                  success: req.flash("success").toString()
+                  error: req.flash("error").toString()
+                  push_info: push_info1
+                  user_photo0: ""
+              else
+                console.log user.photo2
+                res.render "creat_dinner",
+                  user: req.session.user
+                  city: req.session.city
+                  tag: user.tag
+                  success: req.flash("success").toString()
+                  error: req.flash("error").toString()
+                  push_info: push_info1
+                  user_photo0: user.photo0
+              
+
 
   app.post "/get_dinners", (req, res) ->
     console.log "idinner服务器端"
@@ -116,10 +133,13 @@ module.exports = (app) ->
     number_of_meals = req.body.number_of_meals
     payment_method = req.body.payment_method
     string_tag = req.body.string_tag
+    console.log "string_tag"+string_tag
     description = req.body.description
     tel_of_meals = req.body.tel_of_meals
     dinner_image = req.body.dinner_image
     city = req.body.city
+    user_photo0 = req.body.user_photo0
+    console.log user_photo0
     console.log dinner_image
 
 
@@ -158,45 +178,53 @@ module.exports = (app) ->
       console.log "dinner_tag_input校验不通过"
       req.flash "err", "标题必须在2-50个字节"
       res.redirect "/idinner"
-      return false
+      
     if !validator.isByteLength dining_locations_info, 2 ,10 
       console.log "dining_locations_info校验不通过"
       req.flash "err", "地址不超过50个字"
       res.redirect "/idinner"
-      return false
+      
     date_reg = /^(?:(?:(?:(?:(?:1[6-9]|[2-9][0-9])?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))([-/.])(?:0?2\1(?:29)))|(?:(?:(?:1[6-9]|[2-9][0-9])?[0-9]{2})([-/.])(?:(?:(?:0?[13578]|1[02])\2(?:31))|(?:(?:0?[13-9]|1[0-2])\2(?:29|30))|(?:(?:0?[1-9])|(?:1[0-2]))\2(?:0?[1-9]|1[0-9]|2[0-8]))))$/
     if !date_reg.test(dinner_time)
       console.log "dinner_time校验不通过"
       req.flash "err", "时间类型不是YYYY-MM-DD"
       res.redirect "/idinner"
-      return false
+      
     if !validator.isNumeric number_of_meals
       console.log "number_of_meals校验不通过"
       req.flash "err", "人数必须为1-50位"
       res.redirect "/idinner"
-      return false
+      
     if number_of_meals < 0 || number_of_meals > 50
       console.log "number_of_meals校验不通过"
       req.flash "err", "人数必须为1-50位"
       res.redirect "/idinner"
-      return false
+      
     if validator.isNull description
       console.log "description校验不通过"
       req.flash "err", "描述为必填"
       res.redirect "/idinner"
-      return false
+      
     telphone_reg = /^1[3|5][0-9]\d{4,8}$/
     if !telphone_reg.test(tel_of_meals)
       console.log "tel_of_meals校验不通过"
       req.flash "err", "电话号码填写不正确"
       res.redirect "/idinner"
-      return false
+      
     if dinner_image == '' || dinner_image == undefined
       console.log "dinner_image校验不通过"
       req.flash "err", "封面不存在"
       res.redirect "/idinner"
 
-    dinner = new Dinner(
+
+    apply_members_info = new Array()
+    apply_members_info[0] = {
+      photo0 : req.session.user.photo0
+      name : req.session.user.name
+      introduce : req.session.user.introduce
+      flag : "T"
+    }
+    dinner = {
       e_mail: req.session.user.e_mail
       dinner_tag: dinner_tag_input
       dining_hours: dining_hours
@@ -212,8 +240,11 @@ module.exports = (app) ->
       dinner_image_big: dinner_image_big
       dinner_image_small: dinner_image_small
       city: city
-    )
-    dinner.save (err, dinner) ->
+      creater: user_photo0
+      apply_members: apply_members_info
+    }
+    Dinner.save dinner 
+    , (err, dinner) ->
       console.log "新增聚餐"
       if err
         console.log "新增错误"
@@ -223,7 +254,6 @@ module.exports = (app) ->
           status: false
       else
         console.log "新增成功"
-        # req.session.dinner = dinner
         req.flash "success", "创建聚餐成功"
         res.json
           status: true
@@ -233,7 +263,7 @@ module.exports = (app) ->
   app.get "/idinner/:id", (req, res) ->
     # 这里得到的req.params.id只是字符串，需要包装成ObjectID类型的
     select_id = ObjectID.createFromHexString(req.params.id)
-    Dinner.get 
+    Dinner.get
       _id : select_id
     , (err, dinners) ->
       console.log dinners[0]
@@ -245,17 +275,132 @@ module.exports = (app) ->
       else
         console.log "查询正确"
         res.render "dinner_list",
-              title: "多人聚餐"
-              user: req.session.user
-              city: req.session.city
-              success: req.flash("success").toString()
-              error: req.flash("error").toString()
-              dinners : dinners
+          title: "多人聚餐"
+          user: req.session.user
+          city: req.session.city
+          success: req.flash("success").toString()
+          error: req.flash("error").toString()
+          dinners : dinners
 
   app.get "/book_table", (req, res) ->
+    console.log "服务器端DINNER_ID"+req.query.dinner_id
+    select_id = ObjectID.createFromHexString(req.query.dinner_id)
     if req.session.user
-      console.log "说明用户登陆了"
+      Dinner.get
+        _id : select_id
+      , (err, dinners) ->
+        if err
+          console.log "err"
+          res.json
+            flag : false
+        else 
+          console.log "说明用户登陆了"
+          res.json
+            flag : true
+            dinner : dinners
     else
       console.log "说明用户没有登陆"
       res.json
         flag : false
+
+
+# 等创建者审批后，才执行这里
+  # app.post "/add_members", (req, res) ->
+  #   console.log "/add_members,req.body.add_user"
+  #   console.log req.body.add_user
+  #   console.log req.body.dinner_id 
+  #   # 把得到的dinner_id封装成object类型
+  #   dinner_id = ObjectID.createFromHexString(req.body.dinner_id)
+  #   Dinner.add_dinner
+  #     id : dinner_id
+  #     members : req.body.add_user
+  #   ,(err, number) ->
+  #     if number > 0
+  #       # 获取加入聚餐的时间戳
+  #       now_date = Date.parse(new Date())
+  #       console.log "now_date"+now_date
+  #       photo2 = req.body.add_user
+  #       User.add_dinner
+  #         photo2 : photo2
+  #         last_dinner_time : now_date
+  #       ,(err, number) ->
+  #         if err
+  #           console.log err
+  #           res.json
+  #             status : false
+  #         else
+  #           console.log "返回成功条数"+ number
+  #           User.add_dinner_times
+  #             photo2 : photo2
+  #           ,(err, number) ->
+  #             if err
+  #               console.log err
+  #               res.json
+  #                 status : false
+  #             else
+  #               console.log "成功加入聚餐次数增加1"
+  #               console.log number
+  #               res.json
+  #                 status : true
+      
+  #     else 
+  #       console.log err
+  #       res.json
+  #         status : false
+
+  app.post "/apply_members", (req, res) ->
+    console.log "/apply_members"
+    console.log req.body.add_user
+    console.log req.session.user.photo0
+    console.log req.body.dinner_id 
+    # 把得到的dinner_id封装成object类型
+    dinner_id = ObjectID.createFromHexString(req.body.dinner_id)
+    # 先根据email，去user表里查询用户所有数据
+    User.get req.session.user.e_mail, (err, user) ->
+      if err
+        console.log err
+      else
+        # console.log user
+        # console.log user.photo0
+        # console.log user.name
+        # console.log user.introduce
+        console.log "11111111111AB"
+    #   # 聚餐表 申请加入
+
+      Dinner.apply_dinner
+        id : dinner_id
+        apply_members : 
+          photo0 : user.photo0
+          name : user.name
+          introduce : user.introduce
+          flag : "F"
+      ,(err, number) ->
+        if err
+          console.log "11111111111AC"
+          console.log err
+        else 
+          console.log "11111111111AD"
+          console.log number
+          console.log "number"
+        if number > 0
+          # 获取加入聚餐的时间戳
+          now_date = Date.parse(new Date())
+          console.log "now_date"+now_date
+          photo0 = req.body.add_user
+          # 最后加入聚餐时间戳
+          User.add_dinner
+            photo0 : photo0
+            last_dinner_time : now_date
+          ,(err, number) ->
+            if err
+              console.log err
+              res.json
+                status : false
+            else
+              console.log "返回成功条数"+ number
+              res.json
+                status : true
+        else 
+          console.log err
+          res.json
+            status : false

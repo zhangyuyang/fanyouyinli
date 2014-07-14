@@ -79,6 +79,8 @@ User = (user) ->
   @worded = user.worded
   @studed = user.studed
   @tag = user.tag
+  @last_dinner_time = user.last_dinner_time
+  @dinner_times = user.dinner_times
 
 module.exports = User
 User::save = save = (callback) ->
@@ -125,7 +127,9 @@ User.get = get = (e_mail, callback) ->
   
   #从数据库中查询出用户的数据
   mongodb.open (err, db) ->
-    return callback(err)  if err
+    if err
+      db.close()
+      return callback err
     
     #读取 User 集合
     db.collection "users", (err, collection) ->
@@ -222,4 +226,56 @@ User.delete_array = delete_array = (e_mail, data, callback) ->
           console.log "这是删除成功"
           callback err, result
 
+
+User.add_dinner = (data, callback) ->
+  # 用户最近一次加入聚餐时间，写入数据库
+  mongodb.open (err, db) ->
+    if err
+      db.close()
+      return callback(err)
+    
+    #读取 User 集合
+    db.collection "users", (err, collection) ->
+      if err
+        db.close()
+        return callback(err)
+
+      collection.update
+        photo0: data.photo0
+      ,
+        $set:
+          last_dinner_time : data.last_dinner_time
+
+      , (err, doc) ->
+        db.close()
+        if doc
+          callback err, doc
+        else
+          callback err, null
+
+User.add_dinner_times = (data, callback) ->
+  # 用户成功加入聚餐后，成功聚餐次数+1
+  mongodb.open (err, db) ->
+    if err
+      db.close()
+      return callback(err)
+    
+    #读取 User 集合
+    db.collection "users", (err, collection) ->
+      if err
+        db.close()
+        return callback(err)
+
+      collection.update
+        photo0: data.photo0
+      ,
+        $inc:
+          dinner_times : 1
+
+      , (err, doc) ->
+        db.close()
+        if doc
+          callback err, doc
+        else
+          callback err, null
 

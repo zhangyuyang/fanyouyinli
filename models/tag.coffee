@@ -66,7 +66,7 @@ Tag.get = (tag_name, callback) ->
 
 Tag.update = (tag_name, callback) ->
   
-  #从数据库中更改用户的密码
+  #从数据库中更改用户的标签 
 
   mongodb.open (err, db) ->
     return callback(err)  if err

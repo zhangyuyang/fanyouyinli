@@ -15,6 +15,9 @@ Dinner = (dinner) ->
   @dinner_image_big = dinner.dinner_image_big
   @dinner_image_small = dinner.dinner_image_small
   @city = dinner.city
+  @creater = dinner.creater
+  @members = dinner.members
+  @apply_members = dinner.apply_members
 module.exports = Dinner
 
 Dinner::save = (callback)->
@@ -34,20 +37,50 @@ Dinner::save = (callback)->
     dinner_image_big: @dinner_image_big
     dinner_image_small: @dinner_image_small
     city: @city
-  mongodb.open (err, db) ->
-    if err
-      db.close()
-      return callback(err)
-    db.collection "dinners", (err, collection) ->
+    creater: @creater
+    apply_members: @apply_members
+  console.log "数据库层save——dinner"
+  console.log dinner
+  try
+    mongodb.open (err, db) ->
       if err
         db.close()
         return callback(err)
-      collection.insert dinner,
-        safe: true
-      , (err, dinner) ->
+      db.collection "dinners", (err, collection) ->
+        if err
+          db.close()
+          return callback(err)
+        collection.insert dinner,
+          safe: true
+        , (err, dinner) ->
+          db.close()
+          callback err, dinner
+          return
+  catch e
+    console.log "DB已经打开"
+    console.log e
+
+
+Dinner.save = (dinner, callback)->
+  console.log dinner
+  try
+    mongodb.open (err, db) ->
+      if err
         db.close()
-        callback err, dinner
-        return
+        return callback(err)
+      db.collection "dinners", (err, collection) ->
+        if err
+          db.close()
+          return callback(err)
+        collection.insert dinner,
+          safe: true
+        , (err, dinner) ->
+          db.close()
+          callback err, dinner
+          return
+  catch e
+    console.log "DB已经打开"
+    console.log e
 
 Dinner.get = (date, callback) ->
   mongodb.close()
@@ -77,6 +110,59 @@ Dinner.get_for_sort = (date, callback) ->
         db.close()
         return callback(err)
       collection.find(date).toArray (err, doc) ->
+        db.close()
+        if doc
+          callback err, doc
+        else
+          callback err, null
+
+Dinner.add_dinner = (date, callback) ->
+  console.log "add_dinner数据库层"
+  console.log date
+  console.log date.id
+  console.log date.members
+  mongodb.open (err, db) ->
+    if err
+      db.close()
+      return callback(err)
+    db.collection "dinners", (err, collection) ->
+      if err
+        db.close()
+        return callback(err)
+
+      collection.update
+        _id: date.id
+      ,
+        $addToSet: 
+          members: date.members
+      , (err, doc) ->
+
+        db.close()
+        if doc
+          callback err, doc
+        else
+          callback err, null
+ 
+Dinner.apply_dinner = (date, callback) ->
+  console.log "apply_dinner数据库"
+  console.log date
+  console.log date.id
+  console.log date.apply_members
+  mongodb.open (err, db) ->
+    if err
+      db.close()
+      return callback(err)
+    db.collection "dinners", (err, collection) ->
+      if err
+        db.close()
+        return callback(err)
+
+      collection.update
+        _id: date.id
+      ,
+        $addToSet: 
+          apply_members: date.apply_members
+      , (err, doc) ->
         db.close()
         if doc
           callback err, doc

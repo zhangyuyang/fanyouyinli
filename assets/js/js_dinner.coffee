@@ -198,6 +198,7 @@ user_tag1 = ->
 			tel_of_meals = $("#tel_of_meals").val()
 			dinner_image = $("#dinner_photo_preview")[0].src
 			city = $(".now_city").html()
+			user_photo0 = $("#user_photo0").val()
 			# # 开始做校验
 			val = $("input:radio[name=\"payment_method\"]:checked").val()
 			unless val?
@@ -293,6 +294,7 @@ user_tag1 = ->
 				image_adaptation_width: image_adaptation_width
 				image_adaptation_height: image_adaptation_height 
 				city: city
+				user_photo0 : user_photo0
 			, (data, status) ->
 				console.log "这里是JS的add_tag"
 				if data.status

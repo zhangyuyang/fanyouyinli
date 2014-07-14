@@ -67,7 +67,7 @@ dinners_main = ->
 					j++
 
 				clone_dinner.css "display":"inline-block"
-				clone_dinner.find("#dinner_photo").attr "src", data.dinners[i].dinner_image_small
+				clone_dinner.find("#dinner_photo").attr "src", "../"+data.dinners[i].dinner_image_small
 				clone_dinner.find(".dinner_name").html data.dinners[i].dinner_tag
 				clone_dinner.find("#dining_locations_info").html data.dinners[i].dining_locations_info
 				console.log data.dinners[i].description
