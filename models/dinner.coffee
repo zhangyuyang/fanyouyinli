@@ -168,3 +168,27 @@ Dinner.apply_dinner = (date, callback) ->
           callback err, doc
         else
           callback err, null
+
+Dinner.authorized_menber = (date, callback) ->
+  console.log "apply_dinner数据库"
+  console.log date
+  mongodb.open (err, db) ->
+    if err
+      db.close()
+      return callback(err)
+    db.collection "dinners", (err, collection) ->
+      if err
+        db.close()
+        return callback(err)
+
+      collection.update
+        _id: date.id
+      ,
+        $addToSet: 
+          apply_members: date.apply_members
+      , (err, doc) ->
+        db.close()
+        if doc
+          callback err, doc
+        else
+          callback err, null

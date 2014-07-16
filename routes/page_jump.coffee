@@ -41,7 +41,6 @@ module.exports = (app) ->
       city: req.session.city
       success: req.flash("success").toString()
       error: req.flash("error").toString()
-
     return
 
 

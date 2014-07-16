@@ -139,8 +139,7 @@ module.exports = (app) ->
     dinner_image = req.body.dinner_image
     city = req.body.city
     user_photo0 = req.body.user_photo0
-    console.log user_photo0
-    console.log dinner_image
+
 
 
     # 去掉图片头文件
@@ -217,13 +216,14 @@ module.exports = (app) ->
       res.redirect "/idinner"
 
 
-    apply_members_info = new Array()
-    apply_members_info[0] = {
-      photo0 : req.session.user.photo0
-      name : req.session.user.name
-      introduce : req.session.user.introduce
-      flag : "T"
-    }
+    # apply_members_info = new Array()
+    
+    # apply_members_info[0] = {
+    #   photo0 : req.session.user.photo0
+    #   name : req.session.user.name
+    #   introduce : req.session.user.introduce
+    #   flag : "T"
+    # }
     dinner = {
       e_mail: req.session.user.e_mail
       dinner_tag: dinner_tag_input
@@ -241,7 +241,7 @@ module.exports = (app) ->
       dinner_image_small: dinner_image_small
       city: city
       creater: user_photo0
-      apply_members: apply_members_info
+
     }
     Dinner.save dinner 
     , (err, dinner) ->
@@ -254,10 +254,15 @@ module.exports = (app) ->
           status: false
       else
         console.log "新增成功"
-        req.flash "success", "创建聚餐成功"
-        res.json
-          status: true
-      return
+        console.log dinner
+        console.log "dinner._id"+dinner[0]._id
+        console.log "dinner.city"+dinner[0].city
+        console.log "session.user.name"+req.session.user.name
+
+      #   req.flash "success", "创建聚餐成功"
+      #   res.json
+      #     status: true
+      # return
 
 
   app.get "/idinner/:id", (req, res) ->
@@ -304,6 +309,24 @@ module.exports = (app) ->
       console.log "说明用户没有登陆"
       res.json
         flag : false
+
+
+  app.post "/authorized_menbers", (req, res) ->
+    console.log "user_photo0"+req.body.user_photo0
+    console.log "dinner_num"+req.body.dinner_id
+    Dinner.authorized_menber
+      user_photo0 : req.body.user_photo0
+      dinner_id : req.body.dinner_id
+    , (err, number) ->
+      if err
+        console.log err
+        res.json
+          flag : false
+      else
+        res.json
+          flag : true
+
+
 
 
 # 等创建者审批后，才执行这里
