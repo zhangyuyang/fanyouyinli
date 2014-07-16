@@ -46,36 +46,15 @@ script(type='text/javascript', src='http://api.map.baidu.com/api?v=2.0&ak=1ZpVLs
           //- div#baidu_map.baidu_map
       div.dinner_list_3 
         span.span_title 你将遇到的人
-        if user
-          if dinners[0].creater == user.photo0         
-            span.dinner_list_users
-              div.dinner_list_little_photo_border
-                img.dinner_list_little_photo_img(src="/temp/11@qq.com1402995083615.png")
-              a.dinner_list_username XX11
-              span.dinner_list_span 厦门大学 学生
-              a.dinner_list_agree_user(href="#")
-              a.dinner_refuse(href="#") 拒绝
-        span.dinner_list_users
+        span.dinner_list_users.remove_class
           div.dinner_list_little_photo_border
-            img.dinner_list_little_photo_img(src="/temp/11@qq.com1402995083615.png")
+            a.dinner_list_little_photo(href="#")
           a.dinner_list_username XX
           span.dinner_list_span 厦门大学 学生
           a.dinner_list_agree_user(href="#")
           a.dinner_refuse(href="#") 拒绝
-        span.dinner_list_users
-          div.dinner_list_little_photo_border
-            img.dinner_list_little_photo_img(src="/temp/11@qq.com1402995083615.png")
-          a.dinner_list_username XX
-          span.dinner_list_span 厦门大学 学生
-          a.dinner_list_agree_user(href="#")
-          a.dinner_refuse(href="#") 拒绝
-        span.dinner_list_users
-          div.dinner_list_little_photo_border
-            img.dinner_list_little_photo_img(src="/temp/11@qq.com1402995083615.png")
-          a.dinner_list_username XX
-          span.dinner_list_span 厦门大学 学生
-          a.dinner_list_agree_user(href="#")
-          a.dinner_refuse(href="#") 拒绝
+
+
       div.dinner_list_4
         span.span_title 饭前饭后说两句
         span.my_user_photo_border
@@ -103,8 +82,8 @@ script(type='text/javascript', src='http://api.map.baidu.com/api?v=2.0&ak=1ZpVLs
     //- 这里是当前用户的信息
     if user 
       div#hidden_info
-        input#user_photo0(value='#{user.photo0}',type='hidden')
-        input#creater(value='#{dinners[0].creater}',type='hidden')
+        input#user_photo0(value='#{user.photo0}',type='')
+        input#creater(value='#{dinners[0].creater}',type='')
         -for(var i = 0; i < dinners[0].apply_members.length; i++)
           if dinners[0].apply_members[i].flag == "F"
             input.apply_members(value='#{dinners[0].apply_members[i].photo0}',type='')
@@ -115,4 +94,6 @@ script
     dinners_main()
     # 在页面加载之前，先判断用户有没有加入此聚餐，如果有，预定位子按钮变灰色
     dinner_list()
+    # 聚餐参与用户展现
+    preview_user()
 include foot

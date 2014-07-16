@@ -115,6 +115,7 @@ dinners_main = ->
 				clone_dinner.find("#dinner_week").html week_and_time
 				clone_dinner.find("#treat").html data.dinners[i].payment_method
 				clone_dinner.find(".dinner_jion_btn").attr "href", "idinner/"+data.dinners[i]._id
+				# 这里给A标签添加href,使之，单击就能提交到服务器层
 				clone_dinner.find(".idinner_photo_border").attr "href", "idinner/"+data.dinners[i]._id
 				clone_dinner.find(".dinner_name").attr "href", "idinner/"+data.dinners[i]._id
 				i++ 

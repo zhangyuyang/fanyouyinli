@@ -262,7 +262,9 @@ module.exports = (app) ->
 
   app.get "/idinner/:id", (req, res) ->
     # 这里得到的req.params.id只是字符串，需要包装成ObjectID类型的
+    console.log "/idinner/:id"+req.params.id
     select_id = ObjectID.createFromHexString(req.params.id)
+    console.log "select_id"+select_id
     Dinner.get
       _id : select_id
     , (err, dinners) ->
