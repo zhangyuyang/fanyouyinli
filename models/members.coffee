@@ -1,16 +1,17 @@
 mongodb = require("./db")
-Dinner_members = (Dinner_members) ->
-  @id = Dinner_members.id
 
-module.exports = Dinner_members
+class Members
+module.exports = Members
 
-Dinner_members.save = (date, callback)->
+Members.save = (date, callback)->
+  # 聚餐参与者表
+  console.log "数据库——聚餐参与者表"
   try
     mongodb.open (err, db) ->
       if err
         db.close()
         return callback(err)
-      db.collection "dinners", (err, collection) ->
+      db.collection "members", (err, collection) ->
         if err
           db.close()
           return callback(err)
@@ -23,3 +24,5 @@ Dinner_members.save = (date, callback)->
   catch e
     console.log "DB已经打开"
     console.log e
+
+

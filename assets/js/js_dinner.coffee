@@ -298,7 +298,6 @@ user_tag1 = ->
 			, (data, status) ->
 				console.log "这里是JS的add_tag"
 				if data.status
-					console.log "这里有data"+data
 					location.reload true
 				else 
 					console.log "err"

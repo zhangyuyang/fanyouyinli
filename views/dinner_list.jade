@@ -82,13 +82,14 @@ script(type='text/javascript', src='http://api.map.baidu.com/api?v=2.0&ak=1ZpVLs
     //- 这里是当前用户的信息
     if user 
       div#hidden_info
-        input#user_photo0(value='#{user.photo0}',type='')
-        input#creater(value='#{dinners[0].creater}',type='')
-        -for(var i = 0; i < dinners[0].apply_members.length; i++)
-          if dinners[0].apply_members[i].flag == "F"
-            input.apply_members(value='#{dinners[0].apply_members[i].photo0}',type='')
-          if dinners[0].apply_members[i].flag == "T"
-            input.members(value='#{dinners[0].apply_members[i].photo0}',type='')
+        input#user_email(value='#{user.e_mail}',type='')
+        input#creater_email(value='#{dinners[0].creater.e_mail}',type='')
+          
+        //- -for(var i = 0; i < dinners[0].apply_members.length; i++)
+        //-   if dinners[0].apply_members[i].flag == "F"
+        //-     input.apply_members(value='#{dinners[0].apply_members[i].photo0}',type='')
+        //-   if dinners[0].apply_members[i].flag == "T"
+        //-     input.members(value='#{dinners[0].apply_members[i].photo0}',type='')
 script
   :coffee
     dinners_main()

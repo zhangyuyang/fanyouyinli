@@ -3,6 +3,7 @@ InviteUser = require("../models/user")
 User = require("../models/user")
 Tag = require("../models/tag")
 Dinner = require("../models/dinner")
+Members = require("../models/members")
 fs = require("fs")
 gm = require("gm")
 validator = require('validator')
@@ -17,36 +18,32 @@ module.exports = (app) ->
       if err
         console.log "错误"+err
       else 
-        console.log user.tag
+        console.log user
         # 到数据库里读取推送数据
         Tag.get_push (err, push_info) ->
           if err
             console.log errs
-            push_info = ''
+            req.session.user = user
+            res.render "creat_dinner",
+              user: user
+              city: user.city
+              tag: user.tag
+              success: req.flash("success").toString()
+              error: req.flash("error").toString()
+              push_info: ""
+              user_photo0: user.photo0
+
           else
-            push_info1 = push_info
-            # 获取发起聚餐人的头像
-            User.get req.session.user.e_mail, (err, user) ->
-              if err
-                console.log err
-                res.render "creat_dinner",
-                  user: req.session.user
-                  city: req.session.city
-                  tag: user.tag
-                  success: req.flash("success").toString()
-                  error: req.flash("error").toString()
-                  push_info: push_info1
-                  user_photo0: ""
-              else
-                console.log user.photo2
-                res.render "creat_dinner",
-                  user: req.session.user
-                  city: req.session.city
-                  tag: user.tag
-                  success: req.flash("success").toString()
-                  error: req.flash("error").toString()
-                  push_info: push_info1
-                  user_photo0: user.photo0
+            req.session.user = user
+            res.render "creat_dinner",
+              user: user
+              city: user.city
+              tag: user.tag
+              success: req.flash("success").toString()
+              error: req.flash("error").toString()
+              push_info: push_info
+              user_photo0: user.photo0
+
               
 
 
@@ -216,16 +213,8 @@ module.exports = (app) ->
       res.redirect "/idinner"
 
 
-    # apply_members_info = new Array()
-    
-    # apply_members_info[0] = {
-    #   photo0 : req.session.user.photo0
-    #   name : req.session.user.name
-    #   introduce : req.session.user.introduce
-    #   flag : "T"
-    # }
+
     dinner = {
-      e_mail: req.session.user.e_mail
       dinner_tag: dinner_tag_input
       dining_hours: dining_hours
       dining_minute: dining_minute
@@ -240,8 +229,7 @@ module.exports = (app) ->
       dinner_image_big: dinner_image_big
       dinner_image_small: dinner_image_small
       city: city
-      creater: user_photo0
-
+      creater: req.session.user
     }
     Dinner.save dinner 
     , (err, dinner) ->
@@ -258,11 +246,30 @@ module.exports = (app) ->
         console.log "dinner._id"+dinner[0]._id
         console.log "dinner.city"+dinner[0].city
         console.log "session.user.name"+req.session.user.name
+        console.log "req.session.user.e_mail"+req.session.user.e_mail
+        console.log "req.session.user.photo2"+req.session.user.photo2
+        console.log "req.session.user.introduce"+req.session.user.introduce
+        members = new Array()
+        members = {
+          dinner_id : dinner[0]._id
+          name : req.session.user.name
+          e_mail : req.session.user.e_mail
+          user_photo2 : req.session.user.user_photo2
+          user_photo0 : req.session.user.user_photo0
+          introduce : req.session.user.introduce
+          flag : "T"
+        }
+        Members.save members, (err, result) ->
+          if err
+            console.log err
+            req.flash "success", "创建聚餐失败"
+            # res.json
+              # status: false
+          else
+            req.flash "success", "创建聚餐成功"
+            # res.json
+              # status: true
 
-      #   req.flash "success", "创建聚餐成功"
-      #   res.json
-      #     status: true
-      # return
 
 
   app.get "/idinner/:id", (req, res) ->
@@ -281,13 +288,19 @@ module.exports = (app) ->
           error: req.flash("error").toString()
       else
         console.log "查询正确"
-        res.render "dinner_list",
-          title: "多人聚餐"
-          user: req.session.user
-          city: req.session.city
-          success: req.flash("success").toString()
-          error: req.flash("error").toString()
-          dinners : dinners
+        # 根据聚餐表的ID，去查询该聚餐下的聚餐者
+        console.log "根据聚餐表的ID，去查询该聚餐下的聚餐者"
+        console.log "dinners_id:"+dinners[0]._id
+
+
+
+        # res.render "dinner_list",
+        #   title: "多人聚餐"
+        #   user: req.session.user
+        #   city: req.session.city
+        #   success: req.flash("success").toString()
+        #   error: req.flash("error").toString()
+        #   dinners : dinners
 
   app.get "/book_table", (req, res) ->
     console.log "服务器端DINNER_ID"+req.query.dinner_id

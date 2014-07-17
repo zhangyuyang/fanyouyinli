@@ -16,8 +16,8 @@ Dinner = (dinner) ->
   @dinner_image_small = dinner.dinner_image_small
   @city = dinner.city
   @creater = dinner.creater
-  @members = dinner.members
-  @apply_members = dinner.apply_members
+  # @members = dinner.members
+  # @apply_members = dinner.apply_members
 module.exports = Dinner
 
 Dinner::save = (callback)->
@@ -38,7 +38,7 @@ Dinner::save = (callback)->
     dinner_image_small: @dinner_image_small
     city: @city
     creater: @creater
-    apply_members: @apply_members
+    # apply_members: @apply_members
   console.log "数据库层save——dinner"
   console.log dinner
   try
