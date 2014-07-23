@@ -1,4 +1,7 @@
 mongodb = require("./db")
+Autodb = require("./autodb.coffee")
+
+
 Dinner = (dinner) ->
   @e_mail = dinner.e_mail
   @dinner_tag = dinner.dinner_tag
@@ -39,156 +42,96 @@ Dinner::save = (callback)->
     city: @city
     creater: @creater
     # apply_members: @apply_members
-  console.log "数据库层save——dinner"
-  console.log dinner
-  try
-    mongodb.open (err, db) ->
-      if err
-        db.close()
-        return callback(err)
-      db.collection "dinners", (err, collection) ->
-        if err
-          db.close()
-          return callback(err)
-        collection.insert dinner,
-          safe: true
-        , (err, dinner) ->
-          db.close()
-          callback err, dinner
-          return
-  catch e
-    console.log "DB已经打开"
-    console.log e
+  db = Autodb.get()
+  db.collection "dinners", (err, collection) ->
+    if err
+      return callback(err)
+    collection.insert dinner,
+      safe: true
+    , (err, dinner) ->
+      callback err, dinner
+      return
 
 
 Dinner.save = (dinner, callback)->
-  console.log dinner
-  try
-    mongodb.open (err, db) ->
-      if err
-        db.close()
-        return callback(err)
-      db.collection "dinners", (err, collection) ->
-        if err
-          db.close()
-          return callback(err)
-        collection.insert dinner,
-          safe: true
-        , (err, dinner) ->
-          db.close()
-          callback err, dinner
-          return
-  catch e
-    console.log "DB已经打开"
-    console.log e
+  db = Autodb.get() 
+  db.collection "dinners", (err, collection) ->
+    if err
+      return callback(err)
+    collection.insert dinner,
+      safe: true
+    , (err, dinner) ->
+      callback err, dinner
+      return
+
 
 Dinner.get = (date, callback) ->
-  mongodb.close()
-  mongodb.open (err, db) ->
+  console.log "dinner的数据库"
+  db = Autodb.get()
+  db.collection "dinners", (err, collection) ->
     if err
-      db.close()
       return callback(err)
-    db.collection "dinners", (err, collection) ->
-      if err
-        db.close()
-        return callback(err)
-      collection.find(date).toArray (err, doc) ->
-        db.close()
-        if doc
-          callback err, doc
-        else
-          callback err, null
+    collection.find(date).toArray (err, doc) ->
+      if doc
+        callback err, doc
+      else
+        callback err, null
 
 Dinner.get_for_sort = (date, callback) ->
-  console.log date
-  mongodb.open (err, db) ->
+  db = Autodb.get()
+  db.collection "dinners", (err, collection) ->
     if err
-      db.close()
       return callback(err)
-    db.collection "dinners", (err, collection) ->
-      if err
-        db.close()
-        return callback(err)
-      collection.find(date).toArray (err, doc) ->
-        db.close()
-        if doc
-          callback err, doc
-        else
-          callback err, null
+    collection.find(date).toArray (err, doc) ->
+      if doc
+        callback err, doc
+      else
+        callback err, null
 
 Dinner.add_dinner = (date, callback) ->
-  console.log "add_dinner数据库层"
-  console.log date
-  console.log date.id
-  console.log date.members
-  mongodb.open (err, db) ->
+  db = Autodb.get()
+  db.collection "dinners", (err, collection) ->
     if err
-      db.close()
       return callback(err)
-    db.collection "dinners", (err, collection) ->
-      if err
-        db.close()
-        return callback(err)
-
-      collection.update
-        _id: date.id
-      ,
-        $addToSet: 
-          members: date.members
-      , (err, doc) ->
-
-        db.close()
-        if doc
-          callback err, doc
-        else
-          callback err, null
+    collection.update
+      _id: date.id
+    ,
+      $addToSet: 
+        members: date.members
+    , (err, doc) ->
+      if doc
+        callback err, doc
+      else
+        callback err, null
  
 Dinner.apply_dinner = (date, callback) ->
-  console.log "apply_dinner数据库"
-  console.log date
-  console.log date.id
-  console.log date.apply_members
-  mongodb.open (err, db) ->
+  db = Autodb.get()
+  db.collection "dinners", (err, collection) ->
     if err
-      db.close()
       return callback(err)
-    db.collection "dinners", (err, collection) ->
-      if err
-        db.close()
-        return callback(err)
-
-      collection.update
-        _id: date.id
-      ,
-        $addToSet: 
-          apply_members: date.apply_members
-      , (err, doc) ->
-        db.close()
-        if doc
-          callback err, doc
-        else
-          callback err, null
+    collection.update
+      _id: date.id
+    ,
+      $addToSet: 
+        apply_members: date.apply_members
+    , (err, doc) ->
+      if doc
+        callback err, doc
+      else
+        callback err, null
 
 Dinner.authorized_menber = (date, callback) ->
-  console.log "apply_dinner数据库"
-  console.log date
-  mongodb.open (err, db) ->
+  db = Autodb.get()
+  db.collection "dinners", (err, collection) ->
     if err
-      db.close()
       return callback(err)
-    db.collection "dinners", (err, collection) ->
-      if err
-        db.close()
-        return callback(err)
-
-      collection.update
-        _id: date.id
-      ,
-        $addToSet: 
-          apply_members: date.apply_members
-      , (err, doc) ->
-        db.close()
-        if doc
-          callback err, doc
-        else
-          callback err, null
+    collection.update
+      _id: date.id
+    ,
+      $addToSet: 
+        apply_members: date.apply_members
+    , (err, doc) ->
+      if doc
+        callback err, doc
+      else
+        callback err, null

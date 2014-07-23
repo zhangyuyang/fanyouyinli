@@ -120,7 +120,8 @@ dinners_main = ->
 				clone_dinner.find(".dinner_name").attr "href", "idinner/"+data.dinners[i]._id
 				i++ 
 			# 调取分页的方法进行分页
-			initPagination = InitPagination()
+			if window.location.href.split("#")[0] == "http://localhost:3000/idinner"
+				initPagination = InitPagination()
 		# 获取当前城市
 		now_city = $("#now_city").html()
 		console.log now_city

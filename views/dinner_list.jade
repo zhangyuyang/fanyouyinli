@@ -49,8 +49,8 @@ script(type='text/javascript', src='http://api.map.baidu.com/api?v=2.0&ak=1ZpVLs
         span.dinner_list_users.remove_class
           div.dinner_list_little_photo_border
             a.dinner_list_little_photo(href="#")
-          a.dinner_list_username XX
-          span.dinner_list_span 厦门大学 学生
+          a.dinner_list_username X
+          span.dinner_list_span 厦门大学 学
           a.dinner_list_agree_user(href="#")
           a.dinner_refuse(href="#") 拒绝
 
@@ -85,16 +85,18 @@ script(type='text/javascript', src='http://api.map.baidu.com/api?v=2.0&ak=1ZpVLs
         input#user_email(value='#{user.e_mail}',type='')
         input#creater_email(value='#{dinners[0].creater.e_mail}',type='')
           
-        //- -for(var i = 0; i < dinners[0].apply_members.length; i++)
-        //-   if dinners[0].apply_members[i].flag == "F"
-        //-     input.apply_members(value='#{dinners[0].apply_members[i].photo0}',type='')
-        //-   if dinners[0].apply_members[i].flag == "T"
-        //-     input.members(value='#{dinners[0].apply_members[i].photo0}',type='')
+    -for(var i = 0; i < members.length; i++)
+      if members[i].flag == 'F'
+        input.apply_members(value = "#{members[i].e_mail}")
+
+    -for(var i = 0; i < members.length; i++)
+      if members[i].flag == 'T'
+        input.members(value = "#{members[i].e_mail}")
 script
   :coffee
-    dinners_main()
+    # dinners_main()
     # 在页面加载之前，先判断用户有没有加入此聚餐，如果有，预定位子按钮变灰色
-    dinner_list()
+    # dinner_list()
     # 聚餐参与用户展现
     preview_user()
 include foot

@@ -44,7 +44,7 @@ Module dependencies.路由配置
 
   app.set("view engine", "jade");
 
-  app.configure("dev", function() {
+  app.configure("development", function() {
     console.log("dev");
     app.use(partials());
     app.use(express.urlencoded());
@@ -68,7 +68,13 @@ Module dependencies.路由配置
     app.use(flash());
   });
 
-  require("./routes/index")(app);
+  require("./routes/user_photo")(app);
+
+  require("./routes/user_info")(app);
+
+  require("./routes/page_jump")(app);
+
+  require("./routes/dinner")(app);
 
   app.use(require("connect-assets")());
 
@@ -87,7 +93,8 @@ Module dependencies.路由配置
   module.exports = {
     cookieSecret: "fanyouyinli",
     db: "fanyouyinli",
-    host: "localhost"
+    host: "localhost",
+    port: 27017
   };
 
 }).call(this);

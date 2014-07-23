@@ -423,3 +423,15 @@ module.exports = (app) ->
         res.json
           status : true
           city: req.session.city
+
+  app.post "/user_get", (req, res) ->
+    console.log "进入了服务器 /user_get"
+    User.get req.body.e_mail, (err, doc) ->
+      if err
+        console.log "报错了"
+        console.log err
+      else
+        console.log "/user_get成功了"
+        console.log doc
+        res.json
+          user : doc

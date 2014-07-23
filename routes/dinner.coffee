@@ -48,7 +48,7 @@ module.exports = (app) ->
 
 
   app.post "/get_dinners", (req, res) ->
-    console.log "idinner服务器端"
+    console.log "idinner服务器端1"
     console.log req.session.city
     Dinner.get 
       city : req.session.city
@@ -65,7 +65,7 @@ module.exports = (app) ->
           dinners: dinners
 
   app.post "/get_dinners_sort", (req, res) ->
-    console.log "idinner服务器端"
+    console.log "idinner服务器端2"
     console.log req.session.user.e_mail
     console.log req.body.sort_type
     console.log req.body.sort_flag
@@ -263,12 +263,12 @@ module.exports = (app) ->
           if err
             console.log err
             req.flash "success", "创建聚餐失败"
-            # res.json
-              # status: false
+            res.json
+              status: false
           else
             req.flash "success", "创建聚餐成功"
-            # res.json
-              # status: true
+            res.json
+              status: true
 
 
 
@@ -280,27 +280,34 @@ module.exports = (app) ->
     Dinner.get
       _id : select_id
     , (err, dinners) ->
-      console.log dinners[0]
       if err
         console.log "报错了"
         console.log err
         res.render "idinner",
           error: req.flash("error").toString()
       else
-        console.log "查询正确"
+        console.log "根据聚餐表的ID，去查询聚餐，只会查出一条聚餐"
+        console.log dinners[0]
+        console.log "聚餐表查询到此结束"
+
         # 根据聚餐表的ID，去查询该聚餐下的聚餐者
-        console.log "根据聚餐表的ID，去查询该聚餐下的聚餐者"
-        console.log "dinners_id:"+dinners[0]._id
-
-
-
-        # res.render "dinner_list",
-        #   title: "多人聚餐"
-        #   user: req.session.user
-        #   city: req.session.city
-        #   success: req.flash("success").toString()
-        #   error: req.flash("error").toString()
-        #   dinners : dinners
+        Members.get
+          dinner_id : select_id
+        , (err, members) ->
+          if err
+            console.log err
+          else
+            console.log "该聚餐下的用户"
+            console.log members
+            console.log "该聚餐下的用户结束"
+            res.render "dinner_list",
+              title: "多人聚餐"
+              user: req.session.user
+              city: req.session.city
+              success: req.flash("success").toString()
+              error: req.flash("error").toString()
+              dinners : dinners
+              members : members
 
   app.get "/book_table", (req, res) ->
     console.log "服务器端DINNER_ID"+req.query.dinner_id
@@ -325,19 +332,20 @@ module.exports = (app) ->
 
 
   app.post "/authorized_menbers", (req, res) ->
-    console.log "user_photo0"+req.body.user_photo0
+    console.log "user_photo0"+req.body.e_mail
     console.log "dinner_num"+req.body.dinner_id
-    Dinner.authorized_menber
-      user_photo0 : req.body.user_photo0
-      dinner_id : req.body.dinner_id
-    , (err, number) ->
-      if err
-        console.log err
-        res.json
-          flag : false
-      else
-        res.json
-          flag : true
+
+    # Dinner.authorized_menber
+    #   e_mail : req.body.e_mail
+    #   dinner_id : req.body.dinner_id
+    # , (err, number) ->
+    #   if err
+    #     console.log err
+    #     res.json
+    #       flag : false
+    #   else
+    #     res.json
+    #       flag : true
 
 
 

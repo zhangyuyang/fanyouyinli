@@ -11,6 +11,7 @@ partials = require("express-partials")
 flash = require("connect-flash")
 growl = require("growl")
 app = express()
+Autodb = require("./models/autodb.coffee")
 
 # all environments
 app.use express.static(path.join(__dirname, "public")) #静态请求URL前面加上public
@@ -60,5 +61,6 @@ app.use require("connect-assets")()
 http.createServer(app).listen app.get("port"), ->
   growl "node app.js 重启成功！"
   console.log "Express server listening on port " + app.get("port")
+  Autodb.open()
   return
 
