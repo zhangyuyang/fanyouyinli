@@ -332,20 +332,19 @@ module.exports = (app) ->
 
 
   app.post "/authorized_menbers", (req, res) ->
-    console.log "user_photo0"+req.body.e_mail
-    console.log "dinner_num"+req.body.dinner_id
-
-    # Dinner.authorized_menber
-    #   e_mail : req.body.e_mail
-    #   dinner_id : req.body.dinner_id
-    # , (err, number) ->
-    #   if err
-    #     console.log err
-    #     res.json
-    #       flag : false
-    #   else
-    #     res.json
-    #       flag : true
+    dinner_id = ObjectID.createFromHexString(req.body.dinner_id.split("#")[0])
+    Dinner.authorized_menber
+      e_mail : req.body.e_mail
+      dinner_id : dinner_id
+    , (err, number) ->
+      if err
+        console.log err
+        # res.json
+        #   flag : false
+      else
+        console.log "number"+number
+        res.json
+          flag : true
 
 
 

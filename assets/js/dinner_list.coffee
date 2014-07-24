@@ -17,18 +17,18 @@ traversal_apply_members = (e_mail, dinner_id) ->
 			clone_user.find("a.dinner_list_little_photo").attr "href", "../ifanyor/"+data.user.photo0
 			clone_user.find("a.dinner_list_username").text data.user.name
 			clone_user.find("span.dinner_list_span").text data.user.introduce
-			clone_user.find("a.dinner_list_agree_user").attr "href", "../接受"
-			clone_user.find("a.dinner_refuse").attr "href", "../拒绝"
+			# clone_user.find("a.dinner_list_agree_user").attr "href", "../接受"
+			# clone_user.find("a.dinner_refuse").attr "href", "../拒绝"
 			clone_user.removeClass "remove_class"
 			# 绑定点击事件
-			# clone_user.find("a.dinner_list_agree_user").click ->
-			# 	console.log dinner_id
-			# 	$.post "/authorized_menbers",
-			# 		e_mail : data.user.e_mail
-			# 		dinner_id : dinner_id
-			# 	, (data, status) ->	
-			# 		if status
-			# 			alert "成功"
+			clone_user.find("a.dinner_list_agree_user").click ->
+				console.log dinner_id
+				$.post "/authorized_menbers",
+					e_mail : data.user.e_mail
+					dinner_id : dinner_id
+				, (data, status) ->	
+					if status
+						alert "成功"
 			
 
 preview_menbers = (e_mail) ->
@@ -72,9 +72,9 @@ preview_user = ->
 
 
 	# 遍历所有参与人
-	# $(".members").each ->
-	# 	# 展现
-	# 	console.log "遍历所有参与人的e_mail"
-	# 	console.log $(this).val()
-	# 	preview_menbers $(this).val()
-	# 	
+	$(".members").each ->
+		# 展现
+		console.log "遍历所有参与人的e_mail"
+		console.log $(this).val()
+		preview_menbers $(this).val()
+		

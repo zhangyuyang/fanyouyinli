@@ -121,17 +121,20 @@ Dinner.apply_dinner = (date, callback) ->
         callback err, null
 
 Dinner.authorized_menber = (date, callback) ->
+  console.log "authorized_menber数据库"+date
+  console.log date
+  console.log date.e_mail
+  console.log date.dinner_id
   db = Autodb.get()
-  db.collection "dinners", (err, collection) ->
+  db.collection "members", (err, collection) ->
     if err
       return callback(err)
-    collection.update
-      _id: date.id
-    ,
-      $addToSet: 
-        apply_members: date.apply_members
+    collection.update date,
+      $set:
+        flag : "T"
     , (err, doc) ->
       if doc
+        console.log "doc"+doc
         callback err, doc
       else
-        callback err, null
+        console.log "err"+err
