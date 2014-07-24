@@ -22,13 +22,20 @@ traversal_apply_members = (e_mail, dinner_id) ->
 			clone_user.removeClass "remove_class"
 			# 绑定点击事件
 			clone_user.find("a.dinner_list_agree_user").click ->
-				console.log dinner_id
 				$.post "/authorized_menbers",
 					e_mail : data.user.e_mail
 					dinner_id : dinner_id
 				, (data, status) ->	
 					if status
-						alert "成功"
+						alert "审核成功"
+			clone_user.find("a.dinner_refuse").click ->
+				$.post "/refuse_menbers",
+					e_mail : data.user.e_mail
+					dinner_id : dinner_id
+				, (data, status) ->	
+					if status
+						alert "拒绝加入"
+
 			
 
 preview_menbers = (e_mail) ->

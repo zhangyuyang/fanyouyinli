@@ -346,6 +346,20 @@ module.exports = (app) ->
         res.json
           flag : true
 
+  app.post "/refuse_menbers", (req, res) ->
+    dinner_id = ObjectID.createFromHexString(req.body.dinner_id.split("#")[0])
+    Dinner.refuse_menber
+      e_mail : req.body.e_mail
+      dinner_id : dinner_id
+    , (err, number) ->
+      if err
+        console.log err
+        # res.json
+        #   flag : false
+      else
+        console.log "number"+number
+        res.json
+          flag : true
 
 
 

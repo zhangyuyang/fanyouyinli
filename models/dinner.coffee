@@ -138,3 +138,23 @@ Dinner.authorized_menber = (date, callback) ->
         callback err, doc
       else
         console.log "err"+err
+
+
+Dinner.refuse_menber = (date, callback) ->
+  console.log "refuse_menber"+date
+  console.log date
+  console.log date.e_mail
+  console.log date.dinner_id
+  db = Autodb.get()
+  db.collection "members", (err, collection) ->
+    if err
+      return callback(err)
+    collection.update date,
+      $set:
+        flag : "N"
+    , (err, doc) ->
+      if doc
+        console.log "doc"+doc
+        callback err, doc
+      else
+        console.log "err"+err
