@@ -28,6 +28,9 @@ traversal_apply_members = (e_mail, dinner_id) ->
 				, (data, status) ->	
 					if status
 						alert "审核成功"
+						# 页面重新加载，并自动滚到审批用户位置
+						location.reload()
+						window.scroll 0,400
 			clone_user.find("a.dinner_refuse").click ->
 				$.post "/refuse_menbers",
 					e_mail : data.user.e_mail
@@ -35,7 +38,9 @@ traversal_apply_members = (e_mail, dinner_id) ->
 				, (data, status) ->	
 					if status
 						alert "拒绝加入"
-
+						# 页面重新加载，并自动滚到审批用户位置
+						location.reload()
+						window.scroll 0,400
 			
 
 preview_menbers = (e_mail) ->

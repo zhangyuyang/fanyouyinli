@@ -106,14 +106,17 @@ Dinner.add_dinner = (date, callback) ->
  
 Dinner.apply_dinner = (date, callback) ->
   db = Autodb.get()
-  db.collection "dinners", (err, collection) ->
+  db.collection "members", (err, collection) ->
     if err
       return callback(err)
-    collection.update
-      _id: date.id
-    ,
-      $addToSet: 
-        apply_members: date.apply_members
+    collection.insert
+      dinner_id: date.dinner_id
+      e_mail : date.e_mail
+      name : date.name
+      user_photo0 : date.user_photo0
+      user_photo2 : date.user_photo2
+      introduce : date.introduce
+      flag : "F"
     , (err, doc) ->
       if doc
         callback err, doc

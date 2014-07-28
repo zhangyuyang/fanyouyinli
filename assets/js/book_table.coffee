@@ -63,11 +63,7 @@ book_table = ->
 				hidden_login_out()
 			else
 				# 用户已经登陆
-				# 检测用户是否已经上传头像
-				if $("#user_photo0").val() == "undefined"
-					alert "你没有上传头像"
-					window.location = "/preview_photo"
-				if $("#creater").val() == $("#user_photo0").val()
+				if $("#user_email").val() == $("#creater_email").val()
 					alert "创建者自己不能预定位子"
 					return false
 				else
@@ -76,7 +72,7 @@ book_table = ->
 					console.log "已经申请"
 					flag = true
 					$(".apply_members").each ->
-						if $(this).val() == $("#user_photo0").val()
+						if $(this).val() == $("#user_email").val()
 							$(".book_table").unbind()
 							alert "你已经申请了聚餐"
 							$(".book_table").css "background-position":"0px -125px"
@@ -84,44 +80,21 @@ book_table = ->
 							return false
 					console.log "已经加入"
 					$(".members").each ->
-						if $(this).val() == $("#user_photo0").val()
+						if $(this).val() == $("#user_email").val()
 							$(".book_table").unbind()
 							alert "你已经加入了聚餐"
 							$(".book_table").css "background-position":"0px 0px"
 							flag = false
 							return false
-						
-
-
-					# i = 0
-					# flag = true
-					# while i < data.dinner[0].members.length
-					# 	# 已经参加聚餐
-					# 	if data.dinner[0].members[i] == $("#user_photo0").val()
-					# 		alert "您已经加入了饭局"
-					# 		flag = false
-					# 		return false
-					# 	i++
-
-
-					# i = 0
-					# while i < data.dinner[0].apply_members.length
-					# 	# 已经申请聚餐
-					# 	if data.dinner[0].apply_members[i] == $("#user_photo0").val()
-					# 		alert "已经申请加入"
-					# 		flag = false
-					# 		return false
-					# 	i++
-						
 
 
 					console.log "如果没有加入，会运行到这里，并且flag应该是true"+flag
 					if flag
-						add_user = $("#user_photo0").val()
+						add_user = $("#user_email").val()
 						console.log "这里写加入饭局操作"
 						# 获取聚餐的ID
-						console.log window.location.href.split("idinner/")[1]
-						dinner_id = window.location.href.split("idinner/")[1]
+						console.log window.location.href.split("idinner/")[1].split("#")[0]
+						dinner_id = window.location.href.split("idinner/")[1].split("#")[0]
 						$.post "/apply_members",
 							add_user : add_user
 							dinner_id : dinner_id

@@ -28,7 +28,7 @@ include head
 			h5 生日：
 			h5 介绍下自己：
 		.userinfo_center_right
-			input.true_name
+			input#true_name.true_name
 			span.modiy_city
 				select#province.province(size='1')
 					option(value='') 选择省
@@ -53,7 +53,7 @@ include head
 				|月
 				select.sel_day
 				|日
-			textarea.myself(rows='3', cols='33')
+			textarea#myself.myself(rows='3', cols='33')
 			a#modiy_user_sub.modiy_user_sub(href="#")
 
 script
@@ -66,6 +66,5 @@ script
 				DaySelector: ".sel_day"
 
 			return
-
-
+		modify_info()
 include foot

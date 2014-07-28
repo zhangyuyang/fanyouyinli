@@ -148,9 +148,36 @@ module.exports = (app) ->
             res.redirect "/"
           return
 
-      return
-
-    return
+  app.post "/modify_info", (req, res) ->
+    console.log req.session.user.e_mail
+    console.log req.body.name
+    console.log req.body.province
+    console.log req.body.city
+    console.log req.body.sex
+    console.log req.body.marry
+    console.log req.body.year
+    console.log req.body.month
+    console.log req.body.day
+    console.log req.body.myself
+    User.update req.session.user.e_mail,
+      name : req.body.name
+      province : req.body.province
+      city : req.body.city
+      sex : req.body.sex
+      marry : req.body.marry
+      year : req.body.year
+      month : req.body.month
+      day : req.body.day
+      introduce : req.body.myself
+    , (err, doc) ->
+      if err
+        console.log "err"+err
+        res.json
+          flag : false
+      else
+        console.log "doc"+doc
+        res.json
+          flag : true
 
   app.get "/reg", (req, res) ->
     res.render "reg",

@@ -14,3 +14,4 @@
 # = require choice_city
 # = require book_table
 # = require dinner_list
+# = require modify_info

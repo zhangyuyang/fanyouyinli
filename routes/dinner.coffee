@@ -410,45 +410,37 @@ module.exports = (app) ->
   app.post "/apply_members", (req, res) ->
     console.log "/apply_members"
     console.log req.body.add_user
-    console.log req.session.user.photo0
     console.log req.body.dinner_id 
     # 把得到的dinner_id封装成object类型
     dinner_id = ObjectID.createFromHexString(req.body.dinner_id)
     # 先根据email，去user表里查询用户所有数据
-    User.get req.session.user.e_mail, (err, user) ->
+    User.get req.body.add_user, (err, user) ->
       if err
         console.log err
       else
-        # console.log user
-        # console.log user.photo0
-        # console.log user.name
-        # console.log user.introduce
-        console.log "11111111111AB"
-    #   # 聚餐表 申请加入
-
+        console.log user
+        console.log user.name
+        console.log user.introduce
+      # 聚餐表 申请加入
       Dinner.apply_dinner
-        id : dinner_id
-        apply_members : 
-          photo0 : user.photo0
-          name : user.name
-          introduce : user.introduce
-          flag : "F"
+        dinner_id : dinner_id
+        e_mail: user.e_mail
+        name: user.name
+        user_photo0: user.photo0
+        user_photo2: user.photo2
+        introduce: user.introduce
       ,(err, number) ->
         if err
-          console.log "11111111111AC"
           console.log err
         else 
-          console.log "11111111111AD"
-          console.log number
-          console.log "number"
-        if number > 0
+        if number.length > 0
           # 获取加入聚餐的时间戳
           now_date = Date.parse(new Date())
           console.log "now_date"+now_date
-          photo0 = req.body.add_user
+          e_mail = user.e_mail
           # 最后加入聚餐时间戳
           User.add_dinner
-            photo0 : photo0
+            e_mail : e_mail
             last_dinner_time : now_date
           ,(err, number) ->
             if err

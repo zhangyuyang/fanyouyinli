@@ -176,7 +176,7 @@ User.add_dinner = (data, callback) ->
       return callback(err)
 
     collection.update
-      photo0: data.photo0
+      e_mail: data.e_mail
     ,
       $set:
         last_dinner_time : data.last_dinner_time
